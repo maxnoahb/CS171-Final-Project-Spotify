@@ -8,8 +8,6 @@ Sys.setenv(SPOTIFY_CLIENT_SECRET = 'c01ad3e727e04a39b66045697dcafa7f')
 
 access_token <- get_spotify_access_token()
 
-spotify_df <- get_artist_audio_features('kendrick lamar')
-
 countries_with_spotify <- c('Japan', 'Israel', 'Hong Kong', 'Indonesia', 'Malaysia', 'Philippines', 
                            'Singapore', 'Taiwan', 'Thailand', 'Vietnam', 'Andorra', 'Austria', 'Belgium', 
                            'Bulgaria', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'Finland', 'France', 
@@ -21,48 +19,39 @@ countries_with_spotify <- c('Japan', 'Israel', 'Hong Kong', 'Indonesia', 'Malays
                            'Nicaragua', 'Panama', 'Paraguay', 'Peru', 'Uruguay', 'Canada', 'United States',
                            'South Africa', 'Australia', 'New Zealand')
 
+# get playlists——linked to Max's account, gets the 61 countries' Top 50 playlists
 my_playlists <- get_user_playlists('122991871') %>% get_playlist_tracks()
-# get_playlist_audio_features(username="122991871", playlist_uris=list(my_playlists[,"playlist_uri"]))
+
+# gets audio features for each song in all of those playlists
 top_song_features <- get_track_audio_features(my_playlists)
 
+# join the songs' audio features to the playlist, organize by country
 all_top_songs <- left_join(top_song_features, my_playlists, by='track_uri') %>% arrange(playlist_name)
 
+# gets frequency of songs in the dataset (number of occurences = how many countries the song charts in)
+song_counts <- as.data.frame(table(all_top_songs$track_name)) %>% arrange(desc(Freq))
+
+# write the data to a CSV file
+write.csv(all_top_songs, file="/Users/maxnoahb/Desktop/Harvard/Senior Fall/CS 171/FinalProject/data/audio_features.csv", row.names=FALSE)
+write.csv(song_counts, file="/Users/maxnoahb/Desktop/Harvard/Senior Fall/CS 171/FinalProject/data/track_frequencies.csv", row.names=FALSE)
+
+
+
+
+
+# experimenting with lyrics
+
+# song_lyrics <- data.frame()
+# for (i in 1:50) {
+#   song <- all_top_songs[i,]
+#   lyrics = possible_lyrics(artist = song[,'artist_name'], song = song[,'track_name'])
+#   song_lyrics <- rbind(lyrics, song_lyrics)
+# }
+
 # country_dfs <- split(all_top_songs, all_top_songs$playlist_name)
-
-write.csv(all_top_songs, file="music_data.csv", row.names=FALSE)
-
-song_lyrics <- data.frame()
-for (i in 1:10) {
-  song <- all_top_songs[i,]
-  # print(song[,'track_name'])
-  lyrics = possible_lyrics(artist = song[,'artist_name'], song = song[,'track_name'])
-  song_lyrics <- rbind(lyrics, song_lyrics)
-}
 
 # for (country in countries_with_spotify) {
 #   playlist <- paste(country, " Top 50", sep="")
 #   print(playlist)
 #   assign(paste(country, "_df", sep=""), country_dfs$playlist)
 # }
-  
-
-
-
-
-
-
-# popular_keys <- spotify_df %>% 
-#   count(key_mode, sort = TRUE) %>% 
-#   head(5)
-# 
-# recently_played <- get_my_recently_played(limit = 5) %>% 
-#   select(track_name, artist_name, album_name, played_at_utc)
-# 
-# top_artists <- get_my_top_artists(time_range = 'long_term', limit = 5) %>% 
-#   # select(artist_name, artist_genres) %>% 
-#   rowwise %>% 
-#   mutate(artist_genres = paste(artist_genres, collapse = ', ')) %>% 
-#   ungroup
-# 
-# top_tracks_lately <- get_my_top_tracks(time_range = 'short_term', limit = 5) %>% 
-#   select(track_name, artist_name, album_name)
