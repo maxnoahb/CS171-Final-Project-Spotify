@@ -2,39 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CS171 Final Project</title>
+    <title>D3 Project</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Music Around the World</h1>
+    <!-- Choropleth map -->
 
+    <!-- Side by side country comparison -->
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xl-8" id="map-chart"></div>
+    <!-- Bubble chart -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div id="bubble-chart"></div>
         </div>
-        <div class="row">
-            <div class="col-xl-8" id="comparison-chart"></div>
-        </div>
-        <div class="row">
-            <div class="col-xl-8" id="bubble-chart"></div>
-        </div>
-        <div class="row">
-            <div class="col-xl-8" id="slider-chart"></div>
-        </div>
+      </div>
     </div>
 
+    <!-- Personal slider -->
 
 
-    <!-- Load JS libraries: jQuery, bootstrap, D3 -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/d3.min.js"></script>
 
-    <!-- Your implementation -->
-    <script src="js/comparison-chart.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/bubbles.js"></script>
 </body>
 </html>
