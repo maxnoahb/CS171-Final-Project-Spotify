@@ -4,6 +4,7 @@
 var audioData;
 var frequencyData;
 var mapData;
+var dataByCountry;
 
 var comparisonChart;
 
@@ -36,15 +37,21 @@ d3.queue()
         frequencyData = data2;
         mapData = data3;
 
-        console.log(audioData, frequencyData, mapData);
+        // Organize data by countries
+        dataByCountry = d3.nest()
+            .key(function(d) { return d.playlist_name.split(" ")[0]; })
+            .rollup(function (d) { return d; })
+            .entries(audioData);
+
+        console.log(audioData, frequencyData, mapData, dataByCountry);
 
         // Initial bubble chart
-        initializeBubbles();
+        updateBubbles();
 
         // Initialize comparison chart
         comparisonChart = new ComparisonChart("comparison-chart", audioData);
 
-        // Initialize slider chart
+        // Initialize slider visualization
         var sliderVis = new SliderVis("slider-chart", data1);
 
     });
