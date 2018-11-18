@@ -5,6 +5,7 @@ var audioData;
 var frequencyData;
 var mapData;
 
+// Load in data
 d3.queue()
     .defer(d3.csv, 'data/audio_features.csv')
     .defer(d3.csv, 'data/track_frequencies.csv')
@@ -14,4 +15,7 @@ d3.queue()
         audioData = data1;
         frequencyData = data2;
         mapData = data3;
+
+        // Initial bubble chart
+        initializeBubbles();
     });
