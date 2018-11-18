@@ -63,13 +63,41 @@ SliderVis.prototype.wrangleData = function(){
 
     console.log(vis.countryAvgAttributes);
 
-    // console.log(d3.select("#acousticness-slider").property("value"));
-
     // Update the visualization
     vis.updateVis();
 }
 
 SliderVis.prototype.updateVis = function() {
     var vis = this;
+
+    d3.select("#match-button").on("click", function() {vis.onButtonClick()});
+
+}
+
+SliderVis.prototype.onButtonClick = function() {
+    var vis = this;
+
+    vis.acousticnessSelection = d3.select("#acousticness-slider").property("value");
+    vis.danceabilitySelection = d3.select("#danceability-slider").property("value");
+    vis.speechinessSelection = d3.select("#speechiness-slider").property("value");
+    vis.valenceSelection = d3.select("#valence-slider").property("value");
+
+    vis.lowestDifference = 10;
+    vis.similarCountry = null;
+
+    vis.countryAvgAttributes.forEach(function(d) {
+
+        var difference = Math.abs(vis.acousticnessSelection*.01 - d.value.acousticness) +
+            Math.abs(vis.danceabilitySelection*.01 - d.value.danceability) +
+            Math.abs(vis.speechinessSelection*.01 - d.value.speechiness) +
+            Math.abs(vis.valenceSelection*.01 - d.value.valence);
+
+        if (difference < vis.lowestDifference) {
+            vis.lowestDifference = difference;
+            vis.similarCountry = d.key;
+        }
+    });
+
+    console.log(vis.similarCountry);
 
 }
