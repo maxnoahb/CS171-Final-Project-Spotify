@@ -10,13 +10,27 @@ var svg = d3.select('#bubble-chart').append('svg')
   .append('g')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-// d3.selectAll("#countries-list").on("change", updateBubbles());
-
 // Initiale bubble chart
 function updateBubbles() {
 
-  var selectedCountry = d3.select("#countries-list").property("value");
-  console.log(selectedCountry);
+  // Keep an array of the selected country's top 50 tracks' names
+  var trackNames = [];
+
+  // Set default country to Argentina
+  if (selectedTop50 == null) {
+    selectedTop50 = dataByCountry.filter(function (d) {
+      return d.key == "Argentina";
+    })[0].value;
+  }
+
+  console.log(selectedTop50);
+
+  // Update array of track names
+  selectedTop50.forEach(function (d) {
+    trackNames.push(d.track_name);
+  });
+
+  console.log(trackNames);
 
   var nodes = frequencyData;
   var chargeStrength = 1;
@@ -42,7 +56,14 @@ function updateBubbles() {
           		.attr("r", function (d) {
                 return radius(d.Freq);
               })
-          		.attr("fill", "#d3d3d3");
+          		.attr("fill", function (d) {
+                if (trackNames.includes(d.Var1)) {
+                  return "#4CAF50";
+                }
+                else {
+                  return "#d3d3d3";
+                }
+              });
 
   // Update nodes on tick
   force.on("tick", function() {
