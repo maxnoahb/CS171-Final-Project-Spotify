@@ -30,6 +30,16 @@
     </div>
 
     <!-- Side by side country comparison -->
+    <!-- Dropdown for compared country -->
+    <select id="countries-list" class="form-control" onChange="comparisonChart.onCountryCompareChange()"></select>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="comparison-chart"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- Bubble chart -->
     <div class="container">
@@ -43,13 +53,28 @@
     <!-- Personal slider -->
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-4">
+            <div class="slidecontainer">
+                <input type="range" min="1" max="100" value="50" class="slider" id="acousticness-slider">
+            </div>
+            <div class="slidecontainer">
+                <input type="range" min="1" max="100" value="50" class="slider" id="danceability-slider">
+            </div>
+            <div class="slidecontainer">
+                <input type="range" min="1" max="100" value="50" class="slider" id="speechiness-slider">
+            </div>
+            <div class="slidecontainer">
+                <input type="range" min="1" max="100" value="50" class="slider" id="valence-slider">
+            </div>
+        </div>
+        <div class="col-md-8">
           <div id="slider-chart"></div>
         </div>
       </div>
     </div>
 
 
+    <script src="js/jquery.min.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -59,6 +84,7 @@
     <script src="js/main.js"></script>
     <script src="js/bubbles.js"></script>
     <script src="js/slider-chart.js"></script>
+    <script src="js/comparison-chart.js"></script>
 
 
 </body>
