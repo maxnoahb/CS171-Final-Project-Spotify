@@ -39,7 +39,7 @@ d3.queue()
 
         // Organize data by countries
         dataByCountry = d3.nest()
-            .key(function(d) { return d.playlist_name.split(" ")[0]; })
+            .key(function(d, i) { return d.playlist_name.replace(" Top 50", ""); })
             .rollup(function (d) { return d; })
             .entries(audioData);
 
@@ -55,3 +55,8 @@ d3.queue()
         var sliderVis = new SliderVis("slider-chart", data1);
 
     });
+
+    function updateSelected() {
+      comparisonChart.onCountryCompareChange();
+      updateBubbles();
+    }
