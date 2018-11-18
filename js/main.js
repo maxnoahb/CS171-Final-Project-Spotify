@@ -37,6 +37,7 @@ d3.queue()
         frequencyData = data2;
         mapData = data3;
 
+        // Organize data by countries
         dataByCountry = d3.nest()
             .key(function(d) { return d.playlist_name.split(" ")[0]; })
             .rollup(function (d) { return d; })
@@ -50,6 +51,7 @@ d3.queue()
         // Initialize comparison chart
         comparisonChart = new ComparisonChart("comparison-chart", audioData);
 
+        // Initialize slider visualization
         var sliderVis = new SliderVis("slider-chart", data1);
 
     });
