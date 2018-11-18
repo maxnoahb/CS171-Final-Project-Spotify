@@ -46,7 +46,7 @@ d3.queue()
         console.log(audioData, frequencyData, mapData, dataByCountry);
 
         // Initial bubble chart
-        initializeBubbles();
+        updateBubbles();
 
         // Initialize comparison chart
         comparisonChart = new ComparisonChart("comparison-chart", audioData);

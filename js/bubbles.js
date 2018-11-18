@@ -10,11 +10,13 @@ var svg = d3.select('#bubble-chart').append('svg')
   .append('g')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
+// d3.selectAll("#countries-list").on("change", updateBubbles());
 
 // Initiale bubble chart
-function initializeBubbles() {
-  // Check that data is properly imported
-  // console.log(frequencyData, audioData);
+function updateBubbles() {
+
+  var selectedCountry = d3.select("#countries-list").property("value");
+  console.log(selectedCountry);
 
   var nodes = frequencyData;
   var chargeStrength = 1;
