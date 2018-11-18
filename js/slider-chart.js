@@ -63,6 +63,8 @@ SliderVis.prototype.wrangleData = function(){
 
     console.log(vis.countryAvgAttributes);
 
+    // console.log(d3.select("#acousticness-slider").property("value"));
+
     // Update the visualization
     vis.updateVis();
 }
