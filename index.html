@@ -14,7 +14,7 @@
 
     <!-- Choropleth map -->
     <!-- Dropdown for metric filter -->
-    <select id="filters" class="form-control" onChange="updateMap()">
+    <select id="filters" class="form-control" onChange="updateChoropleth()">
       <option value="danceability">Danceability</option>
       <option value="energy">Energy</option>
       <option value="instrumentalness">Instrumentalness</option>
@@ -43,7 +43,21 @@
     <!-- Personal slider -->
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-4">
+            <div class="slidecontainer">
+                <input type="range" min="1" max="100" value="50" class="slider" id="acousticness-slider">
+            </div>
+            <div class="slidecontainer">
+                <input type="range" min="1" max="100" value="50" class="slider" id="danceability-slider">
+            </div>
+            <div class="slidecontainer">
+                <input type="range" min="1" max="100" value="50" class="slider" id="speechiness-slider">
+            </div>
+            <div class="slidecontainer">
+                <input type="range" min="1" max="100" value="50" class="slider" id="valence-slider">
+            </div>
+        </div>
+        <div class="col-md-8">
           <div id="slider-chart"></div>
         </div>
       </div>
