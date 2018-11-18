@@ -16,12 +16,12 @@ SliderVis.prototype.initVis = function() {
     var vis = this;
 
     // Check that data is properly imported
-    console.log(this.frequencyData, this.audioData);
+    // console.log(this.data);
 
-    vis.margin = {top: 40, right: 0, bottom: 60, left: 60};
+    vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
 
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
-        vis.height = 300 - vis.margin.top - vis.margin.bottom;
+        vis.height = 600 - vis.margin.top - vis.margin.bottom;
 
     // SVG drawing area
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -42,6 +42,8 @@ SliderVis.prototype.wrangleData = function(){
     var vis = this;
 
     this.displayData = this.data;
+
+    vis.averageCountryAttributes =
 
     // Update the visualization
     vis.updateVis();
