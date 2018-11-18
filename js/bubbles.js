@@ -2,7 +2,7 @@
 // Create drawing area
 var margin = {top: 20, right: 10, bottom: 20, left: 10},
     width = 960 - margin.left - margin.right,
-    height = 960 - margin.top - margin.bottom;
+    height = 700 - margin.top - margin.bottom;
 
 var svg = d3.select('#bubble-chart').append('svg')
     .attr('width', width + margin.left + margin.right)
@@ -17,16 +17,19 @@ function initializeBubbles() {
   // console.log(frequencyData, audioData);
 
   var nodes = frequencyData;
-  var chargeStrength = -0.25;
+  var chargeStrength = 1;
 
   // Create scale that determines radius of circles
   var radius = d3.scaleLinear()
                  .domain(d3.extent(nodes, function(d) { return d.Freq; }))
-                 .range([1, 20]);
+                 .range([3, 60]);
 
   // Create force simulation
   var force = d3.forceSimulation(nodes)
                 .force("charge", d3.forceManyBody().strength(chargeStrength))
+                .force("collide", d3.forceCollide(function (d) {
+                  return radius(d.Freq);
+                }))
                 .force("center", d3.forceCenter().x(width/2).y(height/2));
 
   // Create bubbles
@@ -37,7 +40,7 @@ function initializeBubbles() {
           		.attr("r", function (d) {
                 return radius(d.Freq);
               })
-          		.attr("fill", "black");
+          		.attr("fill", "#d3d3d3");
 
   // Update nodes on tick
   force.on("tick", function() {
@@ -48,7 +51,6 @@ function initializeBubbles() {
 
   // Make nodes draggable
   // https://bl.ocks.org/mbostock/ad70335eeef6d167bc36fd3c04378048
-
   function dragSubject() {
     return force.find(d3.event.x, d3.event.y);
   }
