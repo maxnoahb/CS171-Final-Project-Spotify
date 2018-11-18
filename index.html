@@ -7,7 +7,27 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+    <h1>Music Around the World</h1>
+    <h3>[Description of Our Dataset]</h3>
+    <p>[Disclaimers]</p>
+
     <!-- Choropleth map -->
+    <!-- Dropdown for metric filter -->
+    <select id="filters" class="form-control" onChange="updateMap()">
+      <option value="danceability">Danceability</option>
+      <option value="energy">Energy</option>
+      <option value="instrumentalness">Instrumentalness</option>
+      <option value="valence">Valence</option>
+    </select>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div id="map"></div>
+        </div>
+      </div>
+    </div>
 
     <!-- Side by side country comparison -->
 
@@ -21,6 +41,13 @@
     </div>
 
     <!-- Personal slider -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div id="slider-chart"></div>
+        </div>
+      </div>
+    </div>
 
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -28,7 +55,10 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/d3.min.js"></script>
 
+    <!-- JS Visualizations -->
     <script src="js/main.js"></script>
     <script src="js/bubbles.js"></script>
+    <script src="js/slider-chart.js"></script>
+    
 </body>
 </html>
