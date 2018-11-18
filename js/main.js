@@ -42,4 +42,7 @@ d3.queue()
         // Initialize slider chart
         var sliderVis = new SliderVis("slider-chart", data1);
 
+        // Initialize choropleth chart
+        var choroplethVis = new ChoroplethVis("choropleth-map", data1, data3);
+
     });
