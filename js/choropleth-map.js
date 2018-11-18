@@ -33,5 +33,32 @@ ChoroplethVis.prototype.initVis = function(){
     var projection = d3.geoMercator().translate([width / 2, height / 2]);
     var path = d3.geoPath().projection(projection);
 
+    // Set color scale
+    var colorscale = d3.scaleQuantize()
+        .range(["rgb(237,248,233)", "rgb(186,228,179)",
+            "rgb(116,196,118)", "rgb(49,163,84)", "rgb(0,109,44)"]);
+
+    // Initilize Danceability Choropleth
+    var map = this.map;
+    var music = this.audio;
+
+    // Get the country names from music data
+    music.forEach(function(d){
+        d.country = d.playlist_name.replace(" Top 50","");
+    });
+    console.log(music);
+
+    vis.wrangleData();
+
 };
 
+ChoroplethVis.prototype.wrangleData = function(){
+    var vis = this;
+
+    vis.updateChoropleth();
+
+};
+
+ChoroplethVis.prototype.updateChoropleth = function(){
+    var vis = this;
+};

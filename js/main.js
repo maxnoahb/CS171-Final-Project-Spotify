@@ -26,6 +26,8 @@ d3.queue()
           d.speechiness = +d.speechiness;
           d.tempo = +d.tempo;
           d.valence = +d.valence;
+          // Create a new column for country name
+          d.country = d.playlist_name.replace(" Top 50","");
         });
 
         data2.forEach(function(d) {
