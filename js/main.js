@@ -41,9 +41,6 @@ d3.queue()
         // Initial bubble chart
         initializeBubbles();
 
-        // Initialize slider chart
-        initializeSliderChart();
-
         // Initialize comparison chart
         comparisonChart = new ComparisonChart("comparison-chart", audioData);
 
