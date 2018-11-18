@@ -6,6 +6,9 @@ var frequencyData;
 var mapData;
 var dataByCountry;
 
+var selectedCountry;
+var selectedTop50;
+
 var comparisonChart;
 
 // Load in data
@@ -57,6 +60,15 @@ d3.queue()
     });
 
     function updateSelected() {
+
+      selectedCountry = d3.select("#countries-list").property("value");
+
+      var selectedData = dataByCountry.filter(function (d) {
+        return d.key == selectedCountry;
+      });
+
+      selectedTop50 = selectedData[0].value;
+      
       comparisonChart.onCountryCompareChange();
       updateBubbles();
     }
