@@ -21,5 +21,6 @@ d3.queue()
         initializeBubbles();
 
         // Initialize slider chart
-        initializeSliderChart();
+        var sliderVis = new SliderVis("slider-chart", data1);
+
     });
