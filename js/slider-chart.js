@@ -70,6 +70,7 @@ SliderVis.prototype.wrangleData = function(){
 SliderVis.prototype.updateVis = function() {
     var vis = this;
 
+    // run function to update result when button is clicked
     d3.select("#match-button").on("click", function() {vis.onButtonClick()});
 
 }
@@ -77,21 +78,28 @@ SliderVis.prototype.updateVis = function() {
 SliderVis.prototype.onButtonClick = function() {
     var vis = this;
 
+    // get the slider selected values
     vis.acousticnessSelection = d3.select("#acousticness-slider").property("value");
     vis.danceabilitySelection = d3.select("#danceability-slider").property("value");
     vis.speechinessSelection = d3.select("#speechiness-slider").property("value");
     vis.valenceSelection = d3.select("#valence-slider").property("value");
 
+    // initialize variables to update in loop to find the matched country
     vis.lowestDifference = 10;
     vis.similarCountry = null;
 
+    // loop through all countries
     vis.countryAvgAttributes.forEach(function(d) {
 
+        // find the sum of the differences between the slider selected value and the respective
+        // attribute for that country
         var difference = Math.abs(vis.acousticnessSelection*.01 - d.value.acousticness) +
             Math.abs(vis.danceabilitySelection*.01 - d.value.danceability) +
             Math.abs(vis.speechinessSelection*.01 - d.value.speechiness) +
             Math.abs(vis.valenceSelection*.01 - d.value.valence);
 
+        // if the sum of the four differences for that country is the lowest so far,
+        // update the similarCountry to be that country
         if (difference < vis.lowestDifference) {
             vis.lowestDifference = difference;
             vis.similarCountry = d.key;

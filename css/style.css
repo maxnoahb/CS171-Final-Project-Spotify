@@ -16,6 +16,15 @@ MAX'S STYLES
 .slidecontainer {
     width: 100%; /* Width of the outside container */
     padding-bottom: 15px;
+    display: flex;
+}
+
+.slider-label {
+    padding-right: 20px;
+}
+
+output {
+    padding-left: 20px;
 }
 
 .slider {
