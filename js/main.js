@@ -4,13 +4,15 @@
 var audioData;
 var frequencyData;
 var mapData;
+var mapNames;
 
 // Load in data
 d3.queue()
     .defer(d3.csv, 'data/audio_features.csv')
     .defer(d3.csv, 'data/track_frequencies.csv')
     .defer(d3.json, 'data/world-110m.json')
-    .await(function(error, data1, data2, data3) {
+    .defer(d3.tsv, 'data/world-100m-names.tsv')
+    .await(function(error, data1, data2, data3, data4) {
 
         // Convert numStrings to numbers
         data1.forEach(function(d) {
@@ -33,6 +35,7 @@ d3.queue()
         audioData = data1;
         frequencyData = data2;
         mapData = data3;
+        mapNames = data4;
 
         console.log(audioData, frequencyData, mapData);
 
@@ -43,6 +46,7 @@ d3.queue()
         var sliderVis = new SliderVis("slider-chart", data1);
 
         // Initialize choropleth chart
-        var choroplethVis = new ChoroplethVis("choropleth-map", data1, data3);
+        var choroplethVis = new ChoroplethVis("choropleth-map", audioData, mapData, mapNames);
+
 
     });
