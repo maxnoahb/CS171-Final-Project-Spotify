@@ -2,7 +2,7 @@
 // Create drawing area
 var margin = {top: 20, right: 10, bottom: 20, left: 10},
     width = 960 - margin.left - margin.right,
-    height = 700 - margin.top - margin.bottom;
+    height = 760 - margin.top - margin.bottom;
 
 var svg = d3.select('#bubble-chart').append('svg')
     .attr('width', width + margin.left + margin.right)
@@ -44,7 +44,7 @@ function updateBubbles() {
   var force = d3.forceSimulation(nodes)
                 .force("charge", d3.forceManyBody().strength(chargeStrength))
                 .force("collide", d3.forceCollide(function (d) {
-                  return radius(d.Freq);
+                  return radius(d.Freq) + 3;
                 }))
                 .force("center", d3.forceCenter().x(width/2).y(height/2));
 
