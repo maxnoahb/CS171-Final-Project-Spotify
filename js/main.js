@@ -6,6 +6,8 @@ var frequencyData;
 var mapData;
 var mapNames;
 
+var comparisonChart;
+
 // Load in data
 d3.queue()
     .defer(d3.csv, 'data/audio_features.csv')
@@ -45,6 +47,11 @@ d3.queue()
         initializeBubbles();
 
         // Initialize slider chart
+        initializeSliderChart();
+
+        // Initialize comparison chart
+        comparisonChart = new ComparisonChart("comparison-chart", audioData);
+
         var sliderVis = new SliderVis("slider-chart", data1);
 
         // Initialize choropleth chart
