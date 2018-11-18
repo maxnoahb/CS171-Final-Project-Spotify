@@ -4,7 +4,7 @@
 var audioData;
 var frequencyData;
 var mapData;
-var mapNames;
+var countryNames;
 
 var comparisonChart;
 
@@ -36,10 +36,15 @@ d3.queue()
           d.Freq = +d.Freq;
         });
 
+        // Get country names and corresponding ID for map
+        countryNames = d3.map();
+        data4.forEach(function(d){
+            countryNames.set(d.id,d.name);
+        });
+
         audioData = data1;
         frequencyData = data2;
         mapData = data3;
-        mapNames = data4;
 
         console.log(audioData, frequencyData, mapData);
 
@@ -55,7 +60,7 @@ d3.queue()
         var sliderVis = new SliderVis("slider-chart", data1);
 
         // Initialize choropleth chart
-        var choroplethVis = new ChoroplethVis("choropleth-map", audioData, mapData, mapNames);
+        var choroplethVis = new ChoroplethVis("choropleth-map", audioData, mapData, countryNames);
 
 
     });
