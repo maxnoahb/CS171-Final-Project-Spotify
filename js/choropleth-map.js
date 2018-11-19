@@ -30,8 +30,8 @@ var path;
 ChoroplethVis.prototype.initVis = function(){
     var vis = this;
 
-    vis.margin = { top: 20, right: 20, bottom: 200, left: 60 };
-    vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
+    vis.margin = { top: 20, right: 20, bottom: 200, left: 30 };
+    vis.width = 1000 - vis.margin.left - vis.margin.right;
     vis.height = 560 - vis.margin.top - vis.margin.bottom;
 
     // SVG drawing area

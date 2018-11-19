@@ -14,22 +14,23 @@
     <p>[Disclaimers]</p>
 
     <!-- Choropleth map -->
-    <div class="container-fluid">
-        <form class="form-inline">
-            <div class="choropleth-dropdown">
-                Filter by music attribute:
-                <select id="attribute" class="form-control" onChange="choroplethMap.updateChoropleth()" style="margin-left:10px">
-                    <option value="danceability">Danceability</option>
-                    <option value="energy">Energy</option>
-                    <option value="loudness">Loudness</option>
-                    <option value="valence">Valence</option>
-                </select>
-            </div>
-        </form>
-    </div>
     <div class="container">
         <div class="row">
+            <form class="form-inline">
+                <div class="choropleth-dropdown">
+                    Filter by music attribute:
+                    <select id="attribute" class="form-control" onChange="choroplethMap.updateChoropleth()" style="margin-left:10px">
+                        <option value="danceability">Danceability</option>
+                        <option value="energy">Energy</option>
+                        <option value="loudness">Loudness</option>
+                        <option value="valence">Valence</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class="row">
             <div class="col-md-12">
+                The danceability, energy, loudness, and valence of popular music differs across countries
                 <div id="choropleth-map"></div>
             </div>
         </div>
