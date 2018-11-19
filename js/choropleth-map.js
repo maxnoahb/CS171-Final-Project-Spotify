@@ -16,6 +16,15 @@ ChoroplethVis = function(_parentElement, _music, _mapjson, _mapnames){
     this.initVis();
 }
 
+var dance_list = [];
+var energy_list = [];
+var loud_list = [];
+var valence_list = [];
+
+var world;
+var colorscale;
+var path;
+
 ChoroplethVis.prototype.initVis = function(){
     var vis = this;
 
@@ -35,19 +44,17 @@ ChoroplethVis.prototype.initVis = function(){
     var path = d3.geoPath().projection(projection);
 
     // Set color scale
-    var colorscale = d3.scaleQuantize()
+    colorscale = d3.scaleQuantize()
         .range(["rgb(237,248,233)", "rgb(186,228,179)", "rgb(116,196,118)", "rgb(49,163,84)", "rgb(0,109,44)"]);
 
     // Convert the TopoJSON to GeoJSON
-    var world = topojson.feature(this.map, this.map.objects.countries).features;
+    world = topojson.feature(this.map, this.map.objects.countries).features;
     var map_names = this.map_names;
 
     // Get Danceability attributes and merge attribute into world data
-    var dance_list = [];
     var music_data = this.music;
 
     // Merge data
-    // Source: Interactive Data Visualization for the Web - Scott Murray
     for (var i = 0; i < music_data.length; i++){
 
         // Grab country name
@@ -55,27 +62,37 @@ ChoroplethVis.prototype.initVis = function(){
 
         // Find country id
         for (var m = 0; m < map_names.length; m++){
-            if (map_names[m].name == country){
+            if (map_names[m].name === country){
                var country_id = parseInt(map_names[m].id)
             }
         }
 
-        // Grab dancebility
+        // Grab attributes
         var dance = music_data[i].value.danceability;
+        var energy = music_data[i].value.energy;
+        var loudness = music_data[i].value.loudness;
+        var valence = music_data[i].value.valence;
+        energy_list.push(energy);
+        loud_list.push(loudness);
+        valence_list.push(valence);
         dance_list.push(dance);
 
         // Find the corresponding country id inside the GeoJSON
         for (var j = 0; j < world.length; j++) {
             var json_country_id = world[j].id;
-            if (country_id == json_country_id) {
-                console.log("match");
+            if (country_id === json_country_id) {
                 // Copy the data value into the JSON
-                world[j].properties.danceability = dance;
+                world[j].danceability = dance;
+                world[j].energy = energy;
+                world[j].loudness = loudness;
+                world[j].valence = valence;
                 //Stop looking through the JSON
                 break;
             }
         }
     }
+
+    console.log(world);
 
     // Domain
     colorscale.domain([d3.min(dance_list),d3.max(dance_list)]);
@@ -87,7 +104,7 @@ ChoroplethVis.prototype.initVis = function(){
         .attr("d", path)
         .style("fill", function(d) {
             //Get data value
-            var dance = d.properties.danceability;
+            var dance = d.danceability;
             if (dance) {
                 //If value exists...
                 return colorscale(dance);
@@ -111,8 +128,44 @@ ChoroplethVis.prototype.wrangleData = function(){
 ChoroplethVis.prototype.updateChoropleth = function(){
     var vis = this;
 
-    vis.attribute = d3.select("#attribute").property("value");
-    console.log(vis.attribute)
+    vis.attribute = d3.select("#attribute").property("value"); // Return string "danceability"
+    console.log(vis.attribute);
+
+    // Find list
+    var list;
+    if (vis.attribute==="danceability"){
+        list = dance_list;
+    }
+    if (vis.attribute==="energy"){
+        list = energy_list;
+    }
+    if (vis.attribute==="loudness"){
+        list = loud_list;
+    }
+    if (vis.attribute==="valence"){
+        list = valence_list;
+    }
+
+    colorscale.domain([d3.min(list),d3.max(list)]);
+    console.log(list);
+    console.log(world[3].valence);
+
+    // Render the world atlas by using the path generator for WATER
+    vis.svg.selectAll("path")
+        .data(world)
+        .enter().append("path")
+        .attr("d", path)
+        .style("fill", function(d) {
+            //Get data value
+            var attribute = d[vis.attribute];
+            if (attribute) {
+                //If value exists...
+                return colorscale(attribute);
+            }
+            else{
+                // If value is undefined...
+                return "#d3d3d3";
+            }});
 
 
 };
