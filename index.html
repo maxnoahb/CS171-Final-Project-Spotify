@@ -5,6 +5,7 @@
     <title>CS171 Final Project</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 </head>
 <body>
 
@@ -35,7 +36,7 @@
         <form class="form-inline">
             <div class="form-group comparison-dropdown">
                 Choose a country to compare to:
-                <select id="countries-list" class="form-control" onChange="comparisonChart.onCountryCompareChange()" style="margin-left:10px"></select>
+                <select id="countries-list" class="form-control" onChange="updateSelected();" style="margin-left:10px"></select>
             </div>
         </form>
     </div>

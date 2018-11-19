@@ -67,55 +67,29 @@ function updateBubbles(country) {
                 else {
                   return "#d3d3d3";
                 }
-              });
-              // // Add tooltip
-              // // Tooltip inspired by sami rubenfeld
-              // // https://bl.ocks.org/sarubenfeld/56dc691df199b4055d90e66b9d5fc0d2
-              // .on("mouseover", function(d) {
-              //
-              //
-              //
-        			// 	d3.select("#tooltip").classed("hidden", false);
-              // })
-              // .on("mouseout", function () {
-              //   d3.select("#tooltip").classed("hidden", true)
-              // });
+              })
+          // Tooltip
+          // Inspired by http://bl.ocks.org/d3noob/a22c42db65eb00d4e369
+          .on("mouseover", function(d) {
+                    div.transition()
+                        .duration(200)
+                        .style("opacity", 1);
+                    div.html(d.Var1)
+                        .style("left", (d3.event.pageX) + "px")
+                        .style("top", (d3.event.pageY - 28) + "px");
+                    })
+          .on("mouseout", function(d) {
+              div.transition()
+                  .duration(500)
+                  .style("opacity", 0);
+          });
+
+  // Define the div for the tooltip
+  var div = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
 
   bubble.exit().remove();
-
-    // add tooltip
-    // svg.selectAll(".node")
-    //     .on("mouseover", function(d) {
-    //         if (countryDataByCountryId[d.properties.adm0_a3_is] != null) {
-    //             tip.show(d);
-    //         }
-    //     })
-    //     .on("mouseout", tip.hide);
-
-    // tooltip
-
-    // tip.offset([-10,0])
-    //     .html(function(d) {
-    //         var currentCountryData = countryDataByCountryId[d.properties.adm0_a3_is];
-    //
-    //         if (currentCountryData != null) {
-    //
-    //             var metricData = currentCountryData[selection];
-    //             var format;
-    //
-    //             if (selection === "UN_Population") {
-    //                 format = d3.format(".2s");
-    //             }
-    //             else {
-    //                 format = d3.format(".2f");
-    //             }
-    //
-    //             return currentCountryData.Country + "<br><br>" + selection + ": " + format(metricData);
-    //         }
-    //         else { return null; }
-    //     });
-    //
-    // svg.call(tip);
 
   // Update nodes on tick
   force.on("tick", function() {
