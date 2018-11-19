@@ -57,6 +57,10 @@ output {
 	cursor: pointer;
 }
 
+#selectedCountryName {
+    text-align: center;
+}
+
 /*****
 
 JUSTIN'S STYLES
@@ -75,4 +79,39 @@ div.tooltip {
     border: 0px;
     border-radius: 8px;
     pointer-events: none;
+}
+
+
+
+/*****
+
+KATE'S STYLES
+
+*****/
+.comparison-top-text {
+    display: inline-block;
+    text-align: center;
+    margin: 50px auto 30px;
+}
+
+.comparison-dropdown {
+    margin-left: 70px;
+}
+
+.comparison-country-labels .country-label-right {
+    font-weight: bold;
+}
+
+/* this helped: https://stackoverflow.com/questions/5288336/put-text-at-bottom-of-div */
+.comparison-country-label-left {
+    position: relative;
+}
+
+.comparison-country-label-left span {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    text-anchor: end;
+    margin-right: 70px;
+    font-weight: bold;
 }

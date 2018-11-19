@@ -34,7 +34,7 @@ ComparisonChart.prototype.initVis = function(){
         });
     });
 
-    vis.margin = {top: 50, right: 120, bottom: 20, left: 120};
+    vis.margin = {top: 10, right: 120, bottom: 20, left: 120};
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
     vis.height = 300 - vis.margin.top - vis.margin.bottom;
 
@@ -52,8 +52,6 @@ ComparisonChart.prototype.initVis = function(){
     vis.xScaleRight = d3.scaleLinear()
         .range([0, vis.width/2])
         .domain([0,1]);
-
-    // console.log(vis.data.map(function(d){return d.value}));
 
     vis.yScale = d3.scaleBand()
         .range([0, vis.height])
@@ -87,7 +85,7 @@ ComparisonChart.prototype.wrangleData = function(){
             return [
                 {"danceability": d3.mean(v, function(d) { return d.danceability; })},
                 {"energy": d3.mean(v, function(d) { return d.energy; })},
-                {"instrumentalness": d3.mean(v, function(d) { return d.instrumentalness})},
+                {"speechiness": d3.mean(v, function(d) { return d.speechiness})},
                 {"valence": d3.mean(v, function(d) { return d.valence; })}
             ];
         })
@@ -99,7 +97,7 @@ ComparisonChart.prototype.wrangleData = function(){
             return [
                 {"danceability": d3.mean(v, function(d) { return d.danceability; })},
                 {"energy": d3.mean(v, function(d) { return d.energy; })},
-                {"instrumentalness": d3.mean(v, function(d) { return d.instrumentalness})},
+                {"speechiness": d3.mean(v, function(d) { return d.speechiness})},
                 {"valence": d3.mean(v, function(d) { return d.valence; })}
             ];
         })
@@ -120,25 +118,7 @@ ComparisonChart.prototype.wrangleData = function(){
 ComparisonChart.prototype.updateVis = function(){
     var vis = this;
 
-    vis.yScale.domain(["energy", "danceability", "instrumentalness", "valence"]);
-
-    // draw headers
-    vis.svg.append("text")
-        .text(vis.leftChartData[0].key)
-        .attr("x", vis.width/2 - 50)
-        .attr("y", -vis.margin.top/4)
-        .attr("class", "comparison-country-labels")
-        .style("text-anchor", "end");
-
-    var chosenCountryLabel = vis.svg.selectAll(".comparison-country-label-right")
-        .data(vis.rightChartData[0]);
-
-    chosenCountryLabel.enter().append("text")
-        .text(function(d){return d.key})
-        .attr("x", vis.width/2 + 50)
-        .attr("y", -vis.margin.top/4)
-        .attr("class", "comparison-country-label-right")
-        .style("text-anchor", "start");
+    vis.yScale.domain(["energy", "danceability", "speechiness", "valence"]);
 
     // draw left rectangles
     var leftBars = vis.svg.selectAll(".left-bar-group")
@@ -147,20 +127,11 @@ ComparisonChart.prototype.updateVis = function(){
     // used for reference:  https://stackoverflow.com/questions/45847254/d3-bar-chart-reverse-bars-from-right-to-left
     leftBars.enter().append("rect")
         .attr("class", "left-bar-group")
-        .attr("x", function(d){return vis.xScaleLeft(d[Object.keys(d)[0]]) - 3})
+        .attr("x", function(d){return vis.xScaleLeft(d[Object.keys(d)[0]]) - 50})
         .attr("y", function(d){return vis.yScale(Object.keys(d)[0])})
         .attr("width", function(d){return vis.width/2 - vis.xScaleLeft(d[Object.keys(d)[0]])})
         .attr("height", vis.yScale.bandwidth())
-        .attr("fill", "lightblue");
-
-    // draw dividing line
-    vis.svg.append("line")
-        .attr("x1", vis.width/2)
-        .attr("y1", 0)
-        .attr("x2", vis.width/2)
-        .attr("y2", vis.height)
-        .style("stroke-width", 1)
-        .style("stroke", "black");
+        .attr("fill", "#4caf50");
 
     // draw right rectangles
     var rightBars = vis.svg.selectAll(".right-bar-group")
@@ -169,32 +140,63 @@ ComparisonChart.prototype.updateVis = function(){
     // used for reference:  https://stackoverflow.com/questions/45847254/d3-bar-chart-reverse-bars-from-right-to-left
     rightBars.enter().append("rect")
         .attr("class", "right-bar-group")
-        .attr("x", vis.width/2 + 3)
+        .attr("x", vis.width/2 + 50)
         .attr("y", function(d){return vis.yScale(Object.keys(d)[0])})
         .attr("width", function(d){return vis.xScaleRight(d[Object.keys(d)[0]])})
         .attr("height", vis.yScale.bandwidth())
-        .attr("fill", "lightblue");
+        .attr("fill", "#4caf50");
 
+    // column labels
+    var columnLabels = vis.svg.selectAll("text.column-label")
+        .data(vis.leftChartData[0].value);
+
+    columnLabels.enter().append("text")
+        .attr("class", "column-label")
+        .text(function(d){return Object.keys(d)[0]})
+        .attr("x", vis.width/2)
+        .attr("y", function(d){return vis.yScale(Object.keys(d)[0]) + vis.yScale.bandwidth()/2 + vis.yScale.bandwidth()*.1})
+        .style("text-anchor", "middle");
+
+    // bar labels
+    var leftBarLabels = vis.svg.selectAll("text.left-bar-labels")
+        .data(vis.leftChartData[0].value);
+
+    leftBarLabels.enter().append("text")
+        .attr("class", "left-bar-labels")
+        .text(function(d){ return Math.round(d[Object.keys(d)[0]] * 100)})
+        .attr("x", function(d){ return -60 + vis.xScaleLeft(d[Object.keys(d)[0]])})
+        .attr("y", function(d){ return vis.yScale(Object.keys(d)[0]) + vis.yScale.bandwidth()/2 + vis.yScale.bandwidth()*.1})
+        .style("text-anchor", "end");
+
+    var rightBarLabels = vis.svg.selectAll("text.right-bar-labels")
+        .data(vis.rightChartData[0].value);
+
+    rightBarLabels.enter().append("text")
+        .attr("class", "right-bar-labels")
+        .text(function(d){ return Math.round(d[Object.keys(d)[0]] * 100)})
+        .attr("x", function(d){ return 60 + vis.xScaleRight(d[Object.keys(d)[0]]) + vis.width/2})
+        .attr("y", function(d){ return vis.yScale(Object.keys(d)[0]) + vis.yScale.bandwidth()/2 + vis.yScale.bandwidth()*.1})
+        .style("text-anchor", "start");
+
+    // remove
     rightBars.exit().remove();
-    // chosenCountryLabel.exit().remove();
-
-    console.log("test6");
+    rightBarLabels.exit().remove();
 
     rightBars.transition()
         .duration(800)
-        .attr("x", vis.width/2 + 3)
+        .attr("x", vis.width/2 + 50)
         .attr("y", function(d){return vis.yScale(Object.keys(d)[0])})
         .attr("width", function(d){return vis.xScaleRight(d[Object.keys(d)[0]])})
         .attr("height", vis.yScale.bandwidth())
-        .attr("fill", "lightblue");
+        .attr("fill", "#4caf50");
 
-    // chosenCountryLabel.transition()
-    //     .duration(800)
-    //     .text(function(d){return d.key})
-    //     .attr("x", vis.width/2 + 50)
-    //     .attr("y", -vis.margin.top/4);
-        // .attr("class", ".comparison-country-label-right")
-        // .style("text-anchor", "start");
+    rightBarLabels.transition()
+        .duration(800)
+        .attr("class", "right-bar-labels")
+        .text(function(d){ return Math.round(d[Object.keys(d)[0]] * 100)})
+        .attr("x", function(d){ return 60 + vis.xScaleRight(d[Object.keys(d)[0]]) + vis.width/2})
+        .attr("y", function(d){ return vis.yScale(Object.keys(d)[0]) + vis.yScale.bandwidth()/2 + vis.yScale.bandwidth()*.1})
+        .style("text-anchor", "start");
 
 }
 
