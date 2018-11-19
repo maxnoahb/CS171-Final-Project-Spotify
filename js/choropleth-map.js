@@ -38,11 +38,12 @@ ChoroplethVis.prototype.initVis = function(){
 
     // Convert the TopoJSON to GeoJSON
     var world = topojson.feature(this.map, this.map.objects.countries).features;
-    console.log(world);
 
     // Get country names and ID
     var map_names = this.map_names;
+    console.log(map_names)
     var countryNames = d3.map();
+    console.log(countryNames);
     map_names.forEach(function(d){
         countryNames.set(d.id, d.name);
     });
