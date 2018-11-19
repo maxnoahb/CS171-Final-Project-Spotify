@@ -12,11 +12,6 @@ var svg = d3.select('#bubble-chart').append('svg')
 
 var chargeStrength = 1;
 
-// initialize tooltip
-// var tip = d3.tip()
-//     .attr("class", "d3-tip");
-
-
 // Create bubble chart
 function updateBubbles(country) {
 
@@ -28,13 +23,11 @@ function updateBubbles(country) {
   var selectedTop50 = {};
 
   dataByCountry[country].forEach(function (d) {
-    // trackNames.push(d.track_name);
     selectedTop50[d.track_name] = d;
   });
 
   console.log(selectedTop50);
 
-  // console.log(trackNames);
 
   // Create scale that determines radius of circles
   var radius = d3.scaleLinear()
