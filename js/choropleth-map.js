@@ -6,7 +6,7 @@
  * @param _data             -- map names data
  */
 
-ChoroplethVis = function(_parentElement, _audio_data, _map_data, _map_names){
+ChoroplethVis = function(_parentElement, _data1, _data2, _data4){
     this.parentElement = _parentElement;
     this.music = _audio_data;
     this.map = _map_data;
