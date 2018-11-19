@@ -25,6 +25,8 @@ var world;
 var colorscale;
 var path;
 
+// var tool_tip;
+
 ChoroplethVis.prototype.initVis = function(){
     var vis = this;
 
@@ -86,6 +88,7 @@ ChoroplethVis.prototype.initVis = function(){
                 world[j].energy = energy;
                 world[j].loudness = loudness;
                 world[j].valence = valence;
+                world[j].country = country;
                 //Stop looking through the JSON
                 break;
             }
@@ -96,6 +99,11 @@ ChoroplethVis.prototype.initVis = function(){
 
     // Domain
     colorscale.domain([d3.min(dance_list),d3.max(dance_list)]);
+
+    // tool_tip = = d3.tip()
+    //     .attr("class", "d3-tip")
+    //     .offset([-8,0])
+    //     .html(function(d) {return d.country;});
 
     // Render the world atlas by using the path generator for WATER
     vis.svg.selectAll("path")
@@ -162,6 +170,5 @@ ChoroplethVis.prototype.updateChoropleth = function(){
                 // If value is undefined...
                 return "#d3d3d3";
             }});
-
 
 };
