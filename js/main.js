@@ -7,7 +7,6 @@ var mapData;
 var dataByCountry;
 var selectedCountry;
 var selectedTop50;
-var countryNames;
 
 var comparisonChart;
 
@@ -40,7 +39,6 @@ d3.queue()
         audioData = data1;
         frequencyData = data2;
         mapData = data3;
-        countryNames = data4;
 
         console.log(audioData, frequencyData, mapData);
 
@@ -54,5 +52,7 @@ d3.queue()
         comparisonChart = new ComparisonChart("comparison-chart", audioData);
 
         var sliderVis = new SliderVis("slider-chart", data1);
+
+        var choroplethMap = new choroplethMap("choropleth-map", data1, data3, data4)
 
     });
