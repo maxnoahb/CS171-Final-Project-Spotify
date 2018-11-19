@@ -13,8 +13,8 @@ var svg = d3.select('#bubble-chart').append('svg')
 var chargeStrength = 1;
 
 // initialize tooltip
-var tip = d3.tip()
-    .attr("class", "d3-tip");
+// var tip = d3.tip()
+//     .attr("class", "d3-tip");
 
 
 // Create bubble chart

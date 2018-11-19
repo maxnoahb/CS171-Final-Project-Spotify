@@ -5,9 +5,11 @@
  * @param _data						-- the actual data
  */
 
-SliderVis = function(_parentElement, _data ) {
+SliderVis = function(_parentElement, _data, _mapjson, _mapnames) {
     this.parentElement = _parentElement;
     this.data = _data;
+    this.map = _mapjson;
+    this.map_names = _mapnames;
 
     this.initVis();
 }
@@ -30,6 +32,14 @@ SliderVis.prototype.initVis = function() {
         .append("g")
         .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
+    // Create a mercator projection and draw path
+    vis.projection = d3.geoMercator().translate([width / 2, height / 2]);
+    vis.path = d3.geoPath().projection(vis.projection);
+
+    // Set color scale
+    vis.colorScale = d3.scaleQuantize()
+        .range(["rgb(237,248,233)", "rgb(186,228,179)", "rgb(116,196,118)", "rgb(49,163,84)", "rgb(0,109,44)"]);
+
     vis.wrangleData();
 
 }
@@ -43,9 +53,13 @@ SliderVis.prototype.wrangleData = function(){
 
     this.displayData = this.data;
 
+    // Convert the TopoJSON to GeoJSON
+    vis.world = topojson.feature(vis.map, vis.map.objects.countries).features;
+    vis.mapNames = vis.map_names;
+
     // console.log(countryAvgAttributes);
-    console.log(mapData);
-    console.log(mapNameData);
+    // console.log(mapData);
+    // console.log(mapNameData);
 
     // Update the visualization
     vis.updateVis();
@@ -93,7 +107,43 @@ SliderVis.prototype.onButtonClick = function() {
         }
     });
 
-    $('#selectedCountryName').html(vis.similarCountry);
+    $('#selectedCountryName').html(vis.similarCountry.replace(" Top 50",""));
+
+    vis.country = vis.similarCountry.replace(" Top 50","");
+    console.log(vis.country);
+
+    // Merge data
+    // Source: Interactive Data Visualization for the Web - Scott Murray
+    // for (var i = 0; i < vis.data.length; i++){
+    //
+    //     // Grab country name
+    //     var country = vis.data[i].key.replace(" Top 50","");
+    //
+    //     // Find country id
+    //     for (var m = 0; m < vis.mapNames.length; m++){
+    //         if (vis.mapNames[m].name === country){
+    //             var country_id = parseInt(vis.mapNames[m].id);
+    //             // console.log(country_id);
+    //         }
+    //     }
+    //
+    //     // Grab dancebility
+    //     // var dance = vis.data[i].value.danceability;
+    //     // dance_list.push(dance);
+    //
+    //     // Find the corresponding country id inside the GeoJSON
+    //     // for (var j = 0; j < vis.world.length; j++) {
+    //     //     var json_country_id = vis.world[j].id;
+    //     //     if (country_id == json_country_id) {
+    //     //         // console.log("match");
+    //     //         // Copy the data value into the JSON
+    //     //         // vis.world[j].properties.danceability = dance;
+    //     //         //Stop looking through the JSON
+    //     //         break;
+    //     //     }
+    //     // }
+    // }
+    // console.log(vis.world);
 
     // console.log(vis.similarCountry);
 

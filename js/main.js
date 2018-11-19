@@ -82,7 +82,7 @@ d3.queue()
         updateBubbles("Argentina");
         updateBubbles("Argentina");
 
-        sliderVis = new SliderVis("slider-chart", data1);
+        sliderVis = new SliderVis("slider-chart", countryAvgAttributes, data3, data4);
 
         choroplethMap = new ChoroplethVis("choropleth-map", countryAvgAttributes, data3, data4)
 
