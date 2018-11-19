@@ -31,7 +31,7 @@
 
     <!-- Side by side country comparison -->
     <!-- Dropdown for compared country -->
-    <select id="countries-list" class="form-control" onChange="comparisonChart.onCountryCompareChange()"></select>
+    <select id="countries-list" class="form-control" onChange="updateSelected()"></select>
 
     <div class="container">
         <div class="row">
@@ -55,17 +55,28 @@
       <div class="row">
         <div class="col-md-4">
             <div class="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="acousticness-slider">
+                <label class="slider-label" for="acousticness-slider">Acousticness</label>
+                <input type="range" min="1" max="100" value="50" class="slider" id="acousticness-slider" onchange="acousticnessRangeValue.value=value">
+                <output id="acousticnessRangeValue">50</output>
             </div>
             <div class="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="danceability-slider">
+                <label class="slider-label" for="danceability-slider">Danceability</label>
+                <input type="range" min="1" max="100" value="50" class="slider" id="danceability-slider" onchange="danceabilityRangeValue.value=value">
+                <output id="danceabilityRangeValue">50</output>
             </div>
             <div class="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="speechiness-slider">
+                <label class="slider-label" for="speechiness-slider">Speechiness</label>
+                <input type="range" min="1" max="100" value="50" class="slider" id="speechiness-slider" onchange="speechinessRangeValue.value=value">
+                <output id="speechinessRangeValue">50</output>
             </div>
             <div class="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="valence-slider">
+                <label class="slider-label" for="valence-slider">Valence</label>
+                <input type="range" min="1" max="100" value="50" class="slider" id="valence-slider" onchange="valenceRangeValue.value=value">
+                <output id="valenceRangeValue">50</output>
             </div>
+
+            <button type="button" class="btn btn-success" id="match-button">Match</button>
+
         </div>
         <div class="col-md-8">
           <div id="slider-chart"></div>
