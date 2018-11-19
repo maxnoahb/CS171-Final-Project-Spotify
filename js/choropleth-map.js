@@ -6,14 +6,14 @@
  * @param _data             -- map names data
  */
 
+// Green #4caf50
+
 ChoroplethVis = function(_parentElement, _music, _mapjson, _mapnames){
     this.parentElement = _parentElement;
     this.music = _music;
     this.map = _mapjson;
     this.map_names = _mapnames;
     this.initVis();
-    console.log(this.map_names);
-    console.log(this.map);
 }
 
 ChoroplethVis.prototype.initVis = function(){
@@ -40,24 +40,10 @@ ChoroplethVis.prototype.initVis = function(){
 
     // Convert the TopoJSON to GeoJSON
     var world = topojson.feature(this.map, this.map.objects.countries).features;
-
     var map_names = this.map_names;
-    console.log(map_names);
-    console.log(world);
-
-
-    // Get country names and ID
-    // var map_names = this.map_names;
-    // console.log(map_names);
-    // var countryNames = d3.map();
-    // console.log(countryNames);
-    // map_names.forEach(function(d){
-    //     countryNames.set(d.id, d.name);
-    // });
-    // console.log(countryNames);
 
     // Get Danceability attributes and merge attribute into world data
-    var danceability = [];
+    var dance_list = [];
     var music_data = this.music;
 
     // Merge data
@@ -65,25 +51,24 @@ ChoroplethVis.prototype.initVis = function(){
     for (var i = 0; i < music_data.length; i++){
 
         // Grab country name
-        var country = music_data[i].country;
-        var country_id;
+        var country = music_data[i].key.replace(" Top 50","");
 
-        // Grab dancebility
-        var dance = music_data[i].danceability;
-        danceability.push(dance);
-
-        // Find corresponding country inside of country names and get ID
-        for (var k = 0; k < map_names.length; k++){
-            if (country == map_names[k].name){
-                country_id = map_names[k].id;
-                break;
+        // Find country id
+        for (var m = 0; m < map_names.length; m++){
+            if (map_names[m].name == country){
+               var country_id = parseInt(map_names[m].id)
             }
         }
 
+        // Grab dancebility
+        var dance = music_data[i].value.danceability;
+        dance_list.push(dance);
+
         // Find the corresponding country id inside the GeoJSON
         for (var j = 0; j < world.length; j++) {
-            var json_country_id = world[j].properties.id;
+            var json_country_id = world[j].id;
             if (country_id == json_country_id) {
+                console.log("match");
                 // Copy the data value into the JSON
                 world[j].properties.danceability = dance;
                 //Stop looking through the JSON
@@ -93,8 +78,7 @@ ChoroplethVis.prototype.initVis = function(){
     }
 
     // Domain
-    console.log(danceability);
-    colorscale.domain([d3.min(danceability),d3.max(danceability)]);
+    colorscale.domain([d3.min(dance_list),d3.max(dance_list)]);
 
     // Render the world atlas by using the path generator for WATER
     vis.svg.selectAll("path")
@@ -109,8 +93,8 @@ ChoroplethVis.prototype.initVis = function(){
                 return colorscale(dance);
             }
             else{
-                //If value is undefined...
-                return "gray";
+                // If value is undefined...
+                return "#d3d3d3";
             }});
 
     vis.wrangleData();
@@ -126,4 +110,9 @@ ChoroplethVis.prototype.wrangleData = function(){
 
 ChoroplethVis.prototype.updateChoropleth = function(){
     var vis = this;
+
+    vis.attribute = d3.select("#attribute").property("value");
+    console.log(vis.attribute)
+
+
 };

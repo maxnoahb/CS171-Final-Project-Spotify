@@ -14,21 +14,28 @@
     <p>[Disclaimers]</p>
 
     <!-- Choropleth map -->
-    <!-- Dropdown for metric filter -->
-    <select id="filters" class="form-control" onChange="updateChoropleth()">
-      <option value="danceability">Danceability</option>
-      <option value="energy">Energy</option>
-      <option value="instrumentalness">Instrumentalness</option>
-      <option value="valence">Valence</option>
-    </select>
-
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div id="choropleth-map"></div>
-        </div>
-      </div>
+    <div class="container-fluid">
+        <form class="form-inline">
+            <div class="choropleth-dropdown">
+                Filter by music attribute:
+                <select id="attribute" class="form-control" onChange="choroplethMap.updateChoropleth()" style="margin-left:10px">
+                    <option value="danceability">Danceability</option>
+                    <option value="energy">Energy</option>
+                    <option value="instrumentalness">Instrumentalness</option>
+                    <option value="valence">Valence</option>
+                </select>
+            </div>
+        </form>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="choropleth-map"></div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
 
     <!-- Side by side country comparison -->
     <!-- Dropdown for compared country -->
@@ -48,6 +55,8 @@
         </div>
     </div>
 
+    <hr>
+
     <!-- Bubble chart -->
     <div class="container">
       <div class="row">
@@ -56,6 +65,8 @@
         </div>
       </div>
     </div>
+
+    <hr>
 
     <!-- Personal slider -->
     <div class="container-fluid">
@@ -86,6 +97,7 @@
 
         </div>
         <div class="col-md-8">
+            <h4 id="selectedCountryName"></h4>
           <div id="slider-chart"></div>
         </div>
       </div>
