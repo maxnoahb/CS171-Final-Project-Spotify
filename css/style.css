@@ -70,8 +70,8 @@ div.tooltip {
     font-size: 14px;
     padding: 5px;
     margin: 5px;
-    color: #4CAF50;
-    background: grey;
+    color: #d3d3d3;
+    background: #272A2F;
     border: 0px;
     border-radius: 8px;
     pointer-events: none;
