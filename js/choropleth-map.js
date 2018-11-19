@@ -6,11 +6,11 @@
  * @param _data             -- map names data
  */
 
-ChoroplethVis = function(_parentElement, _data1, _data2, _data4){
+ChoroplethVis = function(_parentElement, _music, _mapjson, _mapnames){
     this.parentElement = _parentElement;
-    this.music = _audio_data;
-    this.map = _map_data;
-    this.map_names = _map_names;
+    this.music = _music;
+    this.map = _mapjson;
+    this.map_names = _mapnames;
     this.initVis();
 }
 
@@ -37,7 +37,7 @@ ChoroplethVis.prototype.initVis = function(){
         .range(["rgb(237,248,233)", "rgb(186,228,179)", "rgb(116,196,118)", "rgb(49,163,84)", "rgb(0,109,44)"]);
 
     // Convert the TopoJSON to GeoJSON
-    var world = topojson.feature(world_data, world_data.objects.countries).features;
+    var world = topojson.feature(this.map, this.map.objects.countries).features;
     console.log(world);
 
     // Get country names and ID
@@ -49,7 +49,7 @@ ChoroplethVis.prototype.initVis = function(){
     console.log(countryNames);
 
     // Get Danceability attributes and merge attribute into world data
-    var dancability = [];
+    var danceability = [];
     var music_data = this.music;
 
     // Merge data
@@ -62,7 +62,7 @@ ChoroplethVis.prototype.initVis = function(){
 
         // Grab dancebility
         var dance = music_data[i].danceability;
-        dancability.push(dance);
+        danceability.push(dance);
 
         // Find corresponding country inside of country names and get ID
         for (var k = 0; k < map_names.length; k++){
@@ -86,7 +86,7 @@ ChoroplethVis.prototype.initVis = function(){
 
     // Domain
     console.log(danceability);
-    colorscale.domain([d3.min(dancability),d3.max(dancability)]);
+    colorscale.domain([d3.min(danceability),d3.max(danceability)]);
 
     // Render the world atlas by using the path generator for WATER
     svg.selectAll("path")
