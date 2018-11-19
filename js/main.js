@@ -5,6 +5,8 @@ var audioData;
 var frequencyData;
 var mapData;
 var dataByCountry;
+var countryAvgAttributes;
+
 var selectedCountry;
 var selectedTop50;
 
@@ -40,13 +42,34 @@ d3.queue()
         frequencyData = data2;
         mapData = data3;
 
-        console.log(audioData, frequencyData, mapData);
+        // Organize data by countries
+        dataByCountry = d3.nest()
+            .key(function(d, i) { return d.playlist_name.replace(" Top 50", ""); })
+            .rollup(function (d) { return d; })
+            .entries(audioData);
+
+        // new data structure containing the average attributes for each country playlist
+        countryAvgAttributes = d3.nest()
+            .key(function(d) { return d.playlist_name; })
+            .rollup(function(v) {
+                return {
+                    "acousticness": d3.mean(v, function(d) { return d.acousticness; }),
+                    "danceability": d3.mean(v, function(d) { return d.danceability; }),
+                    "duration_ms": d3.mean(v, function(d) { return d.duration_ms; }),
+                    "energy": d3.mean(v, function(d) { return d.energy; }),
+                    "liveness": d3.mean(v, function(d) { return d.liveness; }),
+                    "loudness": d3.mean(v, function(d) { return d.loudness; }),
+                    "speechiness": d3.mean(v, function(d) { return d.speechiness; }),
+                    "tempo": d3.mean(v, function(d) { return d.tempo; }),
+                    "valence": d3.mean(v, function(d) { return d.valence; })
+                };
+            })
+            .entries(data1);
+
+        console.log(audioData, frequencyData, mapData, dataByCountry);
 
         // Initial bubble chart
-        initializeBubbles();
-
-        // Initialize slider chart
-        initializeSliderChart();
+        updateBubbles();
 
         // Initialize comparison chart
         comparisonChart = new ComparisonChart("comparison-chart", audioData);
