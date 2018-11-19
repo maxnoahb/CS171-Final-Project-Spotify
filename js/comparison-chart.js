@@ -1,7 +1,8 @@
 ComparisonChart = function(_parentElement, _data){
     this.parentElement = _parentElement;
     this.data = _data;
-    this.displayData = _data;
+    this.leftChartData = _data;
+    this.rightChartData = _data;
 
     this.initVis();
 }
@@ -33,9 +34,9 @@ ComparisonChart.prototype.initVis = function(){
         });
     });
 
-    vis.margin = {top: 20, right: 120, bottom: 20, left: 120};
+    vis.margin = {top: 50, right: 120, bottom: 20, left: 120};
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
-    vis.height = 500 - vis.margin.top - vis.margin.bottom;
+    vis.height = 300 - vis.margin.top - vis.margin.bottom;
 
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -44,15 +45,28 @@ ComparisonChart.prototype.initVis = function(){
         .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
     // scales and axes
-    vis.yScale = d3.scaleLinear()
-        .range([0, vis.height]);
+    vis.xScaleLeft = d3.scaleLinear()
+        .range([0, vis.width/2])
+        .domain([1,0]);
 
-    vis.svg.append("g")
-        .attr("class", "y-axis axis")
-        .attr("transform", "translate(" + vis.margin.left + vis.width/2 + "," + vis.margin.top + ")");
+    vis.xScaleRight = d3.scaleLinear()
+        .range([0, vis.width/2])
+        .domain([0,1]);
 
-    vis.yAxis = d3.axisLeft()
-        .scale(vis.yScale);
+    // console.log(vis.data.map(function(d){return d.value}));
+
+    vis.yScale = d3.scaleBand()
+        .range([0, vis.height])
+        .padding(.2);
+
+    // set USA and Argentina as default countries
+    vis.leftChartData = vis.data.filter(function(d){
+        return d.playlist_name === "United States Top 50";
+    });
+
+    vis.rightChartData = vis.data.filter(function(d){
+        return d.playlist_name === "Argentina Top 50";
+    });
 
     // (Filter, aggregate, modify data)
     vis.wrangleData();
@@ -67,25 +81,32 @@ ComparisonChart.prototype.wrangleData = function(){
     var vis = this;
 
     // reorganize data to give me average values for each country
-    vis.displayData = d3.nest()
+    vis.leftChartData = d3.nest()
         .key(function(d) { return d.playlist_name; })
         .rollup(function(v) {
-            return {
-                // "acousticness": d3.mean(v, function(d) { return d.acousticness; }),
-                "danceability": d3.mean(v, function(d) { return d.danceability; }),
-                // "duration_ms": d3.mean(v, function(d) { return d.duration_ms; }),
-                "energy": d3.mean(v, function(d) { return d.energy; }),
-                "instrumentalness": d3.mean(v, function(d) { return d.instrumentalness}),
-                // "liveness": d3.mean(v, function(d) { return d.liveness; }),
-                // "loudness": d3.mean(v, function(d) { return d.loudness; }),
-                // "speechiness": d3.mean(v, function(d) { return d.speechiness; }),
-                // "tempo": d3.mean(v, function(d) { return d.tempo; }),
-                "valence": d3.mean(v, function(d) { return d.valence; })
-            };
+            return [
+                {"danceability": d3.mean(v, function(d) { return d.danceability; })},
+                {"energy": d3.mean(v, function(d) { return d.energy; })},
+                {"instrumentalness": d3.mean(v, function(d) { return d.instrumentalness})},
+                {"valence": d3.mean(v, function(d) { return d.valence; })}
+            ];
         })
-        .entries(vis.displayData);
+        .entries(vis.leftChartData);
 
-    console.log(vis.displayData);
+    vis.rightChartData = d3.nest()
+        .key(function(d) { return d.playlist_name; })
+        .rollup(function(v) {
+            return [
+                {"danceability": d3.mean(v, function(d) { return d.danceability; })},
+                {"energy": d3.mean(v, function(d) { return d.energy; })},
+                {"instrumentalness": d3.mean(v, function(d) { return d.instrumentalness})},
+                {"valence": d3.mean(v, function(d) { return d.valence; })}
+            ];
+        })
+        .entries(vis.rightChartData);
+
+    console.log(vis.leftChartData);
+    console.log(vis.rightChartData);
 
     // Update the visualization
     vis.updateVis();
@@ -99,7 +120,81 @@ ComparisonChart.prototype.wrangleData = function(){
 ComparisonChart.prototype.updateVis = function(){
     var vis = this;
 
+    vis.yScale.domain(["energy", "danceability", "instrumentalness", "valence"]);
 
+    // draw headers
+    vis.svg.append("text")
+        .text(vis.leftChartData[0].key)
+        .attr("x", vis.width/2 - 50)
+        .attr("y", -vis.margin.top/4)
+        .attr("class", "comparison-country-labels")
+        .style("text-anchor", "end");
+
+    var chosenCountryLabel = vis.svg.selectAll(".comparison-country-label-right")
+        .data(vis.rightChartData[0]);
+
+    chosenCountryLabel.enter().append("text")
+        .text(function(d){return d.key})
+        .attr("x", vis.width/2 + 50)
+        .attr("y", -vis.margin.top/4)
+        .attr("class", "comparison-country-label-right")
+        .style("text-anchor", "start");
+
+    // draw left rectangles
+    var leftBars = vis.svg.selectAll(".left-bar-group")
+        .data(vis.leftChartData[0].value);
+
+    // used for reference:  https://stackoverflow.com/questions/45847254/d3-bar-chart-reverse-bars-from-right-to-left
+    leftBars.enter().append("rect")
+        .attr("class", "left-bar-group")
+        .attr("x", function(d){return vis.xScaleLeft(d[Object.keys(d)[0]]) - 3})
+        .attr("y", function(d){return vis.yScale(Object.keys(d)[0])})
+        .attr("width", function(d){return vis.width/2 - vis.xScaleLeft(d[Object.keys(d)[0]])})
+        .attr("height", vis.yScale.bandwidth())
+        .attr("fill", "lightblue");
+
+    // draw dividing line
+    vis.svg.append("line")
+        .attr("x1", vis.width/2)
+        .attr("y1", 0)
+        .attr("x2", vis.width/2)
+        .attr("y2", vis.height)
+        .style("stroke-width", 1)
+        .style("stroke", "black");
+
+    // draw right rectangles
+    var rightBars = vis.svg.selectAll(".right-bar-group")
+        .data(vis.rightChartData[0].value);
+
+    // used for reference:  https://stackoverflow.com/questions/45847254/d3-bar-chart-reverse-bars-from-right-to-left
+    rightBars.enter().append("rect")
+        .attr("class", "right-bar-group")
+        .attr("x", vis.width/2 + 3)
+        .attr("y", function(d){return vis.yScale(Object.keys(d)[0])})
+        .attr("width", function(d){return vis.xScaleRight(d[Object.keys(d)[0]])})
+        .attr("height", vis.yScale.bandwidth())
+        .attr("fill", "lightblue");
+
+    rightBars.exit().remove();
+    // chosenCountryLabel.exit().remove();
+
+    console.log("test6");
+
+    rightBars.transition()
+        .duration(800)
+        .attr("x", vis.width/2 + 3)
+        .attr("y", function(d){return vis.yScale(Object.keys(d)[0])})
+        .attr("width", function(d){return vis.xScaleRight(d[Object.keys(d)[0]])})
+        .attr("height", vis.yScale.bandwidth())
+        .attr("fill", "lightblue");
+
+    // chosenCountryLabel.transition()
+    //     .duration(800)
+    //     .text(function(d){return d.key})
+    //     .attr("x", vis.width/2 + 50)
+    //     .attr("y", -vis.margin.top/4);
+        // .attr("class", ".comparison-country-label-right")
+        // .style("text-anchor", "start");
 
 }
 
@@ -108,7 +203,11 @@ ComparisonChart.prototype.onCountryCompareChange = function(){
 
     vis.chosenCountry = d3.select("#countries-list").property("value");
 
-    vis.displayData = vis.data.filter(function(d){
+    vis.leftChartData = vis.data.filter(function(d){
+        return d.playlist_name === "United States Top 50";
+    });
+
+    vis.rightChartData = vis.data.filter(function(d){
         return d.playlist_name === (vis.chosenCountry + " Top 50");
     });
 
