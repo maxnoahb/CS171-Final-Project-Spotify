@@ -12,6 +12,10 @@ var svg = d3.select('#bubble-chart').append('svg')
 
 var chargeStrength = 1;
 
+// initialize tooltip
+var tip = d3.tip()
+    .attr("class", "d3-tip");
+
 
 // Create bubble chart
 function updateBubbles(country) {
@@ -78,6 +82,40 @@ function updateBubbles(country) {
               // });
 
   bubble.exit().remove();
+
+    // add tooltip
+    // svg.selectAll(".node")
+    //     .on("mouseover", function(d) {
+    //         if (countryDataByCountryId[d.properties.adm0_a3_is] != null) {
+    //             tip.show(d);
+    //         }
+    //     })
+    //     .on("mouseout", tip.hide);
+
+    // tooltip
+
+    // tip.offset([-10,0])
+    //     .html(function(d) {
+    //         var currentCountryData = countryDataByCountryId[d.properties.adm0_a3_is];
+    //
+    //         if (currentCountryData != null) {
+    //
+    //             var metricData = currentCountryData[selection];
+    //             var format;
+    //
+    //             if (selection === "UN_Population") {
+    //                 format = d3.format(".2s");
+    //             }
+    //             else {
+    //                 format = d3.format(".2f");
+    //             }
+    //
+    //             return currentCountryData.Country + "<br><br>" + selection + ": " + format(metricData);
+    //         }
+    //         else { return null; }
+    //     });
+    //
+    // svg.call(tip);
 
   // Update nodes on tick
   force.on("tick", function() {
