@@ -5,7 +5,6 @@ var audioData;
 var frequencyData;
 var mapData;
 var dataByCountry;
-
 var selectedCountry;
 var selectedTop50;
 var countryNames;
