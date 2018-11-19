@@ -43,7 +43,9 @@ SliderVis.prototype.wrangleData = function(){
 
     this.displayData = this.data;
 
-    console.log(countryAvgAttributes);
+    // console.log(countryAvgAttributes);
+    console.log(mapData);
+    console.log(mapNameData);
 
     // Update the visualization
     vis.updateVis();
@@ -88,7 +90,21 @@ SliderVis.prototype.onButtonClick = function() {
         }
     });
 
-    // console.log(vis.similarCountry);
-    console.log(mapNameData);
+    vis.selectedCountryName = vis.svg.append("g")
+        .attr("transform", "translate(" + 10 + ", " + 10 + ")")
+        .selectAll("text.selected-country-name")
+        .data(vis.similarCountry);
+
+    vis.selectedCountryName.enter()
+        .append("text")
+        .attr("class", "selected-country-name")
+        // .merge(vis.selectedCountryName)
+        .text(vis.similarCountry)
+        .attr("x", 10)
+        .attr("y", 10);
+
+    vis.selectedCountryName.exit().remove();
+
+    console.log(vis.similarCountry);
 
 }
