@@ -57,6 +57,9 @@ SliderVis.prototype.updateVis = function() {
     // run function to update result when button is clicked
     d3.select("#match-button").on("click", function() {vis.onButtonClick()});
 
+    vis.selectedCountryName = vis.svg.append("g")
+        .attr("transform", "translate(" + 10 + ", " + 10 + ")");
+
 }
 
 SliderVis.prototype.onButtonClick = function() {
@@ -90,21 +93,9 @@ SliderVis.prototype.onButtonClick = function() {
         }
     });
 
-    vis.selectedCountryName = vis.svg.append("g")
-        .attr("transform", "translate(" + 10 + ", " + 10 + ")")
-        .selectAll("text.selected-country-name")
-        .data(vis.similarCountry);
+    $('#selectedCountryName').html(vis.similarCountry);
 
-    vis.selectedCountryName.enter()
-        .append("text")
-        .attr("class", "selected-country-name")
-        // .merge(vis.selectedCountryName)
-        .text(vis.similarCountry)
-        .attr("x", 10)
-        .attr("y", 10);
+    // console.log(vis.similarCountry);
 
-    vis.selectedCountryName.exit().remove();
-
-    console.log(vis.similarCountry);
 
 }
