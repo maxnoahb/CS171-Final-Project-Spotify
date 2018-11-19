@@ -80,6 +80,7 @@ d3.queue()
 
         // Initial bubble chart
         updateBubbles("Argentina");
+        updateBubbles("Argentina");
 
         sliderVis = new SliderVis("slider-chart", data1);
 
