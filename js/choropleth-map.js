@@ -30,7 +30,7 @@ ChoroplethVis.prototype.initVis = function(){
 
     vis.margin = { top: 20, right: 20, bottom: 200, left: 60 };
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
-    vis.height = 500 - vis.margin.top - vis.margin.bottom;
+    vis.height = 560 - vis.margin.top - vis.margin.bottom;
 
     // SVG drawing area
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -147,19 +147,15 @@ ChoroplethVis.prototype.updateChoropleth = function(){
     }
 
     colorscale.domain([d3.min(list),d3.max(list)]);
-    console.log(list);
-    console.log(world[3].valence);
 
     // Render the world atlas by using the path generator for WATER
     vis.svg.selectAll("path")
-        .data(world)
-        .enter().append("path")
-        .attr("d", path)
         .style("fill", function(d) {
             //Get data value
             var attribute = d[vis.attribute];
             if (attribute) {
                 //If value exists...
+                console.log("match");
                 return colorscale(attribute);
             }
             else{
