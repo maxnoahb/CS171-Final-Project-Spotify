@@ -17,7 +17,7 @@ function updateBubbles() {
   var trackNames = [];
 
   // Set default country to Argentina
-  if (selectedTop50 == null) {
+  if (selectedCountry == null) {
     selectedTop50 = dataByCountry.filter(function (d) {
       return d.key == "Argentina";
     })[0].value;
@@ -40,6 +40,10 @@ function updateBubbles() {
                  .domain(d3.extent(nodes, function(d) { return d.Freq; }))
                  .range([3, 60]);
 
+  // Create bubbles
+  var node = svg.selectAll(".node")
+          .data(nodes);
+
   // Create force simulation
   var force = d3.forceSimulation(nodes)
                 .force("charge", d3.forceManyBody().strength(chargeStrength))
@@ -48,10 +52,8 @@ function updateBubbles() {
                 }))
                 .force("center", d3.forceCenter().x(width/2).y(height/2));
 
-  // Create bubbles
-  var node = svg.selectAll(".node")
-          .data(nodes)
-        	.enter().append("circle")
+  node.enter().append("circle")
+          .merge(node)
           		.attr("class", "node")
           		.attr("r", function (d) {
                 return radius(d.Freq);
@@ -63,6 +65,18 @@ function updateBubbles() {
                 else {
                   return "#d3d3d3";
                 }
+              })
+              // Add tooltip
+              // Tooltip inspired by sami rubenfeld
+              // https://bl.ocks.org/sarubenfeld/56dc691df199b4055d90e66b9d5fc0d2
+              .on("mouseover", function(d) {
+
+        				
+
+        				d3.select("#tooltip").classed("hidden", false);
+              })
+              .on("mouseout", function () {
+                d3.select("#tooltip").classed("hidden", true)
               });
 
   // Update nodes on tick
@@ -117,4 +131,5 @@ function updateBubbles() {
     node.arc(d.x, d.y, 3, 0, 2 * Math.PI);
   }
 
+  node.exit().remove();
 }
