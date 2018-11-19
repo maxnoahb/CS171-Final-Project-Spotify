@@ -43,25 +43,7 @@ SliderVis.prototype.wrangleData = function(){
 
     this.displayData = this.data;
 
-    // new data structure containing the average attributes for each country playlist
-    vis.countryAvgAttributes = d3.nest()
-        .key(function(d) { return d.playlist_name; })
-        .rollup(function(v) {
-            return {
-                "acousticness": d3.mean(v, function(d) { return d.acousticness; }),
-                "danceability": d3.mean(v, function(d) { return d.danceability; }),
-                "duration_ms": d3.mean(v, function(d) { return d.duration_ms; }),
-                "energy": d3.mean(v, function(d) { return d.energy; }),
-                "liveness": d3.mean(v, function(d) { return d.liveness; }),
-                "loudness": d3.mean(v, function(d) { return d.loudness; }),
-                "speechiness": d3.mean(v, function(d) { return d.speechiness; }),
-                "tempo": d3.mean(v, function(d) { return d.tempo; }),
-                "valence": d3.mean(v, function(d) { return d.valence; })
-            };
-        })
-        .entries(vis.displayData);
-
-    console.log(vis.countryAvgAttributes);
+    console.log(countryAvgAttributes);
 
     // Update the visualization
     vis.updateVis();
@@ -89,7 +71,7 @@ SliderVis.prototype.onButtonClick = function() {
     vis.similarCountry = null;
 
     // loop through all countries
-    vis.countryAvgAttributes.forEach(function(d) {
+    countryAvgAttributes.forEach(function(d) {
 
         // find the sum of the differences between the slider selected value and the respective
         // attribute for that country
