@@ -33,7 +33,7 @@ SliderVis.prototype.initVis = function() {
         .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
     // Create a mercator projection and draw path
-    vis.projection = d3.geoMercator().translate([width / 2, height / 2]);
+    vis.projection = d3.geoMercator().translate([-500, 100]).scale(400);
     vis.path = d3.geoPath().projection(vis.projection);
 
     // Set color scale
@@ -71,8 +71,8 @@ SliderVis.prototype.updateVis = function() {
     // run function to update result when button is clicked
     d3.select("#match-button").on("click", function() {vis.onButtonClick()});
 
-    vis.selectedCountryName = vis.svg.append("g")
-        .attr("transform", "translate(" + 10 + ", " + 10 + ")");
+    // vis.selectedCountryName = vis.svg.append("g")
+    //     .attr("transform", "translate(" + 10 + ", " + 10 + ")");
 
 }
 
@@ -110,40 +110,42 @@ SliderVis.prototype.onButtonClick = function() {
     $('#selectedCountryName').html(vis.similarCountry.replace(" Top 50",""));
 
     vis.country = vis.similarCountry.replace(" Top 50","");
-    console.log(vis.country);
 
-    // Merge data
-    // Source: Interactive Data Visualization for the Web - Scott Murray
-    // for (var i = 0; i < vis.data.length; i++){
+    for (var m = 0; m < vis.mapNames.length; m++) {
+        if (vis.mapNames[m].name === vis.country){
+            vis.countryId = parseInt(vis.mapNames[m].id);
+        }
+    }
+
+    vis.countryToDraw = vis.world.filter(function(d) {
+        return d.id === vis.countryId;
+    });
+
+    // vis.projection.center(d3.geoCentroid(vis.countryToDraw));
     //
-    //     // Grab country name
-    //     var country = vis.data[i].key.replace(" Top 50","");
+    // var bounds  = vis.path.bounds(vis.countryToDraw);
+    // var hscale  = scale*width  / (bounds[1][0] - bounds[0][0]);
+    // var vscale  = scale*height / (bounds[1][1] - bounds[0][1]);
+    // var scale   = (hscale < vscale) ? hscale : vscale;
+    // var offset  = [width - (bounds[0][0] + bounds[1][0])/2,
+    //     height - (bounds[0][1] + bounds[1][1])/2];
     //
-    //     // Find country id
-    //     for (var m = 0; m < vis.mapNames.length; m++){
-    //         if (vis.mapNames[m].name === country){
-    //             var country_id = parseInt(vis.mapNames[m].id);
-    //             // console.log(country_id);
-    //         }
-    //     }
-    //
-    //     // Grab dancebility
-    //     // var dance = vis.data[i].value.danceability;
-    //     // dance_list.push(dance);
-    //
-    //     // Find the corresponding country id inside the GeoJSON
-    //     // for (var j = 0; j < vis.world.length; j++) {
-    //     //     var json_country_id = vis.world[j].id;
-    //     //     if (country_id == json_country_id) {
-    //     //         // console.log("match");
-    //     //         // Copy the data value into the JSON
-    //     //         // vis.world[j].properties.danceability = dance;
-    //     //         //Stop looking through the JSON
-    //     //         break;
-    //     //     }
-    //     // }
-    // }
-    // console.log(vis.world);
+    // console.log(bounds);
+
+    vis.countryOutline = vis.svg
+        .selectAll(".country")
+        .data(vis.countryToDraw);
+
+    vis.countryOutline
+        .enter()
+        .append("path")
+        .attr("class", "country");
+
+    vis.countryOutline
+        .attr("d", vis.path)
+        .style("fill", "#4CAF50");
+
+    vis.countryOutline.exit().remove();
 
     // console.log(vis.similarCountry);
 
