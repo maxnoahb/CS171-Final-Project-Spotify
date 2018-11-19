@@ -25,15 +25,16 @@ function updateBubbles(country) {
   // Keep an array of the selected country's top 50 tracks' names
   var trackNames = [];
 
-  var selectedTop50 = dataByCountry[country];
-  console.log(selectedTop50);
+  var selectedTop50 = {};
 
-  // Update array of track names
-  selectedTop50.forEach(function (d) {
-    trackNames.push(d.track_name);
+  dataByCountry[country].forEach(function (d) {
+    // trackNames.push(d.track_name);
+    selectedTop50[d.track_name] = d;
   });
 
-  console.log(trackNames);
+  console.log(selectedTop50);
+
+  // console.log(trackNames);
 
   // Create scale that determines radius of circles
   var radius = d3.scaleLinear()
@@ -61,7 +62,7 @@ function updateBubbles(country) {
           })
           .merge(bubble)
           		.attr("fill", function (d) {
-                if (trackNames.includes(d.Var1)) {
+                if (selectedTop50[d.Var1] != null) {
                   return "#4CAF50";
                 }
                 else {
@@ -74,7 +75,7 @@ function updateBubbles(country) {
                     div.transition()
                         .duration(200)
                         .style("opacity", 1);
-                    div.html(d.Var1)
+                    div.html("<strong>" + d.Var1 + "</strong>")
                         .style("left", (d3.event.pageX) + "px")
                         .style("top", (d3.event.pageY - 28) + "px");
                     })
