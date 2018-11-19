@@ -11,6 +11,7 @@ var selectedCountry;
 var selectedTop50;
 
 var comparisonChart;
+var choroplethMap;
 
 // Load in data
 d3.queue()
@@ -76,7 +77,7 @@ d3.queue()
 
         var sliderVis = new SliderVis("slider-chart", data1);
 
-        var choroplethMap = new ChoroplethVis("choropleth-map", countryAvgAttributes, data3, data4)
+        choroplethMap = new ChoroplethVis("choropleth-map", countryAvgAttributes, data3, data4)
 
     });
 
