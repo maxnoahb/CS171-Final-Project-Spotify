@@ -79,3 +79,14 @@ d3.queue()
         var sliderVis = new SliderVis("slider-chart", data1);
 
     });
+
+    function updateSelected() {
+       selectedCountry = d3.select("#countries-list").property("value");
+       var selectedData = dataByCountry.filter(function (d) {
+        return d.key == selectedCountry;
+      });
+       selectedTop50 = selectedData[0].value;
+
+      comparisonChart.onCountryCompareChange();
+      updateBubbles();
+    }
