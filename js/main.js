@@ -4,11 +4,11 @@
 var audioData;
 var frequencyData;
 var mapData;
-var dataByCountry;
+var dataByCountry = {};
 var countryAvgAttributes;
 
-var selectedCountry;
-var selectedTop50;
+// Set selected country to Argentina by default
+var selectedCountry = "Argentina";
 
 var comparisonChart;
 
@@ -43,10 +43,14 @@ d3.queue()
         mapData = data3;
 
         // Organize data by countries
-        dataByCountry = d3.nest()
+        nestedByCountry = d3.nest()
             .key(function(d, i) { return d.playlist_name.replace(" Top 50", ""); })
             .rollup(function (d) { return d; })
             .entries(audioData);
+
+        nestedByCountry.forEach(function(d) {
+          dataByCountry[d.key] = d.value;
+        });
 
         // new data structure containing the average attributes for each country playlist
         countryAvgAttributes = d3.nest()
@@ -81,12 +85,8 @@ d3.queue()
     });
 
     function updateSelected() {
-       selectedCountry = d3.select("#countries-list").property("value");
-       var selectedData = dataByCountry.filter(function (d) {
-        return d.key == selectedCountry;
-      });
-       selectedTop50 = selectedData[0].value;
-
+      selectedCountry = d3.select("#countries-list").property("value");
+      console.log(selectedCountry);
       comparisonChart.onCountryCompareChange();
       updateBubbles();
     }

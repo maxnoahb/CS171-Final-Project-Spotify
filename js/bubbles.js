@@ -16,13 +16,13 @@ function updateBubbles() {
   // Keep an array of the selected country's top 50 tracks' names
   var trackNames = [];
 
-  // Set default country to Argentina
-  if (selectedCountry == null) {
-    selectedTop50 = dataByCountry.filter(function (d) {
-      return d.key == "Argentina";
-    })[0].value;
-  }
-
+  // // Set default country to Argentina
+  // if (selectedCountry == null) {
+  //   selectedTop50 = dataByCountry.filter(function (d) {
+  //     return d.key == "Argentina";
+  //   })[0].value;
+  // }
+  var selectedTop50 = dataByCountry[selectedCountry];
   console.log(selectedTop50);
 
   // Update array of track names
@@ -71,7 +71,7 @@ function updateBubbles() {
               // https://bl.ocks.org/sarubenfeld/56dc691df199b4055d90e66b9d5fc0d2
               .on("mouseover", function(d) {
 
-        				
+
 
         				d3.select("#tooltip").classed("hidden", false);
               })
