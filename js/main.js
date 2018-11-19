@@ -73,7 +73,7 @@ d3.queue()
             })
             .entries(data1);
 
-        console.log(audioData, frequencyData, mapData, dataByCountry);
+        console.log(audioData, frequencyData, mapData, dataByCountry, data4);
 
         // Initialize comparison chart
         comparisonChart = new ComparisonChart("comparison-chart", audioData);

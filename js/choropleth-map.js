@@ -39,15 +39,23 @@ ChoroplethVis.prototype.initVis = function(){
     // Convert the TopoJSON to GeoJSON
     var world = topojson.feature(this.map, this.map.objects.countries).features;
 
-    // Get country names and ID
     var map_names = this.map_names;
-    console.log(map_names)
-    var countryNames = d3.map();
-    console.log(countryNames);
-    map_names.forEach(function(d){
-        countryNames.set(d.id, d.name);
-    });
-    console.log(countryNames);
+    console.log(map_names);
+    console.log(world);
+
+
+
+
+
+    // Get country names and ID
+    // var map_names = this.map_names;
+    // console.log(map_names);
+    // var countryNames = d3.map();
+    // console.log(countryNames);
+    // map_names.forEach(function(d){
+    //     countryNames.set(d.id, d.name);
+    // });
+    // console.log(countryNames);
 
     // Get Danceability attributes and merge attribute into world data
     var danceability = [];
@@ -90,7 +98,7 @@ ChoroplethVis.prototype.initVis = function(){
     colorscale.domain([d3.min(danceability),d3.max(danceability)]);
 
     // Render the world atlas by using the path generator for WATER
-    svg.selectAll("path")
+    vis.svg.selectAll("path")
         .data(world)
         .enter().append("path")
         .attr("d", path)
