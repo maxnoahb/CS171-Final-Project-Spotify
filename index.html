@@ -39,15 +39,24 @@
 
     <!-- Side by side country comparison -->
     <!-- Dropdown for compared country -->
-    <div class="container-fluid">
-        <form class="form-inline">
-            <div class="form-group comparison-dropdown">
-                Choose a country to compare to:
-                <select id="countries-list" class="form-control" onChange="updateSelected();" style="margin-left:10px"></select>
-            </div>
-        </form>
-    </div>
     <div class="container">
+        <div class="row">
+            <div class="comparison-top-text">
+                <h4>Choose a country to compare to yours:</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-6 comparison-country-label-left">
+                <span>United States</span>
+            </div>
+            <div class="col-xl-6">
+                <form class="form-inline">
+                    <div class="form-group comparison-dropdown">
+                        <select id="countries-list" class="form-control" onChange="updateSelected();" style="margin-left:10px"></select>
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div id="comparison-chart"></div>
