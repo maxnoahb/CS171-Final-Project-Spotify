@@ -12,6 +12,8 @@ ChoroplethVis = function(_parentElement, _music, _mapjson, _mapnames){
     this.map = _mapjson;
     this.map_names = _mapnames;
     this.initVis();
+    console.log(this.map_names);
+    console.log(this.map);
 }
 
 ChoroplethVis.prototype.initVis = function(){
@@ -42,9 +44,6 @@ ChoroplethVis.prototype.initVis = function(){
     var map_names = this.map_names;
     console.log(map_names);
     console.log(world);
-
-
-
 
 
     // Get country names and ID
