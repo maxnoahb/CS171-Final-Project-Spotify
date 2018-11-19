@@ -16,6 +16,15 @@ MAX'S STYLES
 .slidecontainer {
     width: 100%; /* Width of the outside container */
     padding-bottom: 15px;
+    display: flex;
+}
+
+.slider-label {
+    padding-right: 20px;
+}
+
+output {
+    padding-left: 20px;
 }
 
 .slider {
@@ -46,6 +55,7 @@ MAX'S STYLES
 	border-radius: 50%;
 	background: #4CAF50;
 	cursor: pointer;
+<<<<<<< HEAD
 }
 
 /*****
@@ -57,3 +67,6 @@ JUSTIN'S STYLES
 #tooltip {
   fill: grey;
 }
+=======
+}
+>>>>>>> 5681d1d007348ca2843ed2181029047e039ba3d0

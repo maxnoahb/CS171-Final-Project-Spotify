@@ -5,9 +5,9 @@ var audioData;
 var frequencyData;
 var mapData;
 var dataByCountry;
-
 var selectedCountry;
 var selectedTop50;
+var countryNames;
 
 var comparisonChart;
 
@@ -16,7 +16,8 @@ d3.queue()
     .defer(d3.csv, 'data/audio_features.csv')
     .defer(d3.csv, 'data/track_frequencies.csv')
     .defer(d3.json, 'data/world-110m.json')
-    .await(function(error, data1, data2, data3) {
+    .defer(d3.tsv, 'data/world-110m-names.tsv')
+    .await(function(error, data1, data2, data3, data4) {
 
         // Convert numStrings to numbers
         data1.forEach(function(d) {
@@ -39,36 +40,19 @@ d3.queue()
         audioData = data1;
         frequencyData = data2;
         mapData = data3;
+        countryNames = data4;
 
-        // Organize data by countries
-        dataByCountry = d3.nest()
-            .key(function(d, i) { return d.playlist_name.replace(" Top 50", ""); })
-            .rollup(function (d) { return d; })
-            .entries(audioData);
-
-        console.log(audioData, frequencyData, mapData, dataByCountry);
+        console.log(audioData, frequencyData, mapData);
 
         // Initial bubble chart
-        updateBubbles();
+        initializeBubbles();
+
+        // Initialize slider chart
+        initializeSliderChart();
 
         // Initialize comparison chart
         comparisonChart = new ComparisonChart("comparison-chart", audioData);
 
-        // Initialize slider visualization
         var sliderVis = new SliderVis("slider-chart", data1);
 
     });
-
-    function updateSelected() {
-
-      selectedCountry = d3.select("#countries-list").property("value");
-
-      var selectedData = dataByCountry.filter(function (d) {
-        return d.key == selectedCountry;
-      });
-
-      selectedTop50 = selectedData[0].value;
-      
-      comparisonChart.onCountryCompareChange();
-      updateBubbles();
-    }

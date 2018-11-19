@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>D3 Project</title>
+    <title>CS171 Final Project</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -24,7 +24,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <div id="map"></div>
+          <div id="choropleth-map"></div>
         </div>
       </div>
     </div>
@@ -55,16 +55,24 @@
       <div class="row">
         <div class="col-md-4">
             <div class="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="acousticness-slider">
+                <label class="slider-label" for="acousticness-slider">Acousticness</label>
+                <input type="range" min="1" max="100" value="50" class="slider" id="acousticness-slider" onchange="acousticnessRangeValue.value=value">
+                <output id="acousticnessRangeValue">50</output>
             </div>
             <div class="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="danceability-slider">
+                <label class="slider-label" for="danceability-slider">Danceability</label>
+                <input type="range" min="1" max="100" value="50" class="slider" id="danceability-slider" onchange="danceabilityRangeValue.value=value">
+                <output id="danceabilityRangeValue">50</output>
             </div>
             <div class="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="speechiness-slider">
+                <label class="slider-label" for="speechiness-slider">Speechiness</label>
+                <input type="range" min="1" max="100" value="50" class="slider" id="speechiness-slider" onchange="speechinessRangeValue.value=value">
+                <output id="speechinessRangeValue">50</output>
             </div>
             <div class="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="valence-slider">
+                <label class="slider-label" for="valence-slider">Valence</label>
+                <input type="range" min="1" max="100" value="50" class="slider" id="valence-slider" onchange="valenceRangeValue.value=value">
+                <output id="valenceRangeValue">50</output>
             </div>
 
             <button type="button" class="btn btn-success" id="match-button">Match</button>
@@ -88,6 +96,7 @@
     <script src="js/bubbles.js"></script>
     <script src="js/slider-chart.js"></script>
     <script src="js/comparison-chart.js"></script>
+    <script scr="js/choropleth-map.js"></script>
 
 
 </body>
