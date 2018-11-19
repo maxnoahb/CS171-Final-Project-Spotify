@@ -6,6 +6,8 @@
  * @param _data             -- map names data
  */
 
+// Green #4caf50
+
 ChoroplethVis = function(_parentElement, _music, _mapjson, _mapnames){
     this.parentElement = _parentElement;
     this.music = _music;
@@ -75,9 +77,7 @@ ChoroplethVis.prototype.initVis = function(){
         }
     }
 
-    console.log(world);
     // Domain
-    console.log(dance_list);
     colorscale.domain([d3.min(dance_list),d3.max(dance_list)]);
 
     // Render the world atlas by using the path generator for WATER
@@ -93,7 +93,7 @@ ChoroplethVis.prototype.initVis = function(){
                 return colorscale(dance);
             }
             else{
-                //If value is undefined...
+                // If value is undefined...
                 return "#d3d3d3";
             }});
 
@@ -103,6 +103,8 @@ ChoroplethVis.prototype.initVis = function(){
 
 ChoroplethVis.prototype.wrangleData = function(){
     var vis = this;
+
+
 
     vis.updateChoropleth();
 
