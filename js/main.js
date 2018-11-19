@@ -4,12 +4,14 @@
 var audioData;
 var frequencyData;
 var mapData;
+var mapNameData;
 var dataByCountry = {};
 var countryAvgAttributes;
 
 var selectedCountry;
 
 var comparisonChart;
+var sliderVis;
 var choroplethMap;
 
 // Load in data
@@ -41,6 +43,7 @@ d3.queue()
         audioData = data1;
         frequencyData = data2;
         mapData = data3;
+        mapNameData = data4;
 
         // Organize data by countries
         nestedByCountry = d3.nest()
@@ -75,7 +78,7 @@ d3.queue()
         // Initialize comparison chart
         comparisonChart = new ComparisonChart("comparison-chart", audioData);
 
-        var sliderVis = new SliderVis("slider-chart", data1);
+        sliderVis = new SliderVis("slider-chart", data1);
 
         choroplethMap = new ChoroplethVis("choropleth-map", countryAvgAttributes, data3, data4)
 

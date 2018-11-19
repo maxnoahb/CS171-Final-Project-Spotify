@@ -88,6 +88,7 @@ SliderVis.prototype.onButtonClick = function() {
         }
     });
 
-    console.log(vis.similarCountry);
+    // console.log(vis.similarCountry);
+    console.log(mapNameData);
 
 }
