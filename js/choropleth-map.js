@@ -40,11 +40,17 @@ ChoroplethVis.prototype.initVis = function(){
     var world = topojson.feature(world_data, world_data.objects.countries).features;
     console.log(world);
 
+    // Get country names and ID
+    var map_names = this.map_names;
+    var countryNames = d3.map();
+    map_names.forEach(function(d){
+        countryNames.set(d.id, d.name);
+    });
+    console.log(countryNames);
+
     // Get Danceability attributes and merge attribute into world data
     var dancability = [];
     var music_data = this.music;
-    var map_names = this.map_names;
-
 
     // Merge data
     // Source: Interactive Data Visualization for the Web - Scott Murray

@@ -80,7 +80,7 @@ d3.queue()
 
         var sliderVis = new SliderVis("slider-chart", data1);
 
-        var choroplethMap = new choroplethMap("choropleth-map", data1, data3, data4)
+        var choroplethMap = new ChoroplethVis("choropleth-map", countryAvgAttributes, data3, data4)
 
     });
 
