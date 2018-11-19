@@ -16,7 +16,8 @@ d3.queue()
     .defer(d3.csv, 'data/audio_features.csv')
     .defer(d3.csv, 'data/track_frequencies.csv')
     .defer(d3.json, 'data/world-110m.json')
-    .await(function(error, data1, data2, data3) {
+    .defer(d3.tsv, 'data/world-110m-names.tsv')
+    .await(function(error, data1, data2, data3, data4) {
 
         // Convert numStrings to numbers
         data1.forEach(function(d) {
@@ -39,6 +40,7 @@ d3.queue()
         audioData = data1;
         frequencyData = data2;
         mapData = data3;
+        countryNames = data4;
 
         console.log(audioData, frequencyData, mapData);
 
