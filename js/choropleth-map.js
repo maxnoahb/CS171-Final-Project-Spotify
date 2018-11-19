@@ -104,12 +104,15 @@ ChoroplethVis.prototype.initVis = function(){
 ChoroplethVis.prototype.wrangleData = function(){
     var vis = this;
 
-
-
     vis.updateChoropleth();
 
 };
 
 ChoroplethVis.prototype.updateChoropleth = function(){
     var vis = this;
+
+    vis.attribute = d3.select("#attribute").property("value");
+    console.log(vis.attribute)
+
+
 };
