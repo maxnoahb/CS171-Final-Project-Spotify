@@ -11,14 +11,14 @@ var svg = d3.select('#bubble-chart').append('svg')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
 // Initiale bubble chart
-function updateBubbles() {
+function updateBubbles(country) {
 
-  console.log(selectedCountry);
+  console.log(country);
 
   // Keep an array of the selected country's top 50 tracks' names
   var trackNames = [];
 
-  var selectedTop50 = dataByCountry[selectedCountry];
+  var selectedTop50 = dataByCountry[country];
   console.log(selectedTop50);
 
   // Update array of track names
@@ -36,10 +36,6 @@ function updateBubbles() {
                  .domain(d3.extent(nodes, function(d) { return d.Freq; }))
                  .range([3, 60]);
 
-  // Create bubbles
-  var node = svg.selectAll(".node")
-          .data(nodes);
-
   // Create force simulation
   var force = d3.forceSimulation(nodes)
                 .force("charge", d3.forceManyBody().strength(chargeStrength))
@@ -48,32 +44,9 @@ function updateBubbles() {
                 }))
                 .force("center", d3.forceCenter().x(width/2).y(height/2));
 
-  node.enter().append("circle")
-          .merge(node)
-          		.attr("class", "node")
-          		.attr("r", function (d) {
-                return radius(d.Freq);
-              })
-          		.attr("fill", function (d) {
-                if (trackNames.includes(d.Var1)) {
-                  return "#4CAF50";
-                }
-                else {
-                  return "#d3d3d3";
-                }
-              })
-              // Add tooltip
-              // Tooltip inspired by sami rubenfeld
-              // https://bl.ocks.org/sarubenfeld/56dc691df199b4055d90e66b9d5fc0d2
-              .on("mouseover", function(d) {
-
-
-
-        				d3.select("#tooltip").classed("hidden", false);
-              })
-              .on("mouseout", function () {
-                d3.select("#tooltip").classed("hidden", true)
-              });
+  // Create bubbles
+  var node = svg.selectAll(".node")
+          .data(nodes);
 
   // Update nodes on tick
   force.on("tick", function() {
@@ -81,6 +54,39 @@ function updateBubbles() {
     node.attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
   });
+
+  node.enter().append("circle")
+          .attr("class", "node")
+          .attr("r", function (d) {
+            return radius(d.Freq);
+          })
+          .merge(node)
+          		.attr("fill", function (d) {
+                if (trackNames.includes(d.Var1)) {
+                  return "#4CAF50";
+                }
+                else {
+                  return "#d3d3d3";
+                }
+              });
+              // // Add tooltip
+              // // Tooltip inspired by sami rubenfeld
+              // // https://bl.ocks.org/sarubenfeld/56dc691df199b4055d90e66b9d5fc0d2
+              // .on("mouseover", function(d) {
+              //
+              //
+              //
+        			// 	d3.select("#tooltip").classed("hidden", false);
+              // })
+              // .on("mouseout", function () {
+              //   d3.select("#tooltip").classed("hidden", true)
+              // });
+
+  node.exit().remove();
+
+
+
+
 
   // Make nodes draggable
   // https://bl.ocks.org/mbostock/ad70335eeef6d167bc36fd3c04378048
@@ -127,5 +133,4 @@ function updateBubbles() {
     node.arc(d.x, d.y, 3, 0, 2 * Math.PI);
   }
 
-  node.exit().remove();
 }

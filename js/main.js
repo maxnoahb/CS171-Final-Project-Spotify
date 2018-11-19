@@ -78,18 +78,17 @@ d3.queue()
         // Initialize comparison chart
         comparisonChart = new ComparisonChart("comparison-chart", audioData);
 
+        // Initial bubble chart
+        updateBubbles("Argentina");
+
         sliderVis = new SliderVis("slider-chart", data1);
 
         choroplethMap = new ChoroplethVis("choropleth-map", countryAvgAttributes, data3, data4)
-
-        selectedCountry = "Argentina";
-        // Initial bubble chart
-        updateBubbles();
 
     });
 
   function updateSelected() {
     selectedCountry = d3.select("#countries-list").property("value");
     comparisonChart.onCountryCompareChange();
-    updateBubbles();
+    updateBubbles(selectedCountry);
   }
