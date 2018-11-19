@@ -7,8 +7,7 @@ var mapData;
 var dataByCountry = {};
 var countryAvgAttributes;
 
-// Set selected country to Argentina by default
-var selectedCountry = "Argentina";
+var selectedCountry;
 
 var comparisonChart;
 var choroplethMap;
@@ -73,9 +72,6 @@ d3.queue()
 
         console.log(audioData, frequencyData, mapData, dataByCountry);
 
-        // Initial bubble chart
-        updateBubbles();
-
         // Initialize comparison chart
         comparisonChart = new ComparisonChart("comparison-chart", audioData);
 
@@ -83,11 +79,14 @@ d3.queue()
 
         choroplethMap = new ChoroplethVis("choropleth-map", countryAvgAttributes, data3, data4)
 
+        selectedCountry = "Argentina";
+        // Initial bubble chart
+        updateBubbles();
+
     });
 
-    function updateSelected() {
-      selectedCountry = d3.select("#countries-list").property("value");
-      console.log(selectedCountry);
-      comparisonChart.onCountryCompareChange();
-      updateBubbles();
-    }
+  function updateSelected() {
+    selectedCountry = d3.select("#countries-list").property("value");
+    comparisonChart.onCountryCompareChange();
+    updateBubbles();
+  }

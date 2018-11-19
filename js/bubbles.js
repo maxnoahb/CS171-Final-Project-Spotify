@@ -13,15 +13,11 @@ var svg = d3.select('#bubble-chart').append('svg')
 // Initiale bubble chart
 function updateBubbles() {
 
+  console.log(selectedCountry);
+
   // Keep an array of the selected country's top 50 tracks' names
   var trackNames = [];
 
-  // // Set default country to Argentina
-  // if (selectedCountry == null) {
-  //   selectedTop50 = dataByCountry.filter(function (d) {
-  //     return d.key == "Argentina";
-  //   })[0].value;
-  // }
   var selectedTop50 = dataByCountry[selectedCountry];
   console.log(selectedTop50);
 
