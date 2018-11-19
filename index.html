@@ -9,17 +9,26 @@
 </head>
 <body>
 
-    <h1>Music Around the World</h1>
-    <h3>[Description of Our Dataset]</h3>
-    <p>[Disclaimers]</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Music Around the World</h1>
+                <h3>[Description of Our Dataset]</h3>
+                <p>[Disclaimers]</p>
+            </div>
+        </div>
+    </div>
+
+
 
     <!-- Choropleth map -->
     <div class="container">
+        <h3>The type of popular music differs around the world</h3>
         <div class="row">
-            <form class="form-inline">
+            <form class="col-md-3">
                 <div class="choropleth-dropdown">
-                    Filter by music attribute:
-                    <select id="attribute" class="form-control" onChange="choroplethMap.updateChoropleth()" style="margin-left:10px">
+                    <p>Filter by music attribute:</p>
+                    <select id="attribute" class="form-control" onChange="choroplethMap.updateChoropleth()">
                         <option value="danceability">Danceability</option>
                         <option value="energy">Energy</option>
                         <option value="loudness">Loudness</option>
@@ -30,7 +39,10 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                The danceability, energy, loudness, and valence of popular music differs across countries
+
+                <p>The danceability, energy, loudness, and valence of popular music differs across countries</p>
+                <p>[More text about what these attributes mean]</p>
+                <p>[Fun facts about these attributes?]</p>
                 <div id="choropleth-map"></div>
             </div>
         </div>
@@ -41,6 +53,9 @@
     <!-- Side by side country comparison -->
     <!-- Dropdown for compared country -->
     <div class="container">
+        <h3>Take a closer look at how your country compares...</h3>
+        <p>[Talk about the most similar/different countries]</p>
+        <p>[Explain the signficance, why do we care?]</p>
         <div class="row">
             <div class="comparison-top-text">
                 <h4>Choose a country to compare to yours:</h4>
@@ -69,8 +84,13 @@
 
     <!-- Bubble chart -->
     <div class="container">
+        <h3>Are your top 50 songs also popular around the world?</h3>
+        <p>[The large the bubble, the more countries have that song in their top 50]</p>
+        <p>[Explain more on how to read data]</p>
       <div class="row">
         <div class="col-md-12">
+
+
           <div id="bubble-chart"></div>
         </div>
       </div>
@@ -80,6 +100,7 @@
 
     <!-- Personal slider -->
     <div class="container-fluid">
+        <h3>Looking for a new playlist to follow? Find out which country suits you best.</h3>
       <div class="row">
         <div class="col-md-4">
 
