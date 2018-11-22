@@ -103,8 +103,8 @@ ComparisonChart.prototype.wrangleData = function(){
         })
         .entries(vis.rightChartData);
 
-    console.log(vis.leftChartData);
-    console.log(vis.rightChartData);
+    // console.log(vis.leftChartData);
+    // console.log(vis.rightChartData);
 
     // Update the visualization
     vis.updateVis();
@@ -120,6 +120,8 @@ ComparisonChart.prototype.updateVis = function(){
 
     vis.yScale.domain(["energy", "danceability", "speechiness", "valence"]);
 
+    console.log(vis.leftChartData);
+
     // draw left rectangles
     var leftBars = vis.svg.selectAll(".left-bar-group")
         .data(vis.leftChartData[0].value);
@@ -133,6 +135,19 @@ ComparisonChart.prototype.updateVis = function(){
         .attr("height", vis.yScale.bandwidth())
         .attr("fill", "#4caf50");
 
+    // add music staffs
+    // this helped: https://stackoverflow.com/questions/14567809/how-to-add-an-image-to-an-svg-container-using-d3-js
+    var musicLeft = vis.svg.selectAll(".left-image")
+        .data(vis.rightChartData[0].value);
+
+    musicLeft.enter().append("svg:image")
+        .attr("class", "left-image")
+        .attr("x", function(d){return vis.xScaleLeft(d[Object.keys(d)[0]]) - 50})
+        .attr("y", function(d){return vis.yScale(Object.keys(d)[0])})
+        .attr("height", vis.yScale.bandwidth())
+        .attr("width", function(d){return vis.width/2 - vis.xScaleLeft(d[Object.keys(d)[0]])})
+        .attr("xlink:href", "img/music-staff.png");
+
     // draw right rectangles
     var rightBars = vis.svg.selectAll(".right-bar-group")
         .data(vis.rightChartData[0].value);
@@ -145,6 +160,18 @@ ComparisonChart.prototype.updateVis = function(){
         .attr("width", function(d){return vis.xScaleRight(d[Object.keys(d)[0]])})
         .attr("height", vis.yScale.bandwidth())
         .attr("fill", "#4caf50");
+
+    // add music staffs
+    var musicRight = vis.svg.selectAll(".right-image")
+        .data(vis.rightChartData[0].value);
+
+    musicRight.enter().append("svg:image")
+        .attr("class", "right-image")
+        .attr("x", vis.width/2 + 50)
+        .attr("y", function(d){return vis.yScale(Object.keys(d)[0])})
+        .attr("height", vis.yScale.bandwidth())
+        .attr("width", function(d){return vis.xScaleRight(d[Object.keys(d)[0]])})
+        .attr("xlink:href", "img/music-staff-2.png");
 
     // column labels
     var columnLabels = vis.svg.selectAll("text.column-label")
@@ -168,6 +195,25 @@ ComparisonChart.prototype.updateVis = function(){
         .attr("y", function(d){ return vis.yScale(Object.keys(d)[0]) + vis.yScale.bandwidth()/2 + vis.yScale.bandwidth()*.1})
         .style("text-anchor", "end");
 
+    leftBars.exit().remove();
+    // leftBarLabels.exit.remove();
+
+    leftBars.transition()
+        .duration(800)
+        .attr("x", function(d){return vis.xScaleLeft(d[Object.keys(d)[0]]) - 50})
+        .attr("y", function(d){return vis.yScale(Object.keys(d)[0])})
+        .attr("width", function(d){return vis.width/2 - vis.xScaleLeft(d[Object.keys(d)[0]])})
+        .attr("height", vis.yScale.bandwidth())
+        .attr("fill", "#4caf50");
+
+    leftBarLabels.transition()
+        .duration(800)
+        .attr("class", "left-bar-labels")
+        .text(function(d){ return Math.round(d[Object.keys(d)[0]] * 100)})
+        .attr("x", function(d){ return -60 + vis.xScaleLeft(d[Object.keys(d)[0]])})
+        .attr("y", function(d){ return vis.yScale(Object.keys(d)[0]) + vis.yScale.bandwidth()/2 + vis.yScale.bandwidth()*.1})
+        .style("text-anchor", "end");
+
     var rightBarLabels = vis.svg.selectAll("text.right-bar-labels")
         .data(vis.rightChartData[0].value);
 
@@ -180,6 +226,8 @@ ComparisonChart.prototype.updateVis = function(){
 
     // remove
     rightBars.exit().remove();
+    musicRight.exit().remove();
+    musicLeft.exit().remove();
     rightBarLabels.exit().remove();
 
     rightBars.transition()
@@ -198,16 +246,43 @@ ComparisonChart.prototype.updateVis = function(){
         .attr("y", function(d){ return vis.yScale(Object.keys(d)[0]) + vis.yScale.bandwidth()/2 + vis.yScale.bandwidth()*.1})
         .style("text-anchor", "start");
 
+    musicRight.transition()
+        .duration(800)
+        .attr("class", "right-image")
+        .attr("x", vis.width/2 + 50)
+        .attr("y", function(d){return vis.yScale(Object.keys(d)[0])})
+        .attr("height", vis.yScale.bandwidth())
+        .attr("width", function(d){return vis.xScaleRight(d[Object.keys(d)[0]])})
+        .attr("xlink:href", "img/music-staff-2.png");
+
+    // musicLeft.transition()
+    //     .duration(800)
+    //     .attr("class", "left-image")
+    //     .attr("x", function(d){return vis.xScaleLeft(d[Object.keys(d)[0]]) - 50})
+    //     .attr("y", function(d){return vis.yScale(Object.keys(d)[0])})
+    //     .attr("height", vis.yScale.bandwidth())
+    //     .attr("width", function(d){return vis.width/2 - vis.xScaleLeft(d[Object.keys(d)[0]])})
+    //     .attr("xlink:href", "img/music-staff.png");
+
 }
 
 ComparisonChart.prototype.onCountryCompareChange = function(){
     var vis = this;
 
-    vis.chosenCountry = d3.select("#countries-list").property("value");
-
     vis.leftChartData = vis.data.filter(function(d){
-        return d.playlist_name === "United States Top 50";
+        // check the country chosen on first map
+        var chosenLeftCountry = document.getElementById("intro-chosen-country").innerHTML;
+        // if country was chosen, use that one, if not, use USA
+        if (chosenLeftCountry === "Please choose a country with Spotify") {
+            return d.playlist_name === "United States Top 50";
+        }
+        else {
+            $('#comparison-country-label-left span').html(chosenLeftCountry.replace("Chosen Country: ",""));
+            return d.playlist_name === (chosenLeftCountry.replace("Chosen Country: ","") + " Top 50");
+        }
     });
+
+    vis.chosenCountry = d3.select("#countries-list").property("value");
 
     vis.rightChartData = vis.data.filter(function(d){
         return d.playlist_name === (vis.chosenCountry + " Top 50");

@@ -15,7 +15,7 @@ var chargeStrength = 1;
 // Create bubble chart
 function updateBubbles(country) {
 
-  console.log(country);
+  // console.log(country);
 
   // Keep an array of the selected country's top 50 tracks' names
   var trackNames = [];
@@ -26,7 +26,7 @@ function updateBubbles(country) {
     selectedTop50[d.track_name] = d;
   });
 
-  console.log(selectedTop50);
+  // console.log(selectedTop50);
 
 
   // Create scale that determines radius of circles

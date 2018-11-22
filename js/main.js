@@ -13,6 +13,7 @@ var selectedCountry;
 var comparisonChart;
 var sliderVis;
 var choroplethMap;
+var introMap;
 
 // Load in data
 d3.queue()
@@ -73,7 +74,10 @@ d3.queue()
             })
             .entries(data1);
 
-        console.log(audioData, frequencyData, mapData, dataByCountry, data4);
+        // console.log(audioData, frequencyData, mapData, dataByCountry, data4);
+
+        // Initialize intro map
+        introMap = new IntroMap("intro-map", countryAvgAttributes, data3, data4);
 
         // Initialize comparison chart
         comparisonChart = new ComparisonChart("comparison-chart", audioData);
@@ -91,5 +95,5 @@ d3.queue()
   function updateSelected() {
     selectedCountry = d3.select("#countries-list").property("value");
     comparisonChart.onCountryCompareChange();
-    updateBubbles(selectedCountry);
+    // updateBubbles(selectedCountry);
   }

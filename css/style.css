@@ -107,15 +107,20 @@ KATE'S STYLES
 }
 
 /* this helped: https://stackoverflow.com/questions/5288336/put-text-at-bottom-of-div */
-.comparison-country-label-left {
+#comparison-country-label-left {
     position: relative;
 }
 
-.comparison-country-label-left span {
+#comparison-country-label-left span {
     position: absolute;
     bottom: 0;
     right: 0;
     text-anchor: end;
     margin-right: 70px;
     font-weight: bold;
+}
+
+path:hover {
+    stroke: darkgreen;
+    stroke-width: 2px;
 }

@@ -20,6 +20,16 @@
         </div>
     </div>
 
+    <!-- Intro map -->
+    <div class="container-fluid">
+        <div id="row">
+            <div class="col-md-12">
+                <h4 id="intro-chosen-country"></h4>
+                <div id="intro-map" onclick="comparisonChart.onCountryCompareChange()"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- Choropleth map -->
     <div class="container">
         <h3>The type of popular music differs around the world</h3>
@@ -61,7 +71,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xl-6 comparison-country-label-left">
+            <div class="col-xl-6" id="comparison-country-label-left">
                 <span>United States</span>
             </div>
             <div class="col-xl-6">
@@ -152,6 +162,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/d3.min.js"></script>
     <script src="js/topojson.min.js"></script>
+    <script src="js/d3-tip.js"></script>
 
     <!-- JS Visualizations -->
     <script src="js/main.js"></script>
@@ -159,7 +170,7 @@
     <script src="js/slider-chart.js"></script>
     <script src="js/comparison-chart.js"></script>
     <script src="js/choropleth-map.js"></script>
-
+    <script src="js/intro-map.js"></script>
 
 </body>
 </html>
