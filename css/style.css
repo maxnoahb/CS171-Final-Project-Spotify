@@ -85,7 +85,9 @@ div.tooltip {
     pointer-events: none;
 }
 
-
+#bubble-chart-scale {
+  text-align: center;
+}
 
 /*****
 

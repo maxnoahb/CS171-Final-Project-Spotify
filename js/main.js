@@ -6,6 +6,7 @@ var frequencyData;
 var mapData;
 var mapNameData;
 var dataByCountry = {};
+var uniqueSongData = {};
 var countryAvgAttributes;
 
 var selectedCountry;
@@ -56,6 +57,12 @@ d3.queue()
           dataByCountry[d.key] = d.value;
         });
 
+        audioData.forEach(function(d) {
+          if (uniqueSongData[d.track_name] == null) {
+            uniqueSongData[d.track_name] = d;
+          }
+        });
+
         // new data structure containing the average attributes for each country playlist
         countryAvgAttributes = d3.nest()
             .key(function(d) { return d.playlist_name; })
@@ -75,6 +82,7 @@ d3.queue()
             .entries(data1);
 
         // console.log(audioData, frequencyData, mapData, dataByCountry, data4);
+        // console.log(uniqueSongData);
 
         // Initialize intro map
         introMap = new IntroMap("intro-map", countryAvgAttributes, data3, data4);
@@ -83,7 +91,7 @@ d3.queue()
         comparisonChart = new ComparisonChart("comparison-chart", audioData);
 
         // Initial bubble chart
-        updateBubbles("Argentina");
+        bubbleScale();
         updateBubbles("Argentina");
 
         sliderVis = new SliderVis("slider-chart", countryAvgAttributes, data3, data4);
@@ -92,8 +100,8 @@ d3.queue()
 
     });
 
-  function updateSelected() {
-    selectedCountry = d3.select("#countries-list").property("value");
-    comparisonChart.onCountryCompareChange();
-    // updateBubbles(selectedCountry);
-  }
+function updateSelected() {
+  selectedCountry = d3.select("#countries-list").property("value");
+  comparisonChart.onCountryCompareChange();
+  // updateBubbles(selectedCountry);
+}

@@ -17,6 +17,11 @@ function updateBubbles(country) {
 
   // console.log(country);
 
+  // Create scale that determines radius of circles
+  var radius = d3.scaleLinear()
+                 .domain(d3.extent(frequencyData, function(d) { return d.Freq; }))
+                 .range([3, 60]);
+
   // Keep an array of the selected country's top 50 tracks' names
   var trackNames = [];
 
@@ -26,13 +31,7 @@ function updateBubbles(country) {
     selectedTop50[d.track_name] = d;
   });
 
-  // console.log(selectedTop50);
-
-
-  // Create scale that determines radius of circles
-  var radius = d3.scaleLinear()
-                 .domain(d3.extent(frequencyData, function(d) { return d.Freq; }))
-                 .range([3, 60]);
+  console.log(selectedTop50);
 
   // Create force simulation
   var force = d3.forceSimulation(frequencyData)
@@ -43,6 +42,10 @@ function updateBubbles(country) {
                 .force("center", d3.forceCenter().x(width/2).y(height/2));
 
 
+  // Define the div for the tooltip
+  var div = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
 
   // Create bubbles
   var bubble = svg.selectAll(".node")
@@ -68,7 +71,8 @@ function updateBubbles(country) {
                     div.transition()
                         .duration(200)
                         .style("opacity", 1);
-                    div.html("<strong>" + d.Var1 + "</strong>")
+                    div.html("<strong>" + d.Var1 + "</strong>" +
+                             "<br>" + uniqueSongData[d.Var1].artist_name)
                         .style("left", (d3.event.pageX) + "px")
                         .style("top", (d3.event.pageY - 28) + "px");
                     })
@@ -77,11 +81,23 @@ function updateBubbles(country) {
                   .duration(500)
                   .style("opacity", 0);
           });
+          // .on("click", function (d) {
+          //     console.log("clicked");
+          //     div.transition()
+          //         .duration(200)
+          //         .style("opacity", 1);
+          //     div.html("<strong>" + d.Var1 + "</strong>" +
+          //              "<br>" + uniqueSongData[d.Var1].artist_name +
+          //              "<br>" + uniqueSongData[d.Var1].artist_name +
+          //              "<br>" + uniqueSongData[d.Var1].danceability +
+          //              "<br>" + uniqueSongData[d.Var1].energy +
+          //              "<br>" + uniqueSongData[d.Var1].loudness +
+          //              "<br>" + uniqueSongData[d.Var1].valence)
+          //         .style("left", "0px")
+          //         .style("top", "0px");
+          // });
 
-  // Define the div for the tooltip
-  var div = d3.select("body").append("div")
-      .attr("class", "tooltip")
-      .style("opacity", 0);
+
 
   bubble.exit().remove();
 
@@ -91,8 +107,6 @@ function updateBubbles(country) {
     bubble.attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
   });
-
-
 
   // Make nodes draggable
   // https://bl.ocks.org/mbostock/ad70335eeef6d167bc36fd3c04378048
@@ -138,5 +152,39 @@ function updateBubbles(country) {
     bubble.moveTo(d.x + 3, d.y);
     bubble.arc(d.x, d.y, 3, 0, 2 * Math.PI);
   }
+
+}
+
+
+// Create scale for bubble chart just once
+var marginScale = {top: 20, right: 10, bottom: 20, left: 10},
+    widthScale = 280 - marginScale.left - marginScale.right,
+    heightScale = 120 - marginScale.top - marginScale.bottom;
+
+var svgScale = d3.select('#bubble-chart-scale').append('svg')
+    .attr('width', widthScale + marginScale.left + marginScale.right)
+    .attr('height', heightScale + marginScale.top + marginScale.bottom)
+  .append('g')
+    .attr('transform', 'translate(' + marginScale.left + ',' + marginScale.top + ')');
+
+function bubbleScale() {
+  var scaleTicks = [1,20,40,58];
+
+  // Create scale that determines radius of circles
+  var radius = d3.scaleLinear()
+                 .domain(d3.extent(frequencyData, function(d) { return d.Freq; }))
+                 .range([3, 60]);
+
+  svgScale.selectAll(".bubble-scale")
+          .data(scaleTicks).enter()
+          .append('circle')
+              .attr('cx', function (d, i) {
+                return i * (radius(d) + 10);
+              })
+              .attr('cy', heightScale / 2)
+              .attr('r', function (d) {
+                return radius(d);
+              })
+              .style('fill', '#d3d3d3');
 
 }
