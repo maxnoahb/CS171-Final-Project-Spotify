@@ -1,0 +1,130 @@
+/* custom css rules */
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #060433;
+  color: white;
+}
+
+h1 {
+}
+
+/*****
+
+MAX'S STYLES
+
+*****/
+
+.slidecontainer {
+    width: 100%; /* Width of the outside container */
+    padding-bottom: 15px;
+    display: flex;
+}
+
+.slider-label {
+    padding-right: 20px;
+}
+
+output {
+    padding-left: 20px;
+}
+
+.slider {
+	-webkit-appearance: none;
+	width: 100%;
+	height: 15px;
+	border-radius: 5px;
+	background: #d3d3d3;
+	outline: none;
+	opacity: 0.7;
+	-webkit-transition: .2s;
+	transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	background: #65d6c9;
+	cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	background: #65d6c9;
+	cursor: pointer;
+}
+
+#selectedCountryName {
+    text-align: center;
+}
+
+.footer {
+    text-align: center;
+}
+
+/*****
+
+JUSTIN'S STYLES
+
+*****/
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    padding: 5px;
+    margin: 5px;
+    color: white;
+    background: #bd455e;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+#bubble-chart-scale {
+  text-align: center;
+}
+
+/*****
+
+KATE'S STYLES
+
+*****/
+.comparison-top-text {
+    display: inline-block;
+    text-align: center;
+    margin: 50px auto 30px;
+}
+
+.comparison-dropdown {
+    margin-left: 70px;
+}
+
+.comparison-country-labels .country-label-right {
+    font-weight: bold;
+}
+
+/* this helped: https://stackoverflow.com/questions/5288336/put-text-at-bottom-of-div */
+#comparison-country-label-left {
+    position: relative;
+}
+
+#comparison-country-label-left span {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    text-anchor: end;
+    margin-right: 70px;
+    font-weight: bold;
+}
+
+path:hover {
+    stroke: darkgreen;
+    stroke-width: 2px;
+}

@@ -59,7 +59,7 @@ function updateBubbles(country) {
           .merge(bubble)
           		.attr("fill", function (d) {
                 if (selectedTop50[d.Var1] != null) {
-                  return "#4CAF50";
+                  return "#65d6c9";
                 }
                 else {
                   return "#d3d3d3";
@@ -72,7 +72,9 @@ function updateBubbles(country) {
                         .duration(200)
                         .style("opacity", 1);
                     div.html("<strong>" + d.Var1 + "</strong>" +
-                             "<br>" + uniqueSongData[d.Var1].artist_name)
+                             "<br>" + uniqueSongData[d.Var1].artist_name +
+                             "<br>Appears in <strong>" + d.Freq + "</strong> Top 50s"
+                            )
                         .style("left", (d3.event.pageX) + "px")
                         .style("top", (d3.event.pageY - 28) + "px");
                     })
@@ -157,34 +159,34 @@ function updateBubbles(country) {
 
 
 // Create scale for bubble chart just once
-var marginScale = {top: 20, right: 10, bottom: 20, left: 10},
-    widthScale = 280 - marginScale.left - marginScale.right,
-    heightScale = 120 - marginScale.top - marginScale.bottom;
-
-var svgScale = d3.select('#bubble-chart-scale').append('svg')
-    .attr('width', widthScale + marginScale.left + marginScale.right)
-    .attr('height', heightScale + marginScale.top + marginScale.bottom)
-  .append('g')
-    .attr('transform', 'translate(' + marginScale.left + ',' + marginScale.top + ')');
-
-function bubbleScale() {
-  var scaleTicks = [1,20,40,58];
-
-  // Create scale that determines radius of circles
-  var radius = d3.scaleLinear()
-                 .domain(d3.extent(frequencyData, function(d) { return d.Freq; }))
-                 .range([3, 60]);
-
-  svgScale.selectAll(".bubble-scale")
-          .data(scaleTicks).enter()
-          .append('circle')
-              .attr('cx', function (d, i) {
-                return i * (radius(d) + 10);
-              })
-              .attr('cy', heightScale / 2)
-              .attr('r', function (d) {
-                return radius(d);
-              })
-              .style('fill', '#d3d3d3');
-
-}
+// var marginScale = {top: 20, right: 10, bottom: 20, left: 10},
+//     widthScale = 280 - marginScale.left - marginScale.right,
+//     heightScale = 120 - marginScale.top - marginScale.bottom;
+//
+// var svgScale = d3.select('#bubble-chart-scale').append('svg')
+//     .attr('width', widthScale + marginScale.left + marginScale.right)
+//     .attr('height', heightScale + marginScale.top + marginScale.bottom)
+//   .append('g')
+//     .attr('transform', 'translate(' + marginScale.left + ',' + marginScale.top + ')');
+//
+// function bubbleScale() {
+//   var scaleTicks = [1,20,40,58];
+//
+//   // Create scale that determines radius of circles
+//   var radius = d3.scaleLinear()
+//                  .domain(d3.extent(frequencyData, function(d) { return d.Freq; }))
+//                  .range([3, 60]);
+//
+//   svgScale.selectAll(".bubble-scale")
+//           .data(scaleTicks).enter()
+//           .append('circle')
+//               .attr('cx', function (d, i) {
+//                 return i * (radius(d) + 10);
+//               })
+//               .attr('cy', heightScale / 2)
+//               .attr('r', function (d) {
+//                 return radius(d);
+//               })
+//               .style('fill', '#d3d3d3');
+//
+// }

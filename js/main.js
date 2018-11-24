@@ -91,7 +91,7 @@ d3.queue()
         comparisonChart = new ComparisonChart("comparison-chart", audioData);
 
         // Initial bubble chart
-        bubbleScale();
+        // bubbleScale();
         updateBubbles("Argentina");
 
         sliderVis = new SliderVis("slider-chart", countryAvgAttributes, data3, data4);
