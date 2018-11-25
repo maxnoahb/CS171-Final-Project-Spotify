@@ -23,7 +23,7 @@ SliderVis.prototype.initVis = function() {
     vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
 
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
-        vis.height = 600 - vis.margin.top - vis.margin.bottom;
+        vis.height = 300 - vis.margin.top - vis.margin.bottom;
 
     // SVG drawing area
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -32,13 +32,25 @@ SliderVis.prototype.initVis = function() {
         .append("g")
         .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
-    // Create a mercator projection and draw path
-    vis.projection = d3.geoMercator().translate([-500, 100]).scale(400);
+
+    // initialize country to draw to nothing
+    vis.countryToDraw = [];
+
+    // create a first guess for the projection
+    vis.center = d3.geoCentroid(vis.countryToDraw);
+    vis.scale = 100;
+    vis.offset = [vis.width/2, vis.height/2];
+    vis.projection = d3.geoMercator()
+        .translate(vis.offset)
+        .scale(vis.scale)
+        .center(vis.center);
+
+    // draw initial path
     vis.path = d3.geoPath().projection(vis.projection);
 
-    // Set color scale
-    vis.colorScale = d3.scaleQuantize()
-        .range(["rgb(237,248,233)", "rgb(186,228,179)", "rgb(116,196,118)", "rgb(49,163,84)", "rgb(0,109,44)"]);
+    console.log(vis.offset);
+
+    // console.log(vis.bounds);
 
     vis.wrangleData();
 
@@ -69,7 +81,48 @@ SliderVis.prototype.updateVis = function() {
     var vis = this;
 
     // run function to update result when button is clicked
-    d3.select("#match-button").on("click", function() {vis.onButtonClick()});
+    d3.select("#match-button").on("click", function() {
+
+        vis.onButtonClick();
+
+        $('#selectedCountryName').html(vis.similarCountry.replace(" Top 50",""));
+
+        vis.country = vis.similarCountry.replace(" Top 50","");
+
+        for (var m = 0; m < vis.mapNames.length; m++) {
+            if (vis.mapNames[m].name === vis.country){
+                vis.countryId = parseInt(vis.mapNames[m].id);
+            }
+        }
+
+        vis.countryToDraw = vis.world.filter(function(d) {
+            return d.id === vis.countryId;
+        });
+
+        vis.projection = d3.geoMercator()
+            .fitSize([vis.width, vis.height], vis.countryToDraw[0]);
+            // .reflectY(true);
+
+        vis.path = vis.path.projection(vis.projection);
+
+        vis.countryOutline = vis.svg
+            .selectAll(".country")
+            .data(vis.countryToDraw);
+
+        vis.countryOutline
+            .enter()
+            .append("path")
+            .attr("class", "country");
+
+        vis.countryOutline
+            .attr("d", vis.path)
+            .style("fill", "#4CAF50");
+
+        vis.countryOutline.exit().remove();
+
+    });
+
+
 
     // vis.selectedCountryName = vis.svg.append("g")
     //     .attr("transform", "translate(" + 10 + ", " + 10 + ")");
@@ -107,47 +160,6 @@ SliderVis.prototype.onButtonClick = function() {
         }
     });
 
-    $('#selectedCountryName').html(vis.similarCountry.replace(" Top 50",""));
-
-    vis.country = vis.similarCountry.replace(" Top 50","");
-
-    for (var m = 0; m < vis.mapNames.length; m++) {
-        if (vis.mapNames[m].name === vis.country){
-            vis.countryId = parseInt(vis.mapNames[m].id);
-        }
-    }
-
-    vis.countryToDraw = vis.world.filter(function(d) {
-        return d.id === vis.countryId;
-    });
-
-    // vis.projection.center(d3.geoCentroid(vis.countryToDraw));
-    //
-    // var bounds  = vis.path.bounds(vis.countryToDraw);
-    // var hscale  = scale*width  / (bounds[1][0] - bounds[0][0]);
-    // var vscale  = scale*height / (bounds[1][1] - bounds[0][1]);
-    // var scale   = (hscale < vscale) ? hscale : vscale;
-    // var offset  = [width - (bounds[0][0] + bounds[1][0])/2,
-    //     height - (bounds[0][1] + bounds[1][1])/2];
-    //
-    // console.log(bounds);
-
-    vis.countryOutline = vis.svg
-        .selectAll(".country")
-        .data(vis.countryToDraw);
-
-    vis.countryOutline
-        .enter()
-        .append("path")
-        .attr("class", "country");
-
-    vis.countryOutline
-        .attr("d", vis.path)
-        .style("fill", "#4CAF50");
-
-    vis.countryOutline.exit().remove();
-
-    // console.log(vis.similarCountry);
-
+    return vis.similarCountry;
 
 }
