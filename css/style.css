@@ -5,6 +5,41 @@ body {
 }
 
 h1 {
+    text-align: center;
+    color: #4caf50;
+    font-size: 100px;
+    padding-top: 260px;
+    padding-bottom: 260px;
+    background: url("https://cdn12.picryl.com/photo/2016/12/31/guitar-instrument-music-music-34e5d5-1024.jpg") bottom;
+    background-size: cover;
+}
+
+h1 span {
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: rgba(0,0,0, 0.75);
+    border-radius: 20px;
+}
+
+h3 {
+    margin: 10px;
+}
+
+img {
+    width: 100%;
+}
+
+.container .container-fluid{
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.info {
+    background-color: #d3d3d3;
+    border-radius: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding: 20px;
 }
 
 /*****

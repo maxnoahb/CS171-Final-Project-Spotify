@@ -10,19 +10,63 @@
 <body>
 
     <!--Introduction-->
+    <div>
+        <h1><span>Music Around the World</span></h1>
+    </div>
+
+    <hr>
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1>Music Around the World</h1>
-                <h3>[Description of Our Dataset]</h3>
-                <p>[Disclaimers]</p>
+                <h3>Our Project</h3>
+                <p class="info">Music is a universal language. It brings us joy, recalls memories, encourages us to
+                dance. Our music listening habits reflect our lives: what time of year it is, what mood we're in,
+                what language we speak, how energetic we may be. <br>
+                This is why we're interested in exploring music data. ... </p>
             </div>
         </div>
     </div>
 
+    <hr>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Spotify_logo_with_text.svg/2000px-Spotify_logo_with_text.svg.png">
+            </div>
+            <div class="col-md-6">
+                <h3>Our Data</h3>
+                <p class="info">For this project, we're using Spotify data. With
+                    <a href="https://newsroom.spotify.com/companyinfo/">191 million active users</a> across 61 countries
+                featuring over 40 million songs, Spotify is one of the most popular music streaming services in the
+                world. <br><br>
+                    Embedded in each song's metadata is information about the song's energy, valence (happiness), tempo,
+                key, danceability, and much more. Each of these characteristics has a rating from 0 to 1 and the numbers
+                help Spotify understand its users. We're focusing on these metrics to explore similarities and differences
+                in popular music around the world. Our songs are gathered from the Spotify-generated "Top 50" playlists of
+                    each of the 61 countries Spotify serves (e.g. Argentina's Top 50, etc.). <br><br>
+                This data is a snapshot of these playlists as of November 2018. As Spotify reaches a broader audience,
+                it can tell us more and more about the world's music tastes. <strong>For now, we can only gather information
+                about the 61 countries highlighted on the map below. </strong></p>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
     <!-- Intro map -->
     <div class="container-fluid">
-        <div id="row">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="info">Visit <a href="https://www.spotify.com/us/">Spotify's website</a>
+                    for more information as we take you through a musical adventure across the world. <br><br>
+                To begin, choose the country you're from to personalize your experience. You can return to this page
+                and change the country at any time.</p>
+            </div>
+        </div>
+        <br>
+        <div class="row">
             <div class="col-md-12">
                 <h4 id="intro-chosen-country"></h4>
                 <div id="intro-map" onclick="comparisonChart.onCountryCompareChange()"></div>
@@ -64,11 +108,23 @@
     <hr>
 
     <!-- Side by side country comparison -->
-    <!-- Dropdown for compared country -->
     <div class="container">
         <h3>Take a closer look at how your country compares...</h3>
-        <p>[Talk about the most similar/different countries]</p>
-        <p>[Explain the signficance, why do we care?]</p>
+        <p class="info">Now that you've seen the broader trends around the world, let's look at how your country compares to others
+        around the world in more detail. Can you find the country that's most similar to yours? Most different?
+        Perhaps you've been travelling lately, or just have dreams of future travels. How do the countries you want to
+        visit compare to your own in average music taste?
+            <br><br>
+        There may be deeper value in considering these comparisons than you think. While the average American
+        Spotify listener may be quite different from the average Indonesian Spotify listener, the energy and valence
+        of the most popular songs for those countries are very similar. Take Reggaeton as an example. According to
+        Spotify <a href="https://insights.spotify.com/us/2017/09/05/how-reggaeton-became-a-global-phenomenon-on-spotify/">data</a>,
+            reggaeton's share of music on Spotify grew 119% from 2014 to 2017, compared to pop's growth of
+        13% and country music's growth of 4%. Following that trend, more songs from around the world borrowed reggaeton's
+        catchy beat, including the massive Ed Sheeran hit "Shape of You." This suggests that the world may share more
+        music tastes than we recognize.
+            <br><br><br>
+        Take a look at how your country compares to others to see what trends to look out for:</p>
         <div class="row">
             <div class="comparison-top-text">
                 <h4>Choose a country to compare to yours:</h4>
@@ -161,6 +217,8 @@
 
     <div class="footer">
         <p>Max Benegas, Kate Schember, Caitlyn Dang, Justin Gonzalez</p>
+        <p>Images used: https://cdn12.picryl.com/photo/2016/12/31/guitar-instrument-music-music-34e5d5-1024.jpg,
+            https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Spotify_logo_with_text.svg/2000px-Spotify_logo_with_text.svg.png</p>
     </div>
 
     <script src="js/jquery.min.js"></script>

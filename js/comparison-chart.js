@@ -120,7 +120,7 @@ ComparisonChart.prototype.updateVis = function(){
 
     vis.yScale.domain(["energy", "danceability", "speechiness", "valence"]);
 
-    console.log(vis.leftChartData);
+    // console.log(vis.leftChartData);
 
     // draw left rectangles
     var leftBars = vis.svg.selectAll(".left-bar-group")
@@ -137,16 +137,16 @@ ComparisonChart.prototype.updateVis = function(){
 
     // add music staffs
     // this helped: https://stackoverflow.com/questions/14567809/how-to-add-an-image-to-an-svg-container-using-d3-js
-    var musicLeft = vis.svg.selectAll(".left-image")
-        .data(vis.rightChartData[0].value);
+    // var musicLeft = vis.svg.selectAll(".left-image")
+    //     .data(vis.rightChartData[0].value);
 
-    musicLeft.enter().append("svg:image")
-        .attr("class", "left-image")
-        .attr("x", function(d){return vis.xScaleLeft(d[Object.keys(d)[0]]) - 50})
-        .attr("y", function(d){return vis.yScale(Object.keys(d)[0])})
-        .attr("height", vis.yScale.bandwidth())
-        .attr("width", function(d){return vis.width/2 - vis.xScaleLeft(d[Object.keys(d)[0]])})
-        .attr("xlink:href", "img/music-staff.png");
+    // musicLeft.enter().append("svg:image")
+    //     .attr("class", "left-image")
+    //     .attr("x", function(d){return vis.xScaleLeft(d[Object.keys(d)[0]]) - 50})
+    //     .attr("y", function(d){return vis.yScale(Object.keys(d)[0])})
+    //     .attr("height", vis.yScale.bandwidth())
+    //     .attr("width", function(d){return vis.width/2 - vis.xScaleLeft(d[Object.keys(d)[0]])})
+    //     .attr("xlink:href", "img/music-staff.png");
 
     // draw right rectangles
     var rightBars = vis.svg.selectAll(".right-bar-group")
@@ -162,16 +162,16 @@ ComparisonChart.prototype.updateVis = function(){
         .attr("fill", "#4caf50");
 
     // add music staffs
-    var musicRight = vis.svg.selectAll(".right-image")
-        .data(vis.rightChartData[0].value);
-
-    musicRight.enter().append("svg:image")
-        .attr("class", "right-image")
-        .attr("x", vis.width/2 + 50)
-        .attr("y", function(d){return vis.yScale(Object.keys(d)[0])})
-        .attr("height", vis.yScale.bandwidth())
-        .attr("width", function(d){return vis.xScaleRight(d[Object.keys(d)[0]])})
-        .attr("xlink:href", "img/music-staff-2.png");
+    // var musicRight = vis.svg.selectAll(".right-image")
+    //     .data(vis.rightChartData[0].value);
+    //
+    // musicRight.enter().append("svg:image")
+    //     .attr("class", "right-image")
+    //     .attr("x", vis.width/2 + 50)
+    //     .attr("y", function(d){return vis.yScale(Object.keys(d)[0])})
+    //     .attr("height", vis.yScale.bandwidth())
+    //     .attr("width", function(d){return vis.xScaleRight(d[Object.keys(d)[0]])})
+    //     .attr("xlink:href", "img/music-staff-2.png");
 
     // column labels
     var columnLabels = vis.svg.selectAll("text.column-label")
@@ -226,8 +226,8 @@ ComparisonChart.prototype.updateVis = function(){
 
     // remove
     rightBars.exit().remove();
-    musicRight.exit().remove();
-    musicLeft.exit().remove();
+    // musicRight.exit().remove();
+    // musicLeft.exit().remove();
     rightBarLabels.exit().remove();
 
     rightBars.transition()
@@ -246,14 +246,14 @@ ComparisonChart.prototype.updateVis = function(){
         .attr("y", function(d){ return vis.yScale(Object.keys(d)[0]) + vis.yScale.bandwidth()/2 + vis.yScale.bandwidth()*.1})
         .style("text-anchor", "start");
 
-    musicRight.transition()
-        .duration(800)
-        .attr("class", "right-image")
-        .attr("x", vis.width/2 + 50)
-        .attr("y", function(d){return vis.yScale(Object.keys(d)[0])})
-        .attr("height", vis.yScale.bandwidth())
-        .attr("width", function(d){return vis.xScaleRight(d[Object.keys(d)[0]])})
-        .attr("xlink:href", "img/music-staff-2.png");
+    // musicRight.transition()
+    //     .duration(800)
+    //     .attr("class", "right-image")
+    //     .attr("x", vis.width/2 + 50)
+    //     .attr("y", function(d){return vis.yScale(Object.keys(d)[0])})
+    //     .attr("height", vis.yScale.bandwidth())
+    //     .attr("width", function(d){return vis.xScaleRight(d[Object.keys(d)[0]])})
+    //     .attr("xlink:href", "img/music-staff-2.png");
 
     // musicLeft.transition()
     //     .duration(800)
