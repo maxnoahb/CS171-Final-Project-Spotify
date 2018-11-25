@@ -216,11 +216,11 @@ ChoroplethVis.prototype.updateChoropleth = function(){
     // Update labels
     // Legend labels
     distance = (d3.max(list) - d3.min(list))/5;
-    legend_labels = [d3.min(list).toFixed(2) + " - " + (d3.min(list) + distance).toFixed(2),
-        (d3.min(list) + distance).toFixed(2) + " - " + (d3.min(list) + 2*distance).toFixed(2),
-        (d3.min(list) + 2*distance).toFixed(2) + " - " + (d3.min(list) + 3*distance).toFixed(2),
-        (d3.min(list) + 3*distance).toFixed(2) + " - " + (d3.min(list) + 4*distance).toFixed(2),
-        (d3.min(list) + 4*distance).toFixed(2) + " - " + (d3.min(list) + 5*distance).toFixed(2)];
+    legend_labels = [d3.min(list).toFixed(2) + " to " + (d3.min(list) + distance).toFixed(2),
+        (d3.min(list) + distance).toFixed(2) + " to " + (d3.min(list) + 2*distance).toFixed(2),
+        (d3.min(list) + 2*distance).toFixed(2) + " to " + (d3.min(list) + 3*distance).toFixed(2),
+        (d3.min(list) + 3*distance).toFixed(2) + " to " + (d3.min(list) + 4*distance).toFixed(2),
+        (d3.min(list) + 4*distance).toFixed(2) + " to " + (d3.min(list) + 5*distance).toFixed(2)];
 
     // legend.select("text").exit().remove();
 
