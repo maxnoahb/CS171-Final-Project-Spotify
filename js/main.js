@@ -102,7 +102,7 @@ $(document).ready(function() {
 
             sliderVis = new SliderVis("slider-chart", countryAvgAttributes, data3, data4);
 
-            choroplethMap = new ChoroplethVis("choropleth-map", countryAvgAttributes, data3, data4)
+            choroplethMap = new ChoroplethVis("choropleth-map", countryAvgAttributes, data3, data4);
 
         });
 
