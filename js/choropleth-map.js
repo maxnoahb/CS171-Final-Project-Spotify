@@ -14,7 +14,7 @@ ChoroplethVis = function(_parentElement, _music, _mapjson, _mapnames){
     this.map = _mapjson;
     this.map_names = _mapnames;
     this.initVis();
-};
+}
 
 var dance_list = [];
 var valence_list = [];
