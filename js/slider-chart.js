@@ -48,7 +48,7 @@ SliderVis.prototype.initVis = function() {
     // draw initial path
     vis.path = d3.geoPath().projection(vis.projection);
 
-    console.log(vis.offset);
+    // console.log(vis.offset);
 
     // console.log(vis.bounds);
 

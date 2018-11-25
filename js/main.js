@@ -19,6 +19,7 @@ var introMap;
 
 
 $(document).ready(function() {
+
     // Load in data
     d3.queue()
         .defer(d3.csv, 'data/audio_features.csv')
@@ -111,18 +112,22 @@ $(document).ready(function() {
         // updateBubbles(selectedCountry);
     }
 
-    /*$('#fullpage').fullpage({
-        sectionsColor: ['#B8AE9C', '#348899', '#F2AE72', '#5C832F', '#B8B89F'],
+    $('#fullpage').fullpage({
+        // sectionsColor: ['#B8AE9C', '#348899', '#F2AE72', '#5C832F', '#B8B89F'],
         sectionSelector: '.vertical-scrolling',
-        // slideSelector: '.horizontal-scrolling',
         navigation: true,
-        // slidesNavigation: true,
         css3: true,
         controlArrows: false,
-        anchors: ['firstSection', 'secondSection', 'thirdSection', 'fourthSection', 'fifthSection'],
+        // autoScrolling: false,
+        // scrollBar: true,
+        anchors: ['firstSection', 'secondSection', 'thirdSection', 'fourthSection', 'fifthSection',
+            'sixthSection', 'seventhSection', 'eighthSection', 'ninthSection', 'tenthSection'],
         // menu: '#menu',
 
-        afterLoad: function (anchorLink, index) {
+        // afterLoad: function(anchorLink, index) {},
+        // onLeave: function(index, nextIndex) {},
+
+        /*afterLoad: function (anchorLink, index) {
             $header_top.css('background', 'rgba(0, 47, 77, .3)');
             $nav.css('background', 'rgba(0, 47, 77, .25)');
             if (index == 5) {
@@ -134,32 +139,7 @@ $(document).ready(function() {
             if (index == 5) {
                 $('#fp-nav').show();
             }
-        },
+        },*/
 
-        afterSlideLoad: function (anchorLink, index, slideAnchor, slideIndex) {
-            if (anchorLink == 'fifthSection' && slideIndex == 1) {
-                $.fn.fullpage.setAllowScrolling(false, 'up');
-                $header_top.css('background', 'transparent');
-                $nav.css('background', 'transparent');
-                $(this).css('background', '#374140');
-                $(this).find('h2').css('color', 'white');
-                $(this).find('h3').css('color', 'white');
-                $(this).find('p').css(
-                    {
-                        'color': '#DC3522',
-                        'opacity': 1,
-                        'transform': 'translateY(0)'
-                    }
-                );
-            }
-        },
-
-        onSlideLeave: function (anchorLink, index, slideIndex, direction) {
-            if (anchorLink == 'fifthSection' && slideIndex == 1) {
-                $.fn.fullpage.setAllowScrolling(true, 'up');
-                $header_top.css('background', 'rgba(0, 47, 77, .3)');
-                $nav.css('background', 'rgba(0, 47, 77, .25)');
-            }
-        }
-    });*/
+    });
 });

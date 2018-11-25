@@ -100,6 +100,10 @@ output {
     text-align: center;
 }
 
+.fp-scroller {
+    overflow:hidden;
+}
+
 #fp-nav ul li a span,
 .fp-slidesNav ul li a span {
     background: white;
@@ -120,7 +124,7 @@ output {
     border: 1px solid #24221F;
 }
 
-.clearfix:before,
+/*.clearfix:before,
 .clearfix:after {
     content: "";
     display: table;
@@ -150,7 +154,7 @@ output {
     transition: opacity, transform 1s;
     -webkit-transition-delay: 1s;
     transition-delay: 1s;
-}
+}*/
 
 /*****
 
