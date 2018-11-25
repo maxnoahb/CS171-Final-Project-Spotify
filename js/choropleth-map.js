@@ -201,6 +201,8 @@ ChoroplethVis.prototype.updateChoropleth = function(){
 
     // Change the fill based on attribute
     vis.svg.selectAll("path")
+        .transition()
+        .duration(500)
         .style("fill", function(d) {
             //Get data value
             var attribute = d[vis.attribute];
@@ -225,6 +227,8 @@ ChoroplethVis.prototype.updateChoropleth = function(){
     // legend.select("text").exit().remove();
 
     legend.select("text")
+        .transition()
+        .duration(800)
         .attr("x", 50)
         .attr("y", function(d, i){ return 160 + vis.height - (i*box_h) - box_h - 4;})
         .text(function(d,i){return legend_labels[i];});
