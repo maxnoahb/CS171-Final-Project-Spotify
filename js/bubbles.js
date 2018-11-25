@@ -10,7 +10,13 @@ var svg = d3.select('#bubble-chart').append('svg')
   .append('g')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-var chargeStrength = 1;
+var chargeStrength = 0.5;
+
+var filter = false;
+
+var bubble;
+
+var selectedTop50 = {};
 
 // Create bubble chart
 function updateBubbles(country) {
@@ -25,13 +31,33 @@ function updateBubbles(country) {
   // Keep an array of the selected country's top 50 tracks' names
   var trackNames = [];
 
-  var selectedTop50 = {};
-
   dataByCountry[country].forEach(function (d) {
     selectedTop50[d.track_name] = d;
   });
 
   console.log(selectedTop50);
+
+  // Define the div for the tooltip
+  var div = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
+
+  // var filteredData;
+  //
+  // if (!filter) {
+  //   filteredData = frequencyData;
+  //   chargeStrength = 1;
+  // }
+  // if (filter) {
+  //   filteredData = frequencyData.filter(function (d) {
+  //     if (selectedTop50[d.Var1] != null) {
+  //       return d;
+  //     }
+  //   });
+  //   chargeStrength = 10;
+  // }
+  //
+  // console.log(filteredData);
 
   // Create force simulation
   var force = d3.forceSimulation(frequencyData)
@@ -41,48 +67,41 @@ function updateBubbles(country) {
                 }))
                 .force("center", d3.forceCenter().x(width/2).y(height/2));
 
-
-  // Define the div for the tooltip
-  var div = d3.select("body").append("div")
-      .attr("class", "tooltip")
-      .style("opacity", 0);
-
   // Create bubbles
-  var bubble = svg.selectAll(".node")
+  bubble = svg.selectAll(".node")
           .data(frequencyData);
 
   bubble.enter().append("circle")
-          .attr("class", "node")
-          .attr("r", function (d) {
-            return radius(d.Freq);
-          })
-          .merge(bubble)
-          		.attr("fill", function (d) {
-                if (selectedTop50[d.Var1] != null) {
-                  return "#65d6c9";
-                }
-                else {
-                  return "#d3d3d3";
-                }
-              })
-          // Tooltip
-          // Inspired by http://bl.ocks.org/d3noob/a22c42db65eb00d4e369
-          .on("mouseover", function(d) {
-                    div.transition()
-                        .duration(200)
-                        .style("opacity", 1);
-                    div.html("<strong>" + d.Var1 + "</strong>" +
-                             "<br>" + uniqueSongData[d.Var1].artist_name +
-                             "<br>Appears in <strong>" + d.Freq + "</strong> Top 50s"
-                            )
-                        .style("left", (d3.event.pageX) + "px")
-                        .style("top", (d3.event.pageY - 28) + "px");
-                    })
-          .on("mouseout", function(d) {
-              div.transition()
-                  .duration(500)
-                  .style("opacity", 0);
-          });
+        .attr("class", "node")
+        .attr("r", function (d) {
+          return radius(d.Freq);
+        })
+        .merge(bubble)
+            .attr("fill", function (d) {
+              if (selectedTop50[d.Var1] != null) {
+                return "#4caf50";
+              }
+              else {
+                return "#d3d3d3";
+              }
+            })
+        // Tooltip
+        // Inspired by http://bl.ocks.org/d3noob/a22c42db65eb00d4e369
+        .on("mouseover", function(d) {
+                  if (!filter || selectedTop50[d.Var1] != null)
+                  div.transition()
+                      .duration(100)
+                      .style("opacity", 1);
+                  div.html("<strong>" + d.Var1 + "</strong>" +
+                           "<br>" + uniqueSongData[d.Var1].artist_name +
+                           "<br>Appears in <strong>" + d.Freq + "</strong> Top 50s"
+                          )
+                      .style("left", (d3.event.pageX) + "px")
+                      .style("top", (d3.event.pageY - 28) + "px");
+                  })
+        .on("mouseout", function(d) {
+            div.style("opacity", 0);
+        });
           // .on("click", function (d) {
           //     console.log("clicked");
           //     div.transition()
@@ -156,6 +175,44 @@ function updateBubbles(country) {
   }
 
 }
+
+function toggleBubbles() {
+  filter = !filter;
+  if (filter) {
+    d3.select('#filter-toggle').text("Show All of the World's Most Popular Music");
+
+    bubble.transition()
+        .duration(500)
+        .style("opacity", function (d) {
+          if (selectedTop50[d.Var1] == null) {
+            return 0;
+          }
+          else {
+            return 1;
+          }
+        });
+  }
+  else {
+    d3.select('#filter-toggle').text("Show Just Your Country's Top 50");
+
+    bubble.transition()
+        .duration(500)
+        .style("opacity", 1);
+  }
+}
+
+// function toggleBubbles() {
+//   var selectedCountry = d3.select("#countries-list").property("value");
+//   filter = !filter;
+//   if (filter) {
+//     d3.select('#filter-toggle').text("Show the World's Most Popular Music");
+//   }
+//   if (!filter) {
+//     d3.select('#filter-toggle').text("Show Your Country's Top 50");
+//   }
+//   updateBubbles(selectedCountry);
+//   console.log("toggled");
+// }
 
 
 // Create scale for bubble chart just once

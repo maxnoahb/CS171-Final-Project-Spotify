@@ -94,7 +94,7 @@ d3.queue()
 
         // Initial bubble chart
         // bubbleScale();
-        updateBubbles("Argentina");
+        updateBubbles("United States");
 
         sliderVis = new SliderVis("slider-chart", countryAvgAttributes, data3, data4);
 
