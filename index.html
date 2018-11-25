@@ -85,71 +85,72 @@
             </div>
         </section>
 
-    <hr>
+        <hr>
+        <section class="vertical-scrolling">
+            <!-- Choropleth map -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>How does music differ across countries?</h3>
+                        <p class="info">From the dancebility of their playlist to the acousticness of their music, we can visually
+                            <b>see how popular music differs</b> in audio features across the globe.
+                            <br><br>
+                            To compare the the "Top 50" playlists across the world, we <b>averaged the metadata</b> across all 50 songs for
+                            each playlist. With each audio feature <b>(dancebility, valence, speechiness, loudness, and acousticness)</b>
+                            ranging from 0 to 1, we can visually see how each country's "Top 50" playlist differ in audio features.
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="info">
+                            <h5>What do these audio features mean?</h5>
+                            <b>Dancebility</b> describes how suitable a track is for dancing based on a combination of musical
+                            elements including tempo, rhythm stability, beat strength, and overall regularity.
+                            <br><br>
+                            <b>Valence</b> describes the musical positiveness conveyed by a track.
+                            Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with
+                            low valence sound more negative (e.g. sad, depressed, angry).
+                            <br><br>
+                            <b>Speechiness</b> detects the presence of spoken words in a track. The more exclusively speech-like
+                            the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value.
+                            <br><br>
+                            <b>Loudness</b> is the quality of a sound that is the primary psychological correlate of physical
+                            strength (amplitude). Values typical range between -60 and 0 decibels.
+                            <br><br>
+                            <b>Acousticness</b> is a confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0
+                            represents high confidence the track is acoustic.
+                            <br><br>
+                            For more information on the definitions of these features,
+                            check out <a href="https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/">Spotify's API Reference Guide</a>.
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <form class="col-md-4">
+                        <div class="choropleth-dropdown">
+                            <b>Filter</b> by music characteristic
+                            <br><br>
+                            <select id="attribute" class="form-control" onChange="choroplethMap.updateChoropleth()">
+                                <option value="danceability">Danceability</option>
+                                <option value="valence">Valence</option>
+                                <option value="speechiness">Speechiness</option>
+                                <option value="loudness">Loudness</option>
+                                <option value="acousticness">Acousticness</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
 
-    <!-- Choropleth map -->
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-              <h3>How does music differ across countries?</h3>
-              <p class="info">From the dancebility of their playlist to the acousticness of their music, we can visually
-                  <b>see how popular music differs</b> in audio features across the globe.
-                  <br><br>
-                  To compare the the "Top 50" playlists across the world, we <b>averaged the metadata</b> across all 50 songs for
-                  each playlist. With each audio feature <b>(dancebility, valence, speechiness, loudness, and acousticness)</b>
-                  ranging from 0 to 1, we can visually see how each country's "Top 50" playlist differ in audio features.
-              </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="info">
-                    <h5>What do these audio features mean?</h5>
-                    <b>Dancebility</b> describes how suitable a track is for dancing based on a combination of musical
-                    elements including tempo, rhythm stability, beat strength, and overall regularity.
-                    <br><br>
-                    <b>Valence</b> describes the musical positiveness conveyed by a track.
-                    Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with
-                    low valence sound more negative (e.g. sad, depressed, angry).
-                    <br><br>
-                    <b>Speechiness</b> detects the presence of spoken words in a track. The more exclusively speech-like
-                    the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value.
-                    <br><br>
-                    <b>Loudness</b> is the quality of a sound that is the primary psychological correlate of physical
-                    strength (amplitude). Values typical range between -60 and 0 decibels.
-                    <br><br>
-                    <b>Acousticness</b> is a confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0
-                    represents high confidence the track is acoustic.
-                    <br><br>
-                    For more information on the definitions of these features,
-                    check out <a href="https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/">Spotify's API Reference Guide</a>.
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="choropleth-map"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <br>
-        <div class="row">
-            <form class="col-md-4">
-                <div class="choropleth-dropdown">
-                    <b>Filter</b> by music characteristic
-                    <br><br>
-                    <select id="attribute" class="form-control" onChange="choroplethMap.updateChoropleth()">
-                        <option value="danceability">Danceability</option>
-                        <option value="valence">Valence</option>
-                        <option value="speechiness">Speechiness</option>
-                        <option value="loudness">Loudness</option>
-                        <option value="acousticness">Acousticness</option>
-                    </select>
-                </div>
-            </form>
-        </div>
-
-        <br>
-        <div class="row">
-            <div class="col-md-12">
-                <div id="choropleth-map"></div>
-            </div>
-        </div>
-    </div>
+        </section>
 
         <hr>
 
