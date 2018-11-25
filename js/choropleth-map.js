@@ -30,9 +30,8 @@ var box_w;
 var box_h;
 var distance;
 var legend_labels;
-var legend_text;
 
-// var tool_tip;
+var tool_tip;
 
 ChoroplethVis.prototype.initVis = function(){
     var vis = this;
@@ -109,10 +108,10 @@ ChoroplethVis.prototype.initVis = function(){
     // Domain
     colorscale.domain([d3.min(dance_list),d3.max(dance_list)]);
 
-    // tool_tip = = d3.tip()
-    //     .attr("class", "d3-tip")
-    //     .offset([-8,0])
-    //     .html(function(d) {return d.country;});
+    tool_tip = = d3.tip()
+        .attr("class", "d3-tip")
+        .offset([-8,0])
+        .html(function(d) {return d.country;});
 
     // Render the world atlas by using the path generator for danceability
     vis.svg.selectAll("path")
