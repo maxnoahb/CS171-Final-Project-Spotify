@@ -81,6 +81,8 @@ d3.queue()
             })
             .entries(data1);
 
+        console.log(countryAvgAttributes);
+
         // console.log(audioData, frequencyData, mapData, dataByCountry, data4);
         // console.log(uniqueSongData);
 

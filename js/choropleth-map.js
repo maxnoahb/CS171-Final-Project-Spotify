@@ -17,9 +17,12 @@ ChoroplethVis = function(_parentElement, _music, _mapjson, _mapnames){
 }
 
 var dance_list = [];
-var energy_list = [];
-var loud_list = [];
 var valence_list = [];
+var speech_list = [];
+var loud_list = [];
+var acoustic_list = [];
+// var energy_list = [];
+
 
 var world;
 var colorscale;
@@ -29,12 +32,13 @@ var path;
 
 ChoroplethVis.prototype.initVis = function(){
     var vis = this;
+    var map_names = this.map_names;
+    var music_data = this.music;
 
+    // SVG drawing area
     vis.margin = { top: 20, right: 20, bottom: 200, left: 30 };
     vis.width = 1000 - vis.margin.left - vis.margin.right;
     vis.height = 560 - vis.margin.top - vis.margin.bottom;
-
-    // SVG drawing area
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
@@ -51,44 +55,51 @@ ChoroplethVis.prototype.initVis = function(){
 
     // Convert the TopoJSON to GeoJSON
     world = topojson.feature(this.map, this.map.objects.countries).features;
-    var map_names = this.map_names;
 
-    // Get Danceability attributes and merge attribute into world data
-    var music_data = this.music;
-
-    // Merge data
+    // Merge Spotify data and country names
     for (var i = 0; i < music_data.length; i++){
 
-        // Grab country name
+        // Grab country name from Spotify data
         var country = music_data[i].key.replace(" Top 50","");
 
-        // Find country id
+        // Find country ID in the world map names
         for (var m = 0; m < map_names.length; m++){
             if (map_names[m].name === country){
                var country_id = parseInt(map_names[m].id)
             }
         }
 
-        // Grab attributes
+        // Grab attributes from Spotify Data
         var dance = music_data[i].value.danceability;
-        var energy = music_data[i].value.energy;
-        var loudness = music_data[i].value.loudness;
         var valence = music_data[i].value.valence;
-        energy_list.push(energy);
-        loud_list.push(loudness);
-        valence_list.push(valence);
+        var speechiness = music_data[i].value.speechiness;
+        var loudness = music_data[i].value.loudness;
+        var acousticness = music_data[i].value.acousticness;
+        // var energy = music_data[i].value.energy;
+
         dance_list.push(dance);
+        valence_list.push(valence);
+        speech_list.push(speechiness);
+        loud_list.push(loudness);
+        acoustic_list.push(acousticness);
+        // energy_list.push(energy);
+
 
         // Find the corresponding country id inside the GeoJSON
         for (var j = 0; j < world.length; j++) {
             var json_country_id = world[j].id;
             if (country_id === json_country_id) {
-                // Copy the data value into the JSON
+                // Copy the attributes into the JSON
                 world[j].danceability = dance;
-                world[j].energy = energy;
-                world[j].loudness = loudness;
                 world[j].valence = valence;
+                world[j].speechiness = speechiness;
+                world[j].loudness = loudness;
+                world[j].acousticness = acousticness;
+                // world[j].energy = energy;
+
+                // Copy country name into the JSON
                 world[j].country = country;
+
                 //Stop looking through the JSON
                 break;
             }
@@ -144,15 +155,21 @@ ChoroplethVis.prototype.updateChoropleth = function(){
     if (vis.attribute==="danceability"){
         list = dance_list;
     }
-    if (vis.attribute==="energy"){
-        list = energy_list;
+    if (vis.attribute==="valence"){
+        list = valence_list;
+    }
+    if (vis.attribute==="speechiness"){
+        list = speech_list;
     }
     if (vis.attribute==="loudness"){
         list = loud_list;
     }
-    if (vis.attribute==="valence"){
-        list = valence_list;
+    if (vis.attribute==="acousticness"){
+        list = acoustic_list;
     }
+    // if (vis.attribute==="energy"){
+    //     list = energy_list;
+    // }
 
     colorscale.domain([d3.min(list),d3.max(list)]);
 
