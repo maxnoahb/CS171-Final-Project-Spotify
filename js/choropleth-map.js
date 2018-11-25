@@ -224,7 +224,7 @@ ChoroplethVis.prototype.updateChoropleth = function(){
 
     // legend.select("text").exit().remove();
 
-    legend.append("text")
+    legend.select("text")
         .attr("x", 50)
         .attr("y", function(d, i){ return 160 + vis.height - (i*box_h) - box_h - 4;})
         .text(function(d,i){return legend_labels[i];});
