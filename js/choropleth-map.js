@@ -14,7 +14,7 @@ ChoroplethVis = function(_parentElement, _music, _mapjson, _mapnames){
     this.map = _mapjson;
     this.map_names = _mapnames;
     this.initVis();
-}
+};
 
 var dance_list = [];
 var valence_list = [];
@@ -222,8 +222,6 @@ ChoroplethVis.prototype.updateChoropleth = function(){
         (d3.min(list) + 2*distance).toFixed(2) + " to " + (d3.min(list) + 3*distance).toFixed(2),
         (d3.min(list) + 3*distance).toFixed(2) + " to " + (d3.min(list) + 4*distance).toFixed(2),
         (d3.min(list) + 4*distance).toFixed(2) + " to " + (d3.min(list) + 5*distance).toFixed(2)];
-
-    // legend.select("text").exit().remove();
 
     legend.select("text")
         .transition()
