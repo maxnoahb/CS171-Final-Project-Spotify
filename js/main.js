@@ -113,7 +113,7 @@ $(document).ready(function() {
         navigation: true,
         css3: true,
         controlArrows: true,
-        responsiveHeight: 800,
+        // responsiveHeight: 800,
         touchSensitivity: 50,
         normalScrollElements: "#choropleth-map",
         // autoScrolling: false,
