@@ -28,8 +28,12 @@
                         <h3>Our Project</h3>
                         <p class="info">Music is a universal language. It brings us joy, recalls memories, encourages us to
                         dance. Our music listening habits reflect our lives: what time of year it is, what mood we're in,
-                        what language we speak, how energetic we may be. <br>
-                        This is why we're interested in exploring music data. ... </p>
+                        what language we speak, how energetic we may be. <br><br>
+                        This is why we're interested in exploring music data. To explore what others are listening to is to
+                        explore so much more about how people are feeling right now. Which countries listen to the same
+                        songs and what might that say about the state of those areas? Which artists are popular globally
+                        and what is it that makes them so universally loved? We hope to dive into these questions and more
+                        as we take you through the top songs in each of the 61 countries that listen to Spotify.</p>
                     </div>
                 </div>
             </div>
@@ -172,22 +176,34 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xl-6" id="comparison-country-label-left">
-                        <span>United States</span>
+                    <div class="col-md-2">
+                        <div class="row" id="comparison-country-label-left">
+                            <span>United States</span>
+                        </div>
+                        <div class="row">
+                            <form class="form-inline">
+                                <div class="form-group comparison-dropdown">
+                                    <select id="countries-list" class="form-control" onChange="updateSelected();" style="margin-left:10px"></select>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div class="col-xl-6">
-                        <form class="form-inline">
-                            <div class="form-group comparison-dropdown">
-                                <select id="countries-list" class="form-control" onChange="updateSelected();" style="margin-left:10px"></select>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-10">
                         <div id="comparison-chart"></div>
                     </div>
+                    <!--<div class="col-xl-6">-->
+                        <!--<form class="form-inline">-->
+                            <!--<div class="form-group comparison-dropdown">-->
+                                <!--<select id="countries-list" class="form-control" onChange="updateSelected();" style="margin-left:10px"></select>-->
+                            <!--</div>-->
+                        <!--</form>-->
+                    <!--</div>-->
                 </div>
+                <!--<div class="row">-->
+                    <!--<div class="col-md-12">-->
+                        <!--<div id="comparison-chart"></div>-->
+                    <!--</div>-->
+                <!--</div>-->
             </div>
         </section>
 
