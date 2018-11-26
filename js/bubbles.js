@@ -113,7 +113,7 @@ function updateBubbles(country) {
             details.html("<strong>" + d.Var1 + "</strong>" +
                      "<br>Artist: " + uniqueSongData[d.Var1].artist_name +
                      "<br><br>Danceability: " + uniqueSongData[d.Var1].danceability +
-                     "<br>Energy: " + uniqueSongData[d.Var1].energy +
+                     "<br>Speechiness: " + uniqueSongData[d.Var1].speechiness +
                      "<br>Acousticness: " + uniqueSongData[d.Var1].acousticness +
                      "<br>Loudness: " + uniqueSongData[d.Var1].loudness +
                      "<br>Valence: " + uniqueSongData[d.Var1].valence);
