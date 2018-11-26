@@ -47,6 +47,17 @@ ChoroplethVis.prototype.initVis = function(){
         .append("g")
         .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
+    // Background
+    vis.svg.append("rect")
+        .attr("class", "background")
+        .attr("width", width)
+        .attr("height", height)
+        .style("fill","none")
+        .style("pointer-events", "all")
+        .call(d3.zoom() // Call Zoom
+            .scaleExtent([1 / 2, 4])
+            .on("zoom", zoomed));
+
     // Create a mercator projection and draw path
     projection = d3.geoMercator().translate([width / 2, height / 2]);
     path = d3.geoPath().projection(projection);
@@ -71,7 +82,7 @@ ChoroplethVis.prototype.initVis = function(){
             }
         }
 
-        // Grab attributes from Spotify Data
+        // Grab attributes from Spotify Data and scale
         var dance = music_data[i].value.danceability;
         var valence = music_data[i].value.valence;
         var speechiness = music_data[i].value.speechiness;
@@ -104,19 +115,6 @@ ChoroplethVis.prototype.initVis = function(){
         }
     }
 
-    // Scale all lists to be from [0,100]
-    var loudscale = d3.scaleLinear()
-        .range([0,100])
-        .domain([d3.extent(loud_list)]);
-
-    for (var i = 0; i < dance_list.length; i++) {
-        dance_list[i] = dance_list[i]*100;
-        valence_list[i] = valence_list[i]*100;
-        speech_list[i] = speech_list[i]*100;
-        loud_list[i] = loudscale(loud_list[i]);
-        acoustic_list[i] = acoustic_list[i]*100;
-    }
-
     // Domain
     colorscale.domain([d3.min(dance_list),d3.max(dance_list)]);
 
@@ -141,6 +139,11 @@ ChoroplethVis.prototype.initVis = function(){
                 // If value is undefined...
                 return "#d3d3d3";
             }});
+
+    // Zoomable feature
+    function zoomed() {
+        vis.svg.selectAll("path").attr("transform", d3.event.transform);
+    }
 
     var max = d3.max(dance_list);
     var min = d3.min(dance_list);
@@ -207,6 +210,8 @@ ChoroplethVis.prototype.updateChoropleth = function(){
     if (vis.attribute==="acousticness"){
         list = acoustic_list;
     }
+
+    console.log(list);
 
     // Update domain
     colorscale.domain([d3.min(list),d3.max(list)]);

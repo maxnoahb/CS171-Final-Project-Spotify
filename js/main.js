@@ -69,27 +69,42 @@ $(document).ready(function() {
             });
 
             // new data structure containing the average attributes for each country playlist
+
             countryAvgAttributes = d3.nest()
                 .key(function(d) { return d.playlist_name; })
                 .rollup(function(v) {
                     return {
-                        "acousticness": d3.mean(v, function(d) { return d.acousticness; }),
-                        "danceability": d3.mean(v, function(d) { return d.danceability; }),
+                        "acousticness": d3.mean(v, function(d) { return d.acousticness*100; }),
+                        "danceability": d3.mean(v, function(d) { return d.danceability*100; }),
                         "duration_ms": d3.mean(v, function(d) { return d.duration_ms; }),
                         "energy": d3.mean(v, function(d) { return d.energy; }),
                         "liveness": d3.mean(v, function(d) { return d.liveness; }),
                         "loudness": d3.mean(v, function(d) { return d.loudness; }),
-                        "speechiness": d3.mean(v, function(d) { return d.speechiness; }),
+                        "speechiness": d3.mean(v, function(d) { return d.speechiness*100; }),
                         "tempo": d3.mean(v, function(d) { return d.tempo; }),
-                        "valence": d3.mean(v, function(d) { return d.valence; })
+                        "valence": d3.mean(v, function(d) { return d.valence*100; })
                     };
                 })
                 .entries(data1);
+
+            var loudness_list = [];
+            for (var i = 0; i < countryAvgAttributes.length; i++){
+                loudness_list.push(countryAvgAttributes[i].value.loudness);
+            }
+            var loudness_scale = d3.scaleLinear()
+                .range([0,100])
+                .domain(d3.extent(loudness_list));
+
+            countryAvgAttributes.forEach(function(d){
+                d.value.loudness = loudness_scale(d.value.loudness);
+            });
 
             // console.log(countryAvgAttributes);
 
             // console.log(audioData, frequencyData, mapData, dataByCountry, data4);
             // console.log(uniqueSongData);
+
+
 
             // Initialize intro map
             introMap = new IntroMap("intro-map", countryAvgAttributes, data3, data4);
