@@ -151,7 +151,6 @@ ChoroplethVis.prototype.initVis = function(){
     var median1 = (min + median)/2;
     var median2 = (median + max)/2;
     var sample_data = [min, median1, median, median2, max];
-    console.log(sample_data);
 
     // Create legend
     legend = vis.svg.selectAll("g.legend")
@@ -210,8 +209,6 @@ ChoroplethVis.prototype.updateChoropleth = function(){
     if (vis.attribute==="acousticness"){
         list = acoustic_list;
     }
-
-    console.log(list);
 
     // Update domain
     colorscale.domain([d3.min(list),d3.max(list)]);
