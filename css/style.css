@@ -92,13 +92,69 @@ output {
 	cursor: pointer;
 }
 
-#selectedCountryName {
+#selectedCountryName, #top-3-songs, #top-3-songs-label {
     text-align: center;
 }
 
 .footer {
     text-align: center;
 }
+
+.fp-scroller {
+    overflow:hidden;
+}
+
+#fp-nav ul li a span,
+.fp-slidesNav ul li a span {
+    background: white;
+    width: 8px;
+    height: 8px;
+    margin: -4px 0 0 -4px;
+}
+
+#fp-nav ul li a.active span,
+.fp-slidesNav ul li a.active span,
+#fp-nav ul li:hover a.active span,
+.fp-slidesNav ul li:hover a.active span {
+    width: 16px;
+    height: 16px;
+    margin: -8px 0 0 -8px;
+    background: transparent;
+    box-sizing: border-box;
+    border: 1px solid #24221F;
+}
+
+/*.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.l-left {
+    float: left;
+}
+
+.l-right {
+    float: right;
+}
+
+.end {
+    margin-top: 30px;
+    font-size: 3em;
+    font-weight: bold;
+    opacity: 0;
+    -webkit-transform: translateY(300px);
+    -ms-transform: translateY(300px);
+    transform: translateY(300px);
+    -webkit-transition: opacity, -webkit-transform 1s;
+    transition: opacity, transform 1s;
+    -webkit-transition-delay: 1s;
+    transition-delay: 1s;
+}*/
 
 /*****
 
@@ -160,4 +216,17 @@ KATE'S STYLES
 path:hover {
     stroke: darkgreen;
     stroke-width: 2px;
+}
+
+/*****
+
+CAITLYN'S STYLES
+
+*****/
+.choropleth-dropdown {
+    background-color: #d3d3d3;
+    border-radius: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding: 20px;
 }

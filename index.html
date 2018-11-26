@@ -6,150 +6,221 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.css" rel="stylesheet">
 </head>
 <body>
 
-    <!--Introduction-->
-    <div>
-        <h1><span>Music Around the World</span></h1>
-    </div>
+    <div id="fullpage">
 
-    <hr>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h3>Our Project</h3>
-                <p class="info">Music is a universal language. It brings us joy, recalls memories, encourages us to
-                dance. Our music listening habits reflect our lives: what time of year it is, what mood we're in,
-                what language we speak, how energetic we may be. <br>
-                This is why we're interested in exploring music data. ... </p>
+        <section class="vertical-scrolling">
+            <!--Introduction-->
+            <div>
+                <h1><span>Music Around the World</span></h1>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <hr>
+        <hr>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Spotify_logo_with_text.svg/2000px-Spotify_logo_with_text.svg.png">
-            </div>
-            <div class="col-md-6">
-                <h3>Our Data</h3>
-                <p class="info">For this project, we're using Spotify data. With
-                    <a href="https://newsroom.spotify.com/companyinfo/">191 million active users</a> across 61 countries
-                featuring over 40 million songs, Spotify is one of the most popular music streaming services in the
-                world. <br><br>
-                    Embedded in each song's metadata is information about the song's energy, valence (happiness), tempo,
-                key, danceability, and much more. Each of these characteristics has a rating from 0 to 1 and the numbers
-                help Spotify understand its users. We're focusing on these metrics to explore similarities and differences
-                in popular music around the world. Our songs are gathered from the Spotify-generated "Top 50" playlists of
-                    each of the 61 countries Spotify serves (e.g. Argentina's Top 50, etc.). <br><br>
-                This data is a snapshot of these playlists as of November 2018. As Spotify reaches a broader audience,
-                it can tell us more and more about the world's music tastes. <strong>For now, we can only gather information
-                about the 61 countries highlighted on the map below. </strong></p>
-            </div>
-        </div>
-    </div>
-
-    <hr>
-
-    <!-- Intro map -->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <p class="info">Visit <a href="https://www.spotify.com/us/">Spotify's website</a>
-                    for more information as we take you through a musical adventure across the world. <br><br>
-                To begin, choose the country you're from to personalize your experience. You can return to this page
-                and change the country at any time.</p>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-md-12">
-                <h4 id="intro-chosen-country"></h4>
-                <div id="intro-map" onclick="comparisonChart.onCountryCompareChange()"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Choropleth map -->
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h3>The type of popular music differs around the world</h3>
-        </div>
-      </div>
-        <div class="row">
-            <form class="col-md-3">
-                <div class="choropleth-dropdown">
-                    <p>Filter by music attribute:</p>
-                    <select id="attribute" class="form-control" onChange="choroplethMap.updateChoropleth()">
-                        <option value="danceability">Danceability</option>
-                        <option value="valence">Valence</option>
-                        <option value="speechiness">Speechiness</option>
-                        <option value="loudness">Loudness</option>
-                        <option value="acousticness">Acousticness</option>
-                    </select>
-                </div>
-            </form>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-
-                <p>The danceability, energy, loudness, and valence of popular music differs across countries</p>
-                <p>[More text about what these attributes mean]</p>
-                <p>[Fun facts about these attributes?]</p>
-                <div id="choropleth-map"></div>
-            </div>
-        </div>
-    </div>
-
-    <hr>
-
-    <!-- Side by side country comparison -->
-    <div class="container">
-        <h3>Take a closer look at how your country compares...</h3>
-        <p class="info">Now that you've seen the broader trends around the world, let's look at how your country compares to others
-        around the world in more detail. Can you find the country that's most similar to yours? Most different?
-        Perhaps you've been travelling lately, or just have dreams of future travels. How do the countries you want to
-        visit compare to your own in average music taste?
-            <br><br>
-        There may be deeper value in considering these comparisons than you think. While the average American
-        Spotify listener may be quite different from the average Indonesian Spotify listener, the energy and valence
-        of the most popular songs for those countries are very similar. Take Reggaeton as an example. According to
-        Spotify <a href="https://insights.spotify.com/us/2017/09/05/how-reggaeton-became-a-global-phenomenon-on-spotify/">data</a>,
-            reggaeton's share of music on Spotify grew 119% from 2014 to 2017, compared to pop's growth of
-        13% and country music's growth of 4%. Following that trend, more songs from around the world borrowed reggaeton's
-        catchy beat, including the massive Ed Sheeran hit "Shape of You." This suggests that the world may share more
-        music tastes than we recognize.
-            <br><br><br>
-        Take a look at how your country compares to others to see what trends to look out for:</p>
-        <div class="row">
-            <div class="comparison-top-text">
-                <h4>Choose a country to compare to yours:</h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xl-6" id="comparison-country-label-left">
-                <span>United States</span>
-            </div>
-            <div class="col-xl-6">
-                <form class="form-inline">
-                    <div class="form-group comparison-dropdown">
-                        <select id="countries-list" class="form-control" onChange="updateSelected();" style="margin-left:10px"></select>
+        <section class="vertical-scrolling">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Our Project</h3>
+                        <p class="info">Music is a universal language. It brings us joy, recalls memories, encourages us to
+                        dance. Our music listening habits reflect our lives: what time of year it is, what mood we're in,
+                        what language we speak, how energetic we may be. <br>
+                        This is why we're interested in exploring music data. ... </p>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div id="comparison-chart"></div>
-            </div>
-        </div>
-    </div>
+        </section>
 
+        <hr>
+
+        <section class="vertical-scrolling">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Spotify_logo_with_text.svg/2000px-Spotify_logo_with_text.svg.png">
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Our Data</h3>
+                        <p class="info">For this project, we're using Spotify data. With
+                            <a href="https://newsroom.spotify.com/companyinfo/">191 million active users</a> across 61 countries
+                        featuring over 40 million songs, Spotify is one of the most popular music streaming services in the
+                        world. <br><br>
+                            Embedded in each song's metadata is information about the song's energy, valence (happiness), tempo,
+                        key, danceability, and much more. Each of these characteristics has a rating from 0 to 1 and the numbers
+                        help Spotify understand its users. We're focusing on these metrics to explore similarities and differences
+                        in popular music around the world. Our songs are gathered from the Spotify-generated "Top 50" playlists of
+                            each of the 61 countries Spotify serves (e.g. Argentina's Top 50, etc.). <br><br>
+                        This data is a snapshot of these playlists as of November 2018. As Spotify reaches a broader audience,
+                        it can tell us more and more about the world's music tastes. <strong>For now, we can only gather information
+                        about the 61 countries highlighted on the map below. </strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section class="vertical-scrolling">
+            <!-- Intro map -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="info">Visit <a href="https://www.spotify.com/us/">Spotify's website</a>
+                            for more information as we take you through a musical adventure across the world. <br><br>
+                        To begin, choose the country you're from to personalize your experience. You can return to this page
+                        and change the country at any time.</p>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 id="intro-chosen-country"></h4>
+                        <div id="intro-map" onclick="comparisonChart.onCountryCompareChange()"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+        <section class="vertical-scrolling">
+            <!-- Choropleth map -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>How does music differ across countries?</h3>
+                        <p class="info">From the dancebility of their playlist to the acousticness of their music, we can visually
+                            <b>see how popular music differs</b> in audio features across the globe.
+                            <br><br>
+                            To compare the the "Top 50" playlists across the world, we <b>averaged the metadata</b> across all 50 songs for
+                            each playlist. With each audio feature <b>(dancebility, valence, speechiness, loudness, and acousticness)</b>
+                            ranging from 0 to 1, we can visually see how each country's "Top 50" playlist differ in audio features.
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="info">
+                            <h5>What do these audio features mean?</h5>
+                            <b>Dancebility</b> describes how suitable a track is for dancing based on a combination of musical
+                            elements including tempo, rhythm stability, beat strength, and overall regularity.
+                            <br><br>
+                            <b>Valence</b> describes the musical positiveness conveyed by a track.
+                            Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with
+                            low valence sound more negative (e.g. sad, depressed, angry).
+                            <br><br>
+                            <b>Speechiness</b> detects the presence of spoken words in a track. The more exclusively speech-like
+                            the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value.
+                            <br><br>
+                            <b>Loudness</b> is the quality of a sound that is the primary psychological correlate of physical
+                            strength (amplitude). Values typical range between -60 and 0 decibels.
+                            <br><br>
+                            <b>Acousticness</b> is a confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0
+                            represents high confidence the track is acoustic.
+                            <br><br>
+                            For more information on the definitions of these features,
+                            check out <a href="https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/">Spotify's API Reference Guide</a>.
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <form class="col-md-4">
+                        <div class="choropleth-dropdown">
+                            <b>Filter</b> by music characteristic
+                            <br><br>
+                            <select id="attribute" class="form-control" onChange="choroplethMap.updateChoropleth()">
+                                <option value="danceability">Danceability</option>
+                                <option value="valence">Valence</option>
+                                <option value="speechiness">Speechiness</option>
+                                <option value="loudness">Loudness</option>
+                                <option value="acousticness">Acousticness</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="choropleth-map"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section class="vertical-scrolling">
+            <!-- Side by side country comparison -->
+            <div class="container">
+                <h3>Take a closer look at how your country compares...</h3>
+                <p class="info">Now that you've seen the broader trends around the world, let's look at how your country compares to others
+                around the world in more detail. Can you find the country that's most similar to yours? Most different?
+                Perhaps you've been travelling lately, or just have dreams of future travels. How do the countries you want to
+                visit compare to your own in average music taste?
+                    <br><br>
+                There may be deeper value in considering these comparisons than you think. While the average American
+                Spotify listener may be quite different from the average Indonesian Spotify listener, the energy and valence
+                of the most popular songs for those countries are very similar. Take Reggaeton as an example. According to
+                Spotify <a href="https://insights.spotify.com/us/2017/09/05/how-reggaeton-became-a-global-phenomenon-on-spotify/">data</a>,
+                    reggaeton's share of music on Spotify grew 119% from 2014 to 2017, compared to pop's growth of
+                13% and country music's growth of 4%. Following that trend, more songs from around the world borrowed reggaeton's
+                catchy beat, including the massive Ed Sheeran hit "Shape of You." This suggests that the world may share more
+                music tastes than we recognize.
+                    <br><br><br>
+                Take a look at how your country compares to others to see what trends to look out for:</p>
+                <div class="row">
+                    <div class="comparison-top-text">
+                        <h4>Choose a country to compare to yours:</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-6" id="comparison-country-label-left">
+                        <span>United States</span>
+                    </div>
+                    <div class="col-xl-6">
+                        <form class="form-inline">
+                            <div class="form-group comparison-dropdown">
+                                <select id="countries-list" class="form-control" onChange="updateSelected();" style="margin-left:10px"></select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="comparison-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section class="vertical-scrolling">
+            <!-- Bubble chart -->
+            <div class="container">
+                <h3>Are your country's top 50 songs also popular around the world?</h3>
+                <p>[The large the bubble, the more countries have that song in their top 50]</p>
+                <p>[Explain more on how to read data]</p>
+              <div class="row">
+                <div class="col-md-12">
+                  <div id="bubble-chart"></div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <!-- <div id="bubble-chart-scale"></div> -->
+                  <button id="filter-toggle" onclick="toggleBubbles();">Show Just Your Country's Top 50</button>
+                </div>
+              </div>
+            </div>
+        </section>
+
+<<<<<<< HEAD
     <hr>
 
     <!-- Bubble chart -->
@@ -163,59 +234,69 @@
         </div>
       </div>
     </div>
+=======
+        <hr>
+>>>>>>> c67c35fb9a95465e29764ffde645f2dc4d48bb4e
 
-    <hr>
+        <section class="vertical-scrolling">
+            <!-- Personal slider -->
+            <div class="container-fluid">
+                <h3>Looking for a new playlist to follow? Find out which country suits you best.</h3>
+              <div class="row">
+                <div class="col-md-4">
 
-    <!-- Personal slider -->
-    <div class="container-fluid">
-        <h3>Looking for a new playlist to follow? Find out which country suits you best.</h3>
-      <div class="row">
-        <div class="col-md-4">
+                    <p>Adjust the sliders to discover with which country your tastes are most aligned: </p>
 
-            <p>Adjust the sliders to discover with which country your tastes are most aligned: </p>
+                    <div class="slidecontainer">
+                        <label class="slider-label" for="acousticness-slider">Acousticness</label>
+                        <input type="range" min="1" max="100" value="50" class="slider" id="acousticness-slider" onchange="acousticnessRangeValue.value=value">
+                        <output id="acousticnessRangeValue">50</output>
+                    </div>
+                    <div class="slidecontainer">
+                        <label class="slider-label" for="danceability-slider">Danceability</label>
+                        <input type="range" min="1" max="100" value="50" class="slider" id="danceability-slider" onchange="danceabilityRangeValue.value=value">
+                        <output id="danceabilityRangeValue">50</output>
+                    </div>
+                    <div class="slidecontainer">
+                        <label class="slider-label" for="speechiness-slider">Speechiness</label>
+                        <input type="range" min="1" max="100" value="50" class="slider" id="speechiness-slider" onchange="speechinessRangeValue.value=value">
+                        <output id="speechinessRangeValue">50</output>
+                    </div>
+                    <div class="slidecontainer">
+                        <label class="slider-label" for="valence-slider">Valence</label>
+                        <input type="range" min="1" max="100" value="50" class="slider" id="valence-slider" onchange="valenceRangeValue.value=value">
+                        <output id="valenceRangeValue">50</output>
+                    </div>
 
-            <div class="slidecontainer">
-                <label class="slider-label" for="acousticness-slider">Acousticness</label>
-                <input type="range" min="1" max="100" value="50" class="slider" id="acousticness-slider" onchange="acousticnessRangeValue.value=value">
-                <output id="acousticnessRangeValue">50</output>
+                    <button type="button" class="btn btn-success" id="match-button">Match</button>
+
+                </div>
+                <div class="col-md-8">
+                    <h4 id="selectedCountryName"></h4>
+                    <div id="slider-chart"></div>
+                    <p id="top-3-songs-label">Top 3 Songs: </p>
+                    <p id="top-3-songs"></p>
+                </div>
+              </div>
             </div>
-            <div class="slidecontainer">
-                <label class="slider-label" for="danceability-slider">Danceability</label>
-                <input type="range" min="1" max="100" value="50" class="slider" id="danceability-slider" onchange="danceabilityRangeValue.value=value">
-                <output id="danceabilityRangeValue">50</output>
-            </div>
-            <div class="slidecontainer">
-                <label class="slider-label" for="speechiness-slider">Speechiness</label>
-                <input type="range" min="1" max="100" value="50" class="slider" id="speechiness-slider" onchange="speechinessRangeValue.value=value">
-                <output id="speechinessRangeValue">50</output>
-            </div>
-            <div class="slidecontainer">
-                <label class="slider-label" for="valence-slider">Valence</label>
-                <input type="range" min="1" max="100" value="50" class="slider" id="valence-slider" onchange="valenceRangeValue.value=value">
-                <output id="valenceRangeValue">50</output>
+        </section>
+
+        <section class="vertical-scrolling">
+            <!--Ending message-->
+            <div class="container">
+                <h3>[Something for the reader to take away]</h3>
+                <p>[Action items]</p>
             </div>
 
-            <button type="button" class="btn btn-success" id="match-button">Match</button>
+            <div class="footer">
+                <p>Max Benegas, Kate Schember, Caitlyn Dang, Justin Gonzalez</p>
+                <p>Images used: https://cdn12.picryl.com/photo/2016/12/31/guitar-instrument-music-music-34e5d5-1024.jpg,
+                    https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Spotify_logo_with_text.svg/2000px-Spotify_logo_with_text.svg.png</p>
+            </div>
+        </section>
 
-        </div>
-        <div class="col-md-8">
-            <h4 id="selectedCountryName"></h4>
-          <div id="slider-chart"></div>
-        </div>
-      </div>
     </div>
 
-    <!--Ending message-->
-    <div class="container">
-        <h3>[Something for the reader to take away]</h3>
-        <p>[Action items]</p>
-    </div>
-
-    <div class="footer">
-        <p>Max Benegas, Kate Schember, Caitlyn Dang, Justin Gonzalez</p>
-        <p>Images used: https://cdn12.picryl.com/photo/2016/12/31/guitar-instrument-music-music-34e5d5-1024.jpg,
-            https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Spotify_logo_with_text.svg/2000px-Spotify_logo_with_text.svg.png</p>
-    </div>
 
     <script src="js/jquery.min.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -224,6 +305,7 @@
     <script src="js/d3.min.js"></script>
     <script src="js/topojson.min.js"></script>
     <script src="js/d3-tip.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.min.js"></script>
 
     <!-- JS Visualizations -->
     <script src="js/main.js"></script>
