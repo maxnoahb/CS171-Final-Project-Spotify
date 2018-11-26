@@ -6,7 +6,6 @@
  * @param _data             -- map names data
  */
 
-// Green #4caf50
 
 ChoroplethVis = function(_parentElement, _music, _mapjson, _mapnames){
     this.parentElement = _parentElement;
@@ -54,7 +53,7 @@ ChoroplethVis.prototype.initVis = function(){
 
     // Set color scale
     colorscale = d3.scaleQuantize()
-        .range(["rgb(237,248,233)", "rgb(186,228,179)", "rgb(116,196,118)", "rgb(49,163,84)", "rgb(0,109,44)"]);
+        .range(["#E4F1EB", "#C8E7DC", "#AADFD0", "#89D9C9", "#65D6C9"]);
 
     // Convert the TopoJSON to GeoJSON
     world = topojson.feature(this.map, this.map.objects.countries).features;
@@ -178,6 +177,7 @@ ChoroplethVis.prototype.initVis = function(){
     legend.append("text")
         .attr("x", 50)
         .attr("y", function(d, i){ return 160 + vis.height - (i*box_h) - box_h - 4;})
+        .attr("fill", "white")
         .text(function(d,i){return legend_labels[i];});
 
     vis.updateChoropleth();

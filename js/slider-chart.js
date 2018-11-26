@@ -131,7 +131,7 @@ SliderVis.prototype.updateVis = function() {
 
         vis.countryOutline
             .attr("d", vis.path)
-            .style("fill", "#4CAF50");
+            .style("fill", "#65d6c9");
 
         vis.countryOutline.exit().remove();
 

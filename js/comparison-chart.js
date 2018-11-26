@@ -133,7 +133,7 @@ ComparisonChart.prototype.updateVis = function(){
         .attr("y", function(d){return vis.yScale(Object.keys(d)[0])})
         .attr("width", function(d){return vis.width/2 - vis.xScaleLeft(d[Object.keys(d)[0]])})
         .attr("height", vis.yScale.bandwidth())
-        .attr("fill", "#4caf50");
+        .attr("fill", "#65D6C9");
 
     // add music staffs
     // this helped: https://stackoverflow.com/questions/14567809/how-to-add-an-image-to-an-svg-container-using-d3-js
@@ -159,7 +159,7 @@ ComparisonChart.prototype.updateVis = function(){
         .attr("y", function(d){return vis.yScale(Object.keys(d)[0])})
         .attr("width", function(d){return vis.xScaleRight(d[Object.keys(d)[0]])})
         .attr("height", vis.yScale.bandwidth())
-        .attr("fill", "#4caf50");
+        .attr("fill", "#C73866");
 
     // add music staffs
     // var musicRight = vis.svg.selectAll(".right-image")
@@ -179,6 +179,7 @@ ComparisonChart.prototype.updateVis = function(){
 
     columnLabels.enter().append("text")
         .attr("class", "column-label")
+        .attr("fill", "white")
         .text(function(d){return Object.keys(d)[0]})
         .attr("x", vis.width/2)
         .attr("y", function(d){return vis.yScale(Object.keys(d)[0]) + vis.yScale.bandwidth()/2 + vis.yScale.bandwidth()*.1})
@@ -190,6 +191,7 @@ ComparisonChart.prototype.updateVis = function(){
 
     leftBarLabels.enter().append("text")
         .attr("class", "left-bar-labels")
+        .attr("fill", "white")
         .text(function(d){ return Math.round(d[Object.keys(d)[0]] * 100)})
         .attr("x", function(d){ return -60 + vis.xScaleLeft(d[Object.keys(d)[0]])})
         .attr("y", function(d){ return vis.yScale(Object.keys(d)[0]) + vis.yScale.bandwidth()/2 + vis.yScale.bandwidth()*.1})
@@ -219,6 +221,7 @@ ComparisonChart.prototype.updateVis = function(){
 
     rightBarLabels.enter().append("text")
         .attr("class", "right-bar-labels")
+        .attr("fill", "white")
         .text(function(d){ return Math.round(d[Object.keys(d)[0]] * 100)})
         .attr("x", function(d){ return 60 + vis.xScaleRight(d[Object.keys(d)[0]]) + vis.width/2})
         .attr("y", function(d){ return vis.yScale(Object.keys(d)[0]) + vis.yScale.bandwidth()/2 + vis.yScale.bandwidth()*.1})
@@ -290,4 +293,3 @@ ComparisonChart.prototype.onCountryCompareChange = function(){
 
     vis.wrangleData();
 }
-
