@@ -81,7 +81,7 @@ function updateBubbles(country) {
         .merge(bubble)
             .attr("fill", function (d) {
               if (selectedTop50[d.Var1] != null) {
-                return "#65d6c9";
+                return "#FF8F00";
               }
               else {
                 return "#d3d3d3";

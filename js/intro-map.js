@@ -95,12 +95,13 @@ IntroMap.prototype.initVis = function(){
         .enter().append("path")
         .attr("d", path)
         .attr("class", "intro-map-path")
+        .style("stroke", "#F0F0DF")
         .style("fill", function(d) {
             //Get data value
             var dance = d.danceability;
             if (dance) {
                 //If value exists...
-                return "#65d6c9";
+                return "#4FB99F";
             }
             else{
                 // If value is undefined...

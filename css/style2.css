@@ -2,13 +2,13 @@
 
 body {
   font-family: 'Raleway', sans-serif;
-  background-color: #504F70;
-  color: white;
+  background-color: #F0F0DF;
+  color: #2B3A42;
 }
 
 h1 {
     text-align: center;
-    color: #65d6c9;
+    color: #FF8F00;
     font-size: 100px;
     padding-top: 260px;
     padding-bottom: 260px;
@@ -37,7 +37,7 @@ img {
 }
 
 .info {
-    background-color: rgba(199, 56, 102, 1);
+    background-color: #BDD3DE;
     border-radius: 10px;
     margin-left: 50px;
     margin-right: 50px;
@@ -45,11 +45,12 @@ img {
 }
 
 a {
-  color: #65d6c9;
+  color: #ED553B;
+  font-weight: bold;
 }
 
 a:hover {
-  color: #4FA79D;
+  color: #B9372E;
 }
 
 /*****
@@ -144,9 +145,9 @@ output {
     width: 16px;
     height: 16px;
     margin: -8px 0 0 -8px;
-    background: #C73866;
+    background: #D97A00;
     box-sizing: border-box;
-    border: 1px solid #C73866;
+    border: 1px solid #D97A00;
 }
 
 #match-button {
@@ -208,8 +209,8 @@ div.tooltip {
     font-size: 14px;
     padding: 5px;
     margin: 5px;
-    color: #d3d3d3;
-    background: #C73866;
+    color: white;
+    background: #4FB99F;
     border: 0px;
     border-radius: 8px;
     pointer-events: none;
@@ -259,7 +260,8 @@ CAITLYN'S STYLES
 
 *****/
 .choropleth-dropdown {
-    background-color: #C73866;
+    background-color: #ED553B;
+    color: white;
     border-radius: 10px;
     margin-left: 50px;
     margin-right: 50px;

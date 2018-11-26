@@ -64,7 +64,7 @@ ChoroplethVis.prototype.initVis = function(){
 
     // Set color scale
     colorscale = d3.scaleQuantize()
-        .range(["#E6C1CD", "#D47F9B", "#C73866", "#9E2D51", "#75213C"]);
+        .range(["#F4E1DE", "#EDC2BB", "#E9A094", "#E97C69", "#ED553B"]);
 
     // Convert the TopoJSON to GeoJSON
     world = topojson.feature(this.map, this.map.objects.countries).features;
@@ -179,7 +179,7 @@ ChoroplethVis.prototype.initVis = function(){
     legend.append("text")
         .attr("x", 50)
         .attr("y", function(d, i){ return 160 + vis.height - (i*box_h) - box_h - 4;})
-        .attr("fill", "white")
+        .attr("fill", "#2B3A42")
         .text(function(d,i){return legend_labels[i];});
 
     vis.updateChoropleth();
@@ -217,6 +217,7 @@ ChoroplethVis.prototype.updateChoropleth = function(){
     vis.svg.selectAll("path")
         .transition()
         .duration(500)
+        .style("stroke", "#F0F0DF")
         .style("fill", function(d) {
             //Get data value
             var attribute = d[vis.attribute];
