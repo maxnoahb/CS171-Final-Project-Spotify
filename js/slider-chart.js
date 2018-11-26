@@ -49,6 +49,10 @@ SliderVis.prototype.initVis = function() {
     // draw initial path
     vis.path = d3.geoPath().projection(vis.projection);
 
+    // initialize Spotify API object
+    vis.spotifyApi = new SpotifyWebApi();
+    vis.spotifyApi.setAccessToken("BQAXjEE9-rbGkAJ-rsMP_MxB_XgWtCWzSZq5jw-h2-sU4WoGFoL5NqNmMhLoGfpzSqPSkil-br4YREO0Sbo");
+
     // console.log(vis.offset);
 
     // console.log(vis.bounds);
@@ -93,10 +97,29 @@ SliderVis.prototype.updateVis = function() {
 
         $('#selectedCountryName').html(vis.similarCountry.replace(" Top 50",""));
 
+        var topThreeTracks = [];
+        // var track;
+        for (var track = 0; track < 3; track++) {
+            // var trackData;
+            topThreeTracks[track] = vis.spotifyApi.getTrack(vis.displayData[track].track_uri, function(err, data) {
+                // console.log(data.external_urls.spotify);
+                if (err) {throw err}
+                else {return data.external_urls.spotify}
+            });
+            // topThreeTracks[track] = trackData;
+        }
+        console.log(topThreeTracks);
+        // vis.displayData.slice(0, 3).forEach(function(track) {
+        //     vis.spotifyApi.getTrack(track.track_uri, function(err, data) {
+        //         if (err) throw err;
+        //         else topThreeTracks.push(data.external_urls.spotify);
+        //     });
+        // });
+        // console.log(topThreeTracks);
+
         $('#top-3-songs').html(
             '<strong>Top 3 Songs:</strong><br>' +
-            '<ol><li>' +
-            vis.displayData[0].track_name + '—' + vis.displayData[0].artist_name +
+            '<ol><li><a href="' + topThreeTracks[0] + '">' + vis.displayData[0].track_name + '—' + vis.displayData[0].artist_name + '</a>' +
             '</li><li>' + vis.displayData[1].track_name + '—' + vis.displayData[1].artist_name +
             '</li><li>' + vis.displayData[2].track_name + '—' + vis.displayData[2].artist_name +
             '</li></ol>'
@@ -154,7 +177,7 @@ SliderVis.prototype.onButtonClick = function() {
     vis.valenceSelection = d3.select("#valence-slider").property("value");
 
     // initialize variables to update in loop to find the matched country
-    vis.lowestDifference = 10;
+    vis.lowestDifference = 1000;
     vis.similarCountry = null;
 
     // loop through all countries
@@ -162,10 +185,10 @@ SliderVis.prototype.onButtonClick = function() {
 
         // find the sum of the differences between the slider selected value and the respective
         // attribute for that country
-        var difference = Math.abs(vis.acousticnessSelection*.01 - d.value.acousticness) +
-            Math.abs(vis.danceabilitySelection*.01 - d.value.danceability) +
-            Math.abs(vis.speechinessSelection*.01 - d.value.speechiness) +
-            Math.abs(vis.valenceSelection*.01 - d.value.valence);
+        var difference = Math.abs(vis.acousticnessSelection - d.value.acousticness) +
+            Math.abs(vis.danceabilitySelection - d.value.danceability) +
+            Math.abs(vis.speechinessSelection - d.value.speechiness) +
+            Math.abs(vis.valenceSelection - d.value.valence);
 
         // if the sum of the four differences for that country is the lowest so far,
         // update the similarCountry to be that country
