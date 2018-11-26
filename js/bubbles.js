@@ -1,8 +1,8 @@
 
 // Create drawing area
-var margin = {top: 20, right: 10, bottom: 20, left: 10},
+var margin = {top: 5, right: 10, bottom: 5, left: 10},
     width = 960 - margin.left - margin.right,
-    height = 760 - margin.top - margin.bottom;
+    height = 700 - margin.top - margin.bottom;
 
 var svg = d3.select('#bubble-chart').append('svg')
     .attr('width', width + margin.left + margin.right)
@@ -65,7 +65,7 @@ function updateBubbles(country) {
   var force = d3.forceSimulation(frequencyData)
                 .force("charge", d3.forceManyBody().strength(chargeStrength))
                 .force("collide", d3.forceCollide(function (d) {
-                  return radius(d.Freq) + 3;
+                  return radius(d.Freq) + 2;
                 }))
                 .force("center", d3.forceCenter().x(width/2).y(height/2));
 
@@ -104,22 +104,20 @@ function updateBubbles(country) {
                   div.transition()
                       .duration(500)
                       .style("opacity", 0);
+        })
+        .on("click", function (d) {
+
+            var details = d3.select("#details");
+
+
+            details.html("<strong>" + d.Var1 + "</strong>" +
+                     "<br>Artist: " + uniqueSongData[d.Var1].artist_name +
+                     "<br><br>Danceability: " + uniqueSongData[d.Var1].danceability +
+                     "<br>Energy: " + uniqueSongData[d.Var1].energy +
+                     "<br>Acousticness: " + uniqueSongData[d.Var1].acousticness +
+                     "<br>Loudness: " + uniqueSongData[d.Var1].loudness +
+                     "<br>Valence: " + uniqueSongData[d.Var1].valence);
         });
-          // .on("click", function (d) {
-          //     console.log("clicked");
-          //     div.transition()
-          //         .duration(200)
-          //         .style("opacity", 1);
-          //     div.html("<strong>" + d.Var1 + "</strong>" +
-          //              "<br>" + uniqueSongData[d.Var1].artist_name +
-          //              "<br>" + uniqueSongData[d.Var1].artist_name +
-          //              "<br>" + uniqueSongData[d.Var1].danceability +
-          //              "<br>" + uniqueSongData[d.Var1].energy +
-          //              "<br>" + uniqueSongData[d.Var1].loudness +
-          //              "<br>" + uniqueSongData[d.Var1].valence)
-          //         .style("left", "0px")
-          //         .style("top", "0px");
-          // });
 
 
 
