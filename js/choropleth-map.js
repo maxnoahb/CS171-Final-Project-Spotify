@@ -105,6 +105,19 @@ ChoroplethVis.prototype.initVis = function(){
         }
     }
 
+    // Scale all lists to be from [0,100]
+    var loudscale = d3.scaleLinear()
+        .range([0,100])
+        .domain([d3.extent(loud_list)]);
+
+    for (var i = 0; i < dance_list.length; i++) {
+        dance_list[i] = dance_list[i]*100;
+        valence_list[i] = valence_list[i]*100;
+        speech_list[i] = speech_list[i]*100;
+        loud_list[i] = loudscale(loud_list[i]);
+        acoustic_list[i] = acoustic_list[i]*100;
+    }
+
     // Domain
     colorscale.domain([d3.min(dance_list),d3.max(dance_list)]);
 
