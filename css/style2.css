@@ -2,11 +2,13 @@
 
 body {
   font-family: 'Raleway', sans-serif;
+  background-color: #060433;
+  color: white;
 }
 
 h1 {
     text-align: center;
-    color: #4caf50;
+    color: #65d6c9;
     font-size: 100px;
     padding-top: 260px;
     padding-bottom: 260px;
@@ -80,7 +82,7 @@ output {
 	width: 25px;
 	height: 25px;
 	border-radius: 50%;
-	background: #4CAF50;
+	background: #65d6c9;
 	cursor: pointer;
 }
 
@@ -88,7 +90,7 @@ output {
 	width: 25px;
 	height: 25px;
 	border-radius: 50%;
-	background: #4CAF50;
+	background: #65d6c9;
 	cursor: pointer;
 }
 
@@ -134,9 +136,9 @@ output {
     width: 16px;
     height: 16px;
     margin: -8px 0 0 -8px;
-    background: transparent;
+    background: #C73866;
     box-sizing: border-box;
-    border: 1px solid #4CAF50;
+    border: 1px solid #C73866;
 }
 
 /*.clearfix:before,
@@ -229,7 +231,7 @@ KATE'S STYLES
 }
 
 path:hover {
-    stroke: darkgreen;
+    stroke: #C73866;
     stroke-width: 2px;
 }
 
