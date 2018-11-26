@@ -36,7 +36,7 @@ IntroMap.prototype.initVis = function(){
         .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
     // Create a mercator projection and draw path
-    var projection = d3.geoMercator().translate([width / 2, height / 2]);
+    var projection = d3.geoMercator().translate([vis.width / 2, vis.height / 2]);
     var path = d3.geoPath().projection(projection);
 
     // Convert the TopoJSON to GeoJSON
@@ -87,7 +87,7 @@ IntroMap.prototype.initVis = function(){
         })
         .direction('s');
 
-    svg.call(tip);
+    vis.svg.call(tip);
 
     // Render the world atlas by using the path generator for WATER
     vis.svg.selectAll("path")
@@ -129,12 +129,14 @@ IntroMap.prototype.showCountry = function(country){
 
     if (country) {
         $('#intro-chosen-country').html("Chosen Country: " + country);
+        // bubbleChart.wrangleData(country);
         updateBubbles(country);
     }
     else {
         $('#intro-chosen-country').html("Please choose a country with Spotify");
 
         // make the US the default for bubble chart if country not selected here
+        // bubbleChart.wrangleData("United States");
         updateBubbles("United States");
     }
 

@@ -15,6 +15,7 @@ var comparisonChart;
 var sliderVis;
 var choroplethMap;
 var introMap;
+var bubbleChart;
 
 // Load in data
 d3.queue()
@@ -94,6 +95,7 @@ d3.queue()
 
         // Initial bubble chart
         // bubbleScale();
+        // bubbleChart = new BubbleChart("bubble-chart", frequencyData);
         updateBubbles("United States");
 
         sliderVis = new SliderVis("slider-chart", countryAvgAttributes, data3, data4);

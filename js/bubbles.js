@@ -12,14 +12,16 @@ var svg = d3.select('#bubble-chart').append('svg')
 
 var chargeStrength = 0.5;
 
-var filter = false;
+// var filter = false;
 
 var bubble;
 
-var selectedTop50 = {};
+
 
 // Create bubble chart
 function updateBubbles(country) {
+
+  var selectedTop50 = {};
 
   // console.log(country);
 
@@ -88,9 +90,8 @@ function updateBubbles(country) {
         // Tooltip
         // Inspired by http://bl.ocks.org/d3noob/a22c42db65eb00d4e369
         .on("mouseover", function(d) {
-                  if (!filter || selectedTop50[d.Var1] != null)
                   div.transition()
-                      .duration(100)
+                      .duration(200)
                       .style("opacity", 1);
                   div.html("<strong>" + d.Var1 + "</strong>" +
                            "<br>" + uniqueSongData[d.Var1].artist_name +
@@ -100,7 +101,9 @@ function updateBubbles(country) {
                       .style("top", (d3.event.pageY - 28) + "px");
                   })
         .on("mouseout", function(d) {
-            div.style("opacity", 0);
+                  div.transition()
+                      .duration(500)
+                      .style("opacity", 0);
         });
           // .on("click", function (d) {
           //     console.log("clicked");
@@ -176,30 +179,30 @@ function updateBubbles(country) {
 
 }
 
-function toggleBubbles() {
-  filter = !filter;
-  if (filter) {
-    d3.select('#filter-toggle').text("Show All of the World's Most Popular Music");
-
-    bubble.transition()
-        .duration(500)
-        .style("opacity", function (d) {
-          if (selectedTop50[d.Var1] == null) {
-            return 0;
-          }
-          else {
-            return 1;
-          }
-        });
-  }
-  else {
-    d3.select('#filter-toggle').text("Show Just Your Country's Top 50");
-
-    bubble.transition()
-        .duration(500)
-        .style("opacity", 1);
-  }
-}
+// function toggleBubbles() {
+//   filter = !filter;
+//   if (filter) {
+//     d3.select('#filter-toggle').text("Show All of the World's Most Popular Music");
+//
+//     bubble.transition()
+//         .duration(500)
+//         .style("opacity", function (d) {
+//           if (selectedTop50[d.Var1] == null) {
+//             return 0;
+//           }
+//           else {
+//             return 1;
+//           }
+//         });
+//   }
+//   else {
+//     d3.select('#filter-toggle').text("Show Just Your Country's Top 50");
+//
+//     bubble.transition()
+//         .duration(500)
+//         .style("opacity", 1);
+//   }
+// }
 
 // function toggleBubbles() {
 //   var selectedCountry = d3.select("#countries-list").property("value");
