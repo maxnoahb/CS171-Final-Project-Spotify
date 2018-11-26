@@ -44,6 +44,14 @@ img {
     padding: 20px;
 }
 
+a {
+  color: #65d6c9;
+}
+
+a:hover {
+  color: #4FA79D;
+}
+
 /*****
 
 MAX'S STYLES

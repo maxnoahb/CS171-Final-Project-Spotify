@@ -53,7 +53,7 @@ ChoroplethVis.prototype.initVis = function(){
 
     // Set color scale
     colorscale = d3.scaleQuantize()
-        .range(["#E4F1EB", "#C8E7DC", "#AADFD0", "#89D9C9", "#65D6C9"]);
+        .range(["#E4F1EB", "#C0E4E0", "#65D6C9", "#4FA79D", "#397871"]);
 
     // Convert the TopoJSON to GeoJSON
     world = topojson.feature(this.map, this.map.objects.countries).features;
