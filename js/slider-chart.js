@@ -5,9 +5,10 @@
  * @param _data						-- the actual data
  */
 
-SliderVis = function(_parentElement, _data, _mapjson, _mapnames) {
+SliderVis = function(_parentElement, _data, _avgData, _mapjson, _mapnames) {
     this.parentElement = _parentElement;
     this.data = _data;
+    this.avgData = _avgData;
     this.map = _mapjson;
     this.map_names = _mapnames;
 
@@ -51,6 +52,7 @@ SliderVis.prototype.initVis = function() {
     // console.log(vis.offset);
 
     // console.log(vis.bounds);
+    // console.log(vis.data);
 
     vis.wrangleData();
 
@@ -63,7 +65,7 @@ SliderVis.prototype.initVis = function() {
 SliderVis.prototype.wrangleData = function(){
     var vis = this;
 
-    this.displayData = this.data;
+    // this.displayData = this.data;
 
     // Convert the TopoJSON to GeoJSON
     vis.world = topojson.feature(vis.map, vis.map.objects.countries).features;
@@ -85,7 +87,19 @@ SliderVis.prototype.updateVis = function() {
 
         vis.onButtonClick();
 
+        vis.displayData = vis.data.filter(function(d) {
+            return d.playlist_name === vis.similarCountry;
+        });
+
         $('#selectedCountryName').html(vis.similarCountry.replace(" Top 50",""));
+
+        $('#top-3-songs').html(
+            '<ul><li>' +
+            vis.displayData[0].track_name + '—' + vis.displayData[0].artist_name +
+            '</li><li>' + vis.displayData[1].track_name + '—' + vis.displayData[1].artist_name +
+            '</li><li>' + vis.displayData[2].track_name + '—' + vis.displayData[2].artist_name +
+            '</li></ul>'
+        );
 
         vis.country = vis.similarCountry.replace(" Top 50","");
 

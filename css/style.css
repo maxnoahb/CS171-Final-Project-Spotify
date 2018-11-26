@@ -92,7 +92,7 @@ output {
 	cursor: pointer;
 }
 
-#selectedCountryName {
+#selectedCountryName, #top-3-songs, #top-3-songs-label {
     text-align: center;
 }
 

@@ -85,7 +85,7 @@ $(document).ready(function() {
                 })
                 .entries(data1);
 
-            console.log(countryAvgAttributes);
+            // console.log(countryAvgAttributes);
 
             // console.log(audioData, frequencyData, mapData, dataByCountry, data4);
             // console.log(uniqueSongData);
@@ -100,7 +100,7 @@ $(document).ready(function() {
             // bubbleScale();
             updateBubbles("United States");
 
-            sliderVis = new SliderVis("slider-chart", countryAvgAttributes, data3, data4);
+            sliderVis = new SliderVis("slider-chart", audioData, countryAvgAttributes, mapData, mapNameData);
 
             choroplethMap = new ChoroplethVis("choropleth-map", countryAvgAttributes, data3, data4);
 
