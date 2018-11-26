@@ -88,24 +88,37 @@
 
         <section class="vertical-scrolling">
             <!-- Choropleth map -->
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-9">
                         <h3>How does music differ across countries?</h3>
-                        <p class="info">From the dancebility of their playlist to the acousticness of their music, we can visually
+                        <p class="info">From the danceability of their playlist to the acousticness of their music, we can visually
                             <b>see how popular music differs</b> in audio features across the globe.
                             <br><br>
                             To compare the the "Top 50" playlists across the world, we <b>averaged the metadata</b> across all 50 songs for
-                            each playlist. With each audio feature <b>(dancebility, valence, speechiness, loudness, and acousticness)</b>
+                            each playlist. With each audio feature <b>(danceability, valence, speechiness, loudness, and acousticness)</b>
                             ranging from 0 to 1, we can visually see how each country's "Top 50" playlist differ in audio features.
                         </p>
                     </div>
+                    <form class="col-md-3 dropdown-wrapper">
+                        <div class="choropleth-dropdown">
+                            <b>Filter</b> by music characteristic
+                            <br><br>
+                            <select id="attribute" class="form-control" onChange="choroplethMap.updateChoropleth()">
+                                <option value="danceability">Danceability</option>
+                                <option value="valence">Valence</option>
+                                <option value="speechiness">Speechiness</option>
+                                <option value="loudness">Loudness</option>
+                                <option value="acousticness">Acousticness</option>
+                            </select>
+                        </div>
+                    </form>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-4">
                         <div class="info">
                             <h5>What do these audio features mean?</h5>
-                            <b>Dancebility</b> describes how suitable a track is for dancing based on a combination of musical
+                            <b>Danceability</b> describes how suitable a track is for dancing based on a combination of musical
                             elements including tempo, rhythm stability, beat strength, and overall regularity.
                             <br><br>
                             <b>Valence</b> describes the musical positiveness conveyed by a track.
@@ -125,27 +138,7 @@
                             check out <a href="https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/">Spotify's API Reference Guide</a>.
                         </div>
                     </div>
-                </div>
-                <br>
-                <div class="row">
-                    <form class="col-md-4">
-                        <div class="choropleth-dropdown">
-                            <b>Filter</b> by music characteristic
-                            <br><br>
-                            <select id="attribute" class="form-control" onChange="choroplethMap.updateChoropleth()">
-                                <option value="danceability">Danceability</option>
-                                <option value="valence">Valence</option>
-                                <option value="speechiness">Speechiness</option>
-                                <option value="loudness">Loudness</option>
-                                <option value="acousticness">Acousticness</option>
-                            </select>
-                        </div>
-                    </form>
-                </div>
-
-                <br>
-                <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-8">
                         <div id="choropleth-map"></div>
                     </div>
                 </div>
