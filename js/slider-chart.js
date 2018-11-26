@@ -94,11 +94,12 @@ SliderVis.prototype.updateVis = function() {
         $('#selectedCountryName').html(vis.similarCountry.replace(" Top 50",""));
 
         $('#top-3-songs').html(
-            '<ul><li>' +
+            '<strong>Top 3 Songs:</strong><br>' +
+            '<ol><li>' +
             vis.displayData[0].track_name + '—' + vis.displayData[0].artist_name +
             '</li><li>' + vis.displayData[1].track_name + '—' + vis.displayData[1].artist_name +
             '</li><li>' + vis.displayData[2].track_name + '—' + vis.displayData[2].artist_name +
-            '</li></ul>'
+            '</li></ol>'
         );
 
         vis.country = vis.similarCountry.replace(" Top 50","");

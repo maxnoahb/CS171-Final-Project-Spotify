@@ -92,8 +92,18 @@ output {
 	cursor: pointer;
 }
 
-#selectedCountryName, #top-3-songs, #top-3-songs-label {
+#selectedCountryName {
     text-align: center;
+}
+
+#top-3-songs {
+    text-align: center;
+}
+
+#top-3-songs ol {
+    display: table;
+    margin: 0 auto;
+    text-align: left;
 }
 
 .footer {
@@ -121,7 +131,7 @@ output {
     margin: -8px 0 0 -8px;
     background: transparent;
     box-sizing: border-box;
-    border: 1px solid #24221F;
+    border: 1px solid #4CAF50;
 }
 
 /*.clearfix:before,

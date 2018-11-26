@@ -107,51 +107,6 @@ $(document).ready(function() {
 
         });
 
-<<<<<<< HEAD
-        audioData.forEach(function(d) {
-          if (uniqueSongData[d.track_name] == null) {
-            uniqueSongData[d.track_name] = d;
-          }
-        });
-
-        // new data structure containing the average attributes for each country playlist
-        countryAvgAttributes = d3.nest()
-            .key(function(d) { return d.playlist_name; })
-            .rollup(function(v) {
-                return {
-                    "acousticness": d3.mean(v, function(d) { return d.acousticness; }),
-                    "danceability": d3.mean(v, function(d) { return d.danceability; }),
-                    "duration_ms": d3.mean(v, function(d) { return d.duration_ms; }),
-                    "energy": d3.mean(v, function(d) { return d.energy; }),
-                    "liveness": d3.mean(v, function(d) { return d.liveness; }),
-                    "loudness": d3.mean(v, function(d) { return d.loudness; }),
-                    "speechiness": d3.mean(v, function(d) { return d.speechiness; }),
-                    "tempo": d3.mean(v, function(d) { return d.tempo; }),
-                    "valence": d3.mean(v, function(d) { return d.valence; })
-                };
-            })
-            .entries(data1);
-
-        console.log(countryAvgAttributes);
-
-        // console.log(audioData, frequencyData, mapData, dataByCountry, data4);
-        // console.log(uniqueSongData);
-
-        // Initialize intro map
-        introMap = new IntroMap("intro-map", countryAvgAttributes, data3, data4);
-
-        // Initialize comparison chart
-        comparisonChart = new ComparisonChart("comparison-chart", audioData);
-
-        // Initial bubble chart
-        // bubbleScale();
-        // bubbleChart = new BubbleChart("bubble-chart", frequencyData);
-        updateBubbles("United States");
-
-        sliderVis = new SliderVis("slider-chart", countryAvgAttributes, data3, data4);
-
-        choroplethMap = new ChoroplethVis("choropleth-map", countryAvgAttributes, data3, data4)
-=======
     function updateSelected() {
         selectedCountry = d3.select("#countries-list").property("value");
         comparisonChart.onCountryCompareChange();
@@ -186,7 +141,6 @@ $(document).ready(function() {
                 $('#fp-nav').show();
             }
         },*/
->>>>>>> c67c35fb9a95465e29764ffde645f2dc4d48bb4e
 
     });
 });
