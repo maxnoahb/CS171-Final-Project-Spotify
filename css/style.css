@@ -110,6 +110,11 @@ output {
     text-align: center;
 }
 
+#intro-map {
+    margin: 0 auto;
+    display: block;
+}
+
 .fp-scroller {
     overflow:hidden;
 }

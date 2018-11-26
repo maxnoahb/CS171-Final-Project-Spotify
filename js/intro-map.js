@@ -25,8 +25,8 @@ IntroMap.prototype.initVis = function(){
     var vis = this;
 
     vis.margin = { top: 20, right: 20, bottom: 200, left: 30 };
-    vis.width = 1000 - vis.margin.left - vis.margin.right;
-    vis.height = 560 - vis.margin.top - vis.margin.bottom;
+    vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
+    vis.height = 600 - vis.margin.top - vis.margin.bottom;
 
     // SVG drawing area
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -36,7 +36,7 @@ IntroMap.prototype.initVis = function(){
         .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
     // Create a mercator projection and draw path
-    var projection = d3.geoMercator().translate([vis.width / 2, vis.height / 2]);
+    var projection = d3.geoMercator().translate([vis.width / 2, vis.height / 2 + 200]);
     var path = d3.geoPath().projection(projection);
 
     // Convert the TopoJSON to GeoJSON
