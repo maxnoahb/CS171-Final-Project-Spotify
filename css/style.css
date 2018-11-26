@@ -240,3 +240,14 @@ CAITLYN'S STYLES
     margin-right: 50px;
     padding: 20px;
 }
+
+.dropdown-wrapper {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 20px;
+    /*vertical-align: middle;*/
+}
+
+.info {
+    font-size: 15px;
+}
