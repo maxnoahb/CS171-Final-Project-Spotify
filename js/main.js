@@ -107,12 +107,6 @@ $(document).ready(function() {
 
         });
 
-    function updateSelected() {
-        selectedCountry = d3.select("#countries-list").property("value");
-        comparisonChart.onCountryCompareChange();
-        // updateBubbles(selectedCountry);
-    }
-
     $('#fullpage').fullpage({
         // sectionsColor: ['#B8AE9C', '#348899', '#F2AE72', '#5C832F', '#B8B89F'],
         sectionSelector: '.vertical-scrolling',
@@ -144,3 +138,9 @@ $(document).ready(function() {
 
     });
 });
+
+function updateSelected() {
+    selectedCountry = d3.select("#countries-list").property("value");
+    comparisonChart.onCountryCompareChange();
+    // updateBubbles(selectedCountry);
+}
