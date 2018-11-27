@@ -217,7 +217,7 @@ ChoroplethVis.prototype.updateChoropleth = function(){
     vis.svg.selectAll("path")
         .transition()
         .duration(500)
-        .style("stroke", "#F0F0DF")
+        .style("stroke", "#FAFAFA")
         .style("fill", function(d) {
             //Get data value
             var attribute = d[vis.attribute];

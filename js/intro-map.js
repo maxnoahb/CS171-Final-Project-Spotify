@@ -95,7 +95,7 @@ IntroMap.prototype.initVis = function(){
         .enter().append("path")
         .attr("d", path)
         .attr("class", "intro-map-path")
-        .style("stroke", "#F0F0DF")
+        .style("stroke", "#FAFAFA")
         .style("fill", function(d) {
             //Get data value
             var dance = d.danceability;
