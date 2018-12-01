@@ -8,7 +8,7 @@ AttributeSoundbites = function(_parentElement, _data) {
 AttributeSoundbites.prototype.initVis = function() {
     var vis = this;
 
-    vis.margin = {top: 10, right: 200, bottom: 20, left: 20};
+    vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
     vis.height = 300 - vis.margin.top - vis.margin.bottom;
 
@@ -28,7 +28,6 @@ AttributeSoundbites.prototype.initVis = function() {
         .padding(.3);
 
     vis.yScale.domain(["danceability", "valence", "speechiness", "loudness", "acousticness"]);
-
 
     vis.wrangleData();
 
