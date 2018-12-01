@@ -245,19 +245,18 @@ CAITLYN'S STYLES
 .choropleth-dropdown {
     background-color: #d3d3d3;
     border-radius: 20px;
-    margin-left: 50px;
-    margin-right: 50px;
+    /*margin-left: 50px;*/
+    /*margin-right: 50px;*/
     padding: 20px;
 }
 
 .dropdown-wrapper {
-    display: flex;
-    align-items: flex-end;
-    padding-bottom: 20px;
-    /*vertical-align: middle;*/
+    /*display: flex;*/
+    /*align-items: flex-end;*/
+    /*padding-bottom: 20px;*/
+    vertical-align: middle;
 }
 
 .info {
     font-size: 15px;
 }
-

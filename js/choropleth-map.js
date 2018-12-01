@@ -38,7 +38,7 @@ ChoroplethVis.prototype.initVis = function(){
     // SVG drawing area
     vis.margin = { top: 20, right: 20, bottom: 200, left: 30 };
     vis.width = 1000 - vis.margin.left - vis.margin.right;
-    vis.height = 560 - vis.margin.top - vis.margin.bottom;
+    vis.height = 500 - vis.margin.top - vis.margin.bottom;
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
@@ -204,22 +204,34 @@ ChoroplethVis.prototype.updateChoropleth = function(){
     // Get selected attribute
     vis.attribute = d3.select("#attribute").property("value"); // Return string, e.g. "danceability"
 
+    var text_box = d3.select("#attribute-text");
+
     // Find list
     var list;
     if (vis.attribute==="danceability"){
         list = dance_list;
+        text_box.text("Danceability describes how suitable a track is for dancing based on a combination of musical " +
+            "elements including tempo, rhythm stability, beat strength, and overall regularity.");
     }
     if (vis.attribute==="valence"){
         list = valence_list;
+        text_box.text("Valence describes the musical positiveness conveyed by a track. Tracks with high valence sound " +
+            "more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).");
     }
     if (vis.attribute==="speechiness"){
         list = speech_list;
+        text_box.text("Speechiness detects the presence of spoken words in a track. The more exclusively speech-like " +
+            "the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value.");
     }
     if (vis.attribute==="loudness"){
         list = loud_list;
+        text_box.text("Loudness is the quality of a sound that is the primary psychological correlate of physical " +
+            "strength (amplitude). Values typical range between -60 and 0 decibels.")
     }
     if (vis.attribute==="acousticness"){
         list = acoustic_list;
+        text_box.text("Acousticness is a confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0" +
+            "represents high confidence the track is acoustic.");
     }
 
     // Update domain
