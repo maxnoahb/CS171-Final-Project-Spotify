@@ -30,7 +30,7 @@ img {
 }
 
 .container .container-fluid{
-    margin-top: 40px;
+    margin-top: 20px;
     margin-bottom: 40px;
 }
 
@@ -207,7 +207,9 @@ KATE'S STYLES
 }
 
 .comparison-dropdown {
-    margin-top: 100px;
+    position: relative;
+    margin-top: 200px;
+    /*margin-right: 80px;*/
 }
 
 .comparison-country-labels .country-label-right {
@@ -217,7 +219,7 @@ KATE'S STYLES
 /* this helped: https://stackoverflow.com/questions/5288336/put-text-at-bottom-of-div */
 #comparison-country-label-left {
     position: relative;
-    margin-top: 60px;
+    margin-top: 300px;
 }
 
 #comparison-country-label-left span {
@@ -226,6 +228,7 @@ KATE'S STYLES
     right: 0;
     text-anchor: end;
     margin-right: 70px;
+    padding-top: 300px;
     font-weight: bold;
 }
 

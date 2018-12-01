@@ -87,6 +87,8 @@ $(document).ready(function() {
                 })
                 .entries(data1);
 
+            console.log(countryAvgAttributes);
+
             var loudness_list = [];
             for (var i = 0; i < countryAvgAttributes.length; i++){
                 loudness_list.push(countryAvgAttributes[i].value.loudness);
@@ -94,6 +96,10 @@ $(document).ready(function() {
             var loudness_scale = d3.scaleLinear()
                 .range([0,100])
                 .domain(d3.extent(loudness_list));
+
+
+            console.log(d3.extent(loudness_list));
+
 
             countryAvgAttributes.forEach(function(d){
                 d.value.loudness = loudness_scale(d.value.loudness);

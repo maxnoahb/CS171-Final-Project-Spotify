@@ -260,7 +260,7 @@ ComparisonChart.prototype.initVis = function(){
         });
     });
 
-    vis.margin = {top: 10, right: 100, bottom: 20, left: 20};
+    vis.margin = {top: 10, right: 200, bottom: 20, left: 20};
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
     vis.height = 300 - vis.margin.top - vis.margin.bottom;
 
@@ -273,7 +273,7 @@ ComparisonChart.prototype.initVis = function(){
     // scales and axes
     vis.xScale = d3.scaleLinear()
         .range([0, vis.width])
-        .domain([1,0]);
+        .domain([0,1]);
 
     vis.yScale = d3.scaleBand()
         .range([0, vis.height/2])
@@ -288,6 +288,8 @@ ComparisonChart.prototype.initVis = function(){
         return d.playlist_name === "Argentina Top 50";
     });
 
+    vis.yScale.domain(["danceability", "valence", "speechiness", "loudness", "acousticness"]);
+
     // (Filter, aggregate, modify data)
     vis.wrangleData();
 }
@@ -300,20 +302,13 @@ ComparisonChart.prototype.initVis = function(){
 ComparisonChart.prototype.wrangleData = function(){
     var vis = this;
 
-    var loudnessMax = Math.max.apply(Math, vis.data.map(function(d) { return d.loudness; }));
-    var loudnessMin = Math.min.apply(Math, vis.data.map(function(d) { return d.loudness; }));
-
-    vis.loudnessScale = d3.scaleLinear()
-        .domain([loudnessMin, loudnessMax])
-        .range([0,1]);
-
     // reorganize data to give me average values for each country
     vis.leftChartData = d3.nest()
         .key(function(d) { return d.playlist_name; })
         .rollup(function(v) {
             return [
                 {"danceability": d3.mean(v, function(d) { return d.danceability; })},
-                {"loudness": d3.mean(v, function(d) { return vis.loudnessScale(d.loudness); })},
+                {"loudness": d3.mean(v, function(d){return countryAvgAttributes.find(x => x.key === d.playlist_name).value.loudness / 100; })},
                 {"speechiness": d3.mean(v, function(d) { return d.speechiness; })},
                 {"valence": d3.mean(v, function(d) { return d.valence; })},
                 {"acousticness": d3.mean(v, function(d) { return d.acousticness; })}
@@ -326,7 +321,7 @@ ComparisonChart.prototype.wrangleData = function(){
         .rollup(function(v) {
             return [
                 {"danceability": d3.mean(v, function(d) { return d.danceability; })},
-                {"loudness": d3.mean(v, function(d) { return vis.loudnessScale(d.loudness); })},
+                {"loudness": d3.mean(v, function(d){return countryAvgAttributes.find(x => x.key === d.playlist_name).value.loudness / 100; })},
                 {"speechiness": d3.mean(v, function(d) { return d.speechiness; })},
                 {"valence": d3.mean(v, function(d) { return d.valence; })},
                 {"acousticness": d3.mean(v, function(d) { return d.acousticness; })}
@@ -350,41 +345,34 @@ ComparisonChart.prototype.updateVis = function(){
 
     // append treble clef image
     vis.svg.append("svg:image")
-        .attr("xlink:href", "img/treble-clef.png")
+        .attr("xlink:href", "img/treble-clef-black.png")
         .attr("x", 0)
         .attr("y", 5)
         .attr("height", vis.height/2 - 20)
-        .attr("width", 120)
         .attr("fill", "white");
 
     // append bass clef image
     vis.svg.append("svg:image")
-        .attr("xlink:href", "img/bass-clef.png")
+        .attr("xlink:href", "img/bass-clef-black.png")
         .attr("x", 0)
         .attr("y", vis.height/2 + vis.height/6)
-        .attr("height", vis.height/3 - 30)
-        .attr("width", 120);
+        .attr("height", vis.height/3 - 30);
 
     // append staff lines
-    vis.topStaffGroup = vis.svg.append("g")
-        .attr("transform", "translate(120, 0)");
-
-    vis.topStaffs = vis.topStaffGroup.selectAll(".top-staff-line")
+    vis.topStaffs = vis.svg.selectAll(".top-staff-line")
         .data(vis.leftChartData[0].value);
 
     vis.topStaffs.enter().append("line")
         .attr("class", "top-staff-line")
         .attr("x1", 0)
-        .attr("y1", function(d){ return vis.yScale(Object.keys(d)[0])})
+        .attr("y1", function(d){console.log(Object.keys(d)[0]); return vis.yScale(Object.keys(d)[0])})
         .attr("x2", vis.width - 10)
         .attr("y2", function(d){ return vis.yScale(Object.keys(d)[0])})
         .attr("stroke-width", 1)
-        .attr("stroke", "white");
+        .attr("stroke", "black")
+        .attr("transform", "translate(70, 0)");
 
-    vis.bottomStaffGroup = vis.svg.append("g")
-        .attr("transform", "translate(120," + (25 + vis.height/2) + ")");
-
-    vis.bottomStaffs = vis.bottomStaffGroup.selectAll(".bottom-staff-line")
+    vis.bottomStaffs = vis.svg.selectAll(".bottom-staff-line")
         .data(vis.rightChartData[0].value);
 
     vis.bottomStaffs.enter().append("line")
@@ -394,18 +382,19 @@ ComparisonChart.prototype.updateVis = function(){
         .attr("x2", vis.width - 10)
         .attr("y2", function(d){ return vis.yScale(Object.keys(d)[0])})
         .attr("stroke-width", 1)
-        .attr("stroke", "white");
+        .attr("stroke", "black")
+        .attr("transform", "translate(70," + (25 + vis.height/2) + ")");
 
     // append notes
     vis.noteColors = {
-        "danceability": "green",
-        "valence": "orange",
-        "speechiness": "darkblue",
-        "loudness": "red",
-        "acousticness": "purple"
+        "danceability": "#df65b0",
+        "valence": "#d01c8b",
+        "speechiness": "#4dac26",
+        "loudness": "#018571",
+        "acousticness": "#006837"
     };
 
-    var topNotes = vis.topStaffGroup.selectAll(".top-notes")
+    var topNotes = vis.svg.selectAll(".top-notes")
         .data(vis.leftChartData[0].value);
 
     topNotes.enter().append("ellipse")
@@ -414,9 +403,10 @@ ComparisonChart.prototype.updateVis = function(){
         .attr("cy", function(d){ return vis.yScale(Object.keys(d)[0])})
         .attr("rx", 14)
         .attr("ry", 10)
-        .attr("fill", function(d){ return vis.noteColors[Object.keys(d)[0]]});
+        .attr("fill", function(d){ return vis.noteColors[Object.keys(d)[0]]})
+        .attr("transform", "translate(70, 0)");
 
-    var bottomNotes = vis.bottomStaffGroup.selectAll(".bottom-notes")
+    var bottomNotes = vis.svg.selectAll(".bottom-notes")
         .data(vis.rightChartData[0].value);
 
     bottomNotes.enter().append("ellipse")
@@ -425,121 +415,94 @@ ComparisonChart.prototype.updateVis = function(){
         .attr("cy", function(d){ return vis.yScale(Object.keys(d)[0])})
         .attr("rx", 14)
         .attr("ry", 10)
-        .attr("fill", function(d){ return vis.noteColors[Object.keys(d)[0]]});
+        .attr("fill", function(d){ return vis.noteColors[Object.keys(d)[0]]})
+        .attr("transform", "translate(70," + (25 + vis.height/2) + ")");
 
     // transitioning
-    // topNotes.exit().remove();
-    // bottomNotes.selectAll("bottom-notes").exit().remove();
+    topNotes.exit().remove();
     bottomNotes.exit().remove();
 
-    bottomNotes.transition()
+    topNotes.transition()
         .duration(800)
-        .attr("class", "bottom-notes")
         .attr("cx", function(d){ return vis.xScale(d[Object.keys(d)[0]])})
         .attr("cy", function(d){ return vis.yScale(Object.keys(d)[0])})
         .attr("rx", 14)
         .attr("ry", 10)
+        .attr("fill", function(d){ return vis.noteColors[Object.keys(d)[0]]})
+        .attr("transform", "translate(70, 0)");
+
+    bottomNotes.transition()
+        .duration(800)
+        .attr("cx", function(d){ return vis.xScale(d[Object.keys(d)[0]])})
+        .attr("cy", function(d){ return vis.yScale(Object.keys(d)[0])})
+        .attr("rx", 14)
+        .attr("ry", 10)
+        .attr("fill", function(d){ return vis.noteColors[Object.keys(d)[0]]})
+        .attr("transform", "translate(70," + (25 + vis.height/2) + ")");
+
+
+    // attribute labels
+    var attributeLabels = vis.svg.selectAll("text.attribute-label")
+        .data(vis.leftChartData[0].value);
+
+    attributeLabels.enter().append("text")
+        .attr("class", "attribute-label")
+        .text(function(d){return Object.keys(d)[0]})
+        .attr("x", vis.width + 35)
+        .attr("y", function(d){ return vis.yScale(Object.keys(d)[0])})
+        .style("text-anchor", "start")
+        .attr("transform", "translate(70, 0)")
         .attr("fill", function(d){ return vis.noteColors[Object.keys(d)[0]]});
 
+    // number labels
+    var topNumberLabels = vis.svg.selectAll("text.top-number-labels")
+        .data(vis.leftChartData[0].value);
 
+    topNumberLabels.enter().append("text")
+        .attr("class", "top-number-labels")
+        .text(function(d){ return Math.round(d[Object.keys(d)[0]] * 100)})
+        .attr("x", vis.width)
+        .attr("y", function(d){ return vis.yScale(Object.keys(d)[0])})
+        .style("text-anchor", "start")
+        .attr("transform", "translate(70, 0)")
+        .style("font-size", "12")
+        .attr("fill", function(d){ return vis.noteColors[Object.keys(d)[0]]});
 
+    var bottomNumberLabels = vis.svg.selectAll("text.bottom-number-labels")
+        .data(vis.rightChartData[0].value);
 
-    // draw left rectangles
-    // var leftBars = vis.svg.selectAll(".left-bar-group")
-    //     .data(vis.leftChartData[0].value);
-    //
-    // // used for reference:  https://stackoverflow.com/questions/45847254/d3-bar-chart-reverse-bars-from-right-to-left
-    // leftBars.enter().append("rect")
-    //     .attr("class", "left-bar-group")
-    //     .attr("x", function(d){return vis.xScaleLeft(d[Object.keys(d)[0]]) - 50})
-    //     .attr("y", function(d){return vis.yScale(Object.keys(d)[0])})
-    //     .attr("width", function(d){return vis.width/2 - vis.xScaleLeft(d[Object.keys(d)[0]])})
-    //     .attr("height", vis.yScale.bandwidth())
-    //     .attr("fill", "#4caf50");
-    //
-    // // draw right rectangles
-    // var rightBars = vis.svg.selectAll(".right-bar-group")
-    //     .data(vis.rightChartData[0].value);
-    //
-    // // used for reference:  https://stackoverflow.com/questions/45847254/d3-bar-chart-reverse-bars-from-right-to-left
-    // rightBars.enter().append("rect")
-    //     .attr("class", "right-bar-group")
-    //     .attr("x", vis.width/2 + 50)
-    //     .attr("y", function(d){return vis.yScale(Object.keys(d)[0])})
-    //     .attr("width", function(d){return vis.xScaleRight(d[Object.keys(d)[0]])})
-    //     .attr("height", vis.yScale.bandwidth())
-    //     .attr("fill", "#4caf50");
-    //
-    // // column labels
-    // var columnLabels = vis.svg.selectAll("text.column-label")
-    //     .data(vis.leftChartData[0].value);
-    //
-    // columnLabels.enter().append("text")
-    //     .attr("class", "column-label")
-    //     .text(function(d){return Object.keys(d)[0]})
-    //     .attr("x", vis.width/2)
-    //     .attr("y", function(d){return vis.yScale(Object.keys(d)[0]) + vis.yScale.bandwidth()/2 + vis.yScale.bandwidth()*.1})
-    //     .style("text-anchor", "middle");
-    //
-    // // bar labels
-    // var leftBarLabels = vis.svg.selectAll("text.left-bar-labels")
-    //     .data(vis.leftChartData[0].value);
-    //
-    // leftBarLabels.enter().append("text")
-    //     .attr("class", "left-bar-labels")
-    //     .text(function(d){ return Math.round(d[Object.keys(d)[0]] * 100)})
-    //     .attr("x", function(d){ return -60 + vis.xScaleLeft(d[Object.keys(d)[0]])})
-    //     .attr("y", function(d){ return vis.yScale(Object.keys(d)[0]) + vis.yScale.bandwidth()/2 + vis.yScale.bandwidth()*.1})
-    //     .style("text-anchor", "end");
-    //
-    // leftBars.exit().remove();
-    // // leftBarLabels.exit.remove();
-    //
-    // leftBars.transition()
-    //     .duration(800)
-    //     .attr("x", function(d){return vis.xScaleLeft(d[Object.keys(d)[0]]) - 50})
-    //     .attr("y", function(d){return vis.yScale(Object.keys(d)[0])})
-    //     .attr("width", function(d){return vis.width/2 - vis.xScaleLeft(d[Object.keys(d)[0]])})
-    //     .attr("height", vis.yScale.bandwidth())
-    //     .attr("fill", "#4caf50");
-    //
-    // leftBarLabels.transition()
-    //     .duration(800)
-    //     .attr("class", "left-bar-labels")
-    //     .text(function(d){ return Math.round(d[Object.keys(d)[0]] * 100)})
-    //     .attr("x", function(d){ return -60 + vis.xScaleLeft(d[Object.keys(d)[0]])})
-    //     .attr("y", function(d){ return vis.yScale(Object.keys(d)[0]) + vis.yScale.bandwidth()/2 + vis.yScale.bandwidth()*.1})
-    //     .style("text-anchor", "end");
-    //
-    // var rightBarLabels = vis.svg.selectAll("text.right-bar-labels")
-    //     .data(vis.rightChartData[0].value);
-    //
-    // rightBarLabels.enter().append("text")
-    //     .attr("class", "right-bar-labels")
-    //     .text(function(d){ return Math.round(d[Object.keys(d)[0]] * 100)})
-    //     .attr("x", function(d){ return 60 + vis.xScaleRight(d[Object.keys(d)[0]]) + vis.width/2})
-    //     .attr("y", function(d){ return vis.yScale(Object.keys(d)[0]) + vis.yScale.bandwidth()/2 + vis.yScale.bandwidth()*.1})
-    //     .style("text-anchor", "start");
-    //
-    // // remove
-    // rightBars.exit().remove();
-    // rightBarLabels.exit().remove();
-    //
-    // rightBars.transition()
-    //     .duration(800)
-    //     .attr("x", vis.width/2 + 50)
-    //     .attr("y", function(d){return vis.yScale(Object.keys(d)[0])})
-    //     .attr("width", function(d){return vis.xScaleRight(d[Object.keys(d)[0]])})
-    //     .attr("height", vis.yScale.bandwidth())
-    //     .attr("fill", "#4caf50");
-    //
-    // rightBarLabels.transition()
-    //     .duration(800)
-    //     .attr("class", "right-bar-labels")
-    //     .text(function(d){ return Math.round(d[Object.keys(d)[0]] * 100)})
-    //     .attr("x", function(d){ return 60 + vis.xScaleRight(d[Object.keys(d)[0]]) + vis.width/2})
-    //     .attr("y", function(d){ return vis.yScale(Object.keys(d)[0]) + vis.yScale.bandwidth()/2 + vis.yScale.bandwidth()*.1})
-    //     .style("text-anchor", "start");
+    bottomNumberLabels.enter().append("text")
+        .attr("class", "bottom-number-labels")
+        .text(function(d){ return Math.round(d[Object.keys(d)[0]] * 100)})
+        .attr("x", vis.width)
+        .attr("y", function(d){ return vis.yScale(Object.keys(d)[0])})
+        .style("text-anchor", "start")
+        .attr("transform", "translate(70," + (25 + vis.height/2) + ")")
+        .style("font-size", "12")
+        .attr("fill", function(d){ return vis.noteColors[Object.keys(d)[0]]});
+
+    topNumberLabels.exit().remove();
+    bottomNumberLabels.exit().remove();
+
+    topNumberLabels.transition()
+        .duration(800)
+        .text(function(d){ return Math.round(d[Object.keys(d)[0]] * 100)})
+        .attr("x", vis.width)
+        .attr("y", function(d){ return vis.yScale(Object.keys(d)[0])})
+        .style("text-anchor", "start")
+        .attr("transform", "translate(70, 0)")
+        .style("font-size", "12")
+        .attr("fill", function(d){ return vis.noteColors[Object.keys(d)[0]]});
+
+    bottomNumberLabels.transition()
+        .duration(800)
+        .text(function(d){ return Math.round(d[Object.keys(d)[0]] * 100)})
+        .attr("x", vis.width)
+        .attr("y", function(d){ return vis.yScale(Object.keys(d)[0])})
+        .style("text-anchor", "start")
+        .attr("transform", "translate(70," + (25 + vis.height/2) + ")")
+        .style("font-size", "12")
+        .attr("fill", function(d){ return vis.noteColors[Object.keys(d)[0]]});
 
 }
 
