@@ -29,6 +29,13 @@ AttributeSoundbites.prototype.initVis = function() {
 
     vis.yScale.domain(["danceability", "valence", "speechiness", "loudness", "acousticness"]);
 
+    vis.topAndBottomTracks = {
+        "danceability": {
+            "highest": "Funky Friday — Dave",
+            "lowest": "You are the Reason — Calum Scott"
+        }
+    };
+
     // initialize Spotify API object
     // vis.spotifyApi = new SpotifyWebApi();
     // vis.spotifyApi.setAccessToken("BQAXjEE9-rbGkAJ-rsMP_MxB_XgWtCWzSZq5jw-h2-sU4WoGFoL5NqNmMhLoGfpzSqPSkil-br4YREO0Sbo");
@@ -60,7 +67,7 @@ AttributeSoundbites.prototype.updateVis = function() {
         .attr("y", 150);
 
     vis.topButtons = vis.svg.selectAll(".top-buttons")
-        .data(vis.data);
+        .data(vis.yScale.domain());
 
     vis.topButtons
         .enter()
@@ -68,10 +75,11 @@ AttributeSoundbites.prototype.updateVis = function() {
         .attr("class", "top-buttons")
         .attr("xlink:href", "img/up-arrow.png")
         .attr("x", function(d,i) { return vis.xScale(i) - 75; })
-        .attr("y", -10);
+        .attr("y", -10)
+        .on("mouseover", function(d) {console.log(vis.topAndBottomTracks[d].highest);});
 
     vis.bottomButtons = vis.svg.selectAll(".bottom-buttons")
-        .data(vis.data);
+        .data(vis.yScale.domain());
 
     vis.bottomButtons
         .enter()
@@ -80,6 +88,8 @@ AttributeSoundbites.prototype.updateVis = function() {
         .attr("xlink:href", "img/down-arrow.png")
         .attr("x", function(d,i) { return vis.xScale(i) - 75; })
         .attr("y", 155);
+
+    // console.log(vis.topButtons);
 
     // vis.test = vis.svg.append("circle").attr("cx", 100).attr("cy", 100).attr("r", 20);
     //
