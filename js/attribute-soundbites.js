@@ -10,7 +10,7 @@ AttributeSoundbites.prototype.initVis = function() {
 
     vis.margin = {top: 20, right: 120, bottom: 20, left: 150};
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
-    vis.height = 300 - vis.margin.top - vis.margin.bottom;
+    vis.height = 400 - vis.margin.top - vis.margin.bottom;
 
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -64,22 +64,22 @@ AttributeSoundbites.prototype.updateVis = function() {
 
     vis.topButtons
         .enter()
-        .append("circle")
+        .append("svg:image")
         .attr("class", "top-buttons")
-        .attr("cx", function(d,i) { return vis.xScale(i); })
-        .attr("cy", 75)
-        .attr("r", 20);
+        .attr("xlink:href", "img/up-arrow.png")
+        .attr("x", function(d,i) { return vis.xScale(i) - 75; })
+        .attr("y", -10);
 
     vis.bottomButtons = vis.svg.selectAll(".bottom-buttons")
         .data(vis.data);
 
     vis.bottomButtons
         .enter()
-        .append("circle")
+        .append("svg:image")
         .attr("class", "bottom-buttons")
-        .attr("cx", function(d,i) { return vis.xScale(i); })
-        .attr("cy", 225)
-        .attr("r", 20);
+        .attr("xlink:href", "img/down-arrow.png")
+        .attr("x", function(d,i) { return vis.xScale(i) - 75; })
+        .attr("y", 155);
 
     // vis.test = vis.svg.append("circle").attr("cx", 100).attr("cy", 100).attr("r", 20);
     //
