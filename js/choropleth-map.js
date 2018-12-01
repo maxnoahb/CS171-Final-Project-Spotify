@@ -30,8 +30,6 @@ var box_h;
 var distance;
 var legend_labels;
 
-var tool_tip;
-
 ChoroplethVis.prototype.initVis = function(){
     var vis = this;
     var map_names = this.map_names;
@@ -115,13 +113,22 @@ ChoroplethVis.prototype.initVis = function(){
         }
     }
 
+    var tip = d3.tip()
+        .attr('class', 'd3-tip')
+        .html(function(d){
+            if (d.danceability) {
+                return d.country;
+            }
+            else {
+                return "Does not have Spotify"
+            }
+        })
+        .direction('s');
+
+    vis.svg.call(tip);
+
     // Domain
     colorscale.domain([d3.min(dance_list),d3.max(dance_list)]);
-
-    tool_tip = d3.tip()
-        .attr("class", "d3-tip")
-        .offset([-8,0])
-        .html(function(d) {return d.country;});
 
     // Render the world atlas by using the path generator for danceability
     vis.svg.selectAll("path")
@@ -138,7 +145,12 @@ ChoroplethVis.prototype.initVis = function(){
             else{
                 // If value is undefined...
                 return "#d3d3d3";
-            }});
+            }})
+        .on("mouseover", tip.show)
+        .on("mouseout", tip.hide)
+        .on("click", function(d) {
+            return vis.showCountry(d.country);
+        });
 
     // Zoomable feature
     function zoomed() {
