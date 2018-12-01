@@ -48,6 +48,11 @@ MAX'S STYLES
 
 *****/
 
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
 .slidecontainer {
     width: 100%; /* Width of the outside container */
     padding-bottom: 15px;
