@@ -12,6 +12,7 @@ var countryAvgAttributes;
 var selectedCountry;
 
 var comparisonChart;
+var reggaetonChart;
 var attributeSoundbites;
 var sliderVis;
 var choroplethMap;
@@ -115,6 +116,9 @@ $(document).ready(function() {
 
             // Initialize intro map
             introMap = new IntroMap("intro-map", countryAvgAttributes, data3, data4);
+
+            // Initialize reggaeton bar graph
+            reggaetonChart = new ReggaetonChart("reggaeton-bar-graph");
 
             // Initialize attribute soundbites page
             attributeSoundbites = new AttributeSoundbites("attribute-soundbites", audioData);

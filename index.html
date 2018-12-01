@@ -46,6 +46,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Spotify_logo_with_text.svg/2000px-Spotify_logo_with_text.svg.png">
+                        <div class="spotify-users-graph"></div>
                     </div>
                     <div class="col-md-6">
                         <h3>Our Data</h3>
@@ -172,16 +173,27 @@
                     Most different? Perhaps you've been travelling lately, or just have dreams of future travels.
                     How do the countries you want to visit compare to your own in average music taste?
                     <br><br>
-                There may be deeper value in considering these comparisons than you think. While the average American
-                Spotify listener may be quite different from the average Indonesian Spotify listener, the average energy and valence
-                of the most popular songs in those countries are very similar. Take Reggaeton as an example. According to
-                Spotify <a href="https://insights.spotify.com/us/2017/09/05/how-reggaeton-became-a-global-phenomenon-on-spotify/">data</a>,
+                    There may be deeper value in considering these comparisons than you think. While the average American
+                    Spotify listener may be quite different from the average Indonesian Spotify listener, the average energy and valence
+                    of the most popular songs in those countries are very similar. Take Reggaeton as an example. According to
+                    Spotify <a href="https://insights.spotify.com/us/2017/09/05/how-reggaeton-became-a-global-phenomenon-on-spotify/">data</a>,
                     reggaeton's share of music on Spotify grew 119% from 2014 to 2017, compared to pop's growth of
-                13% and country music's growth of 4%. Following that trend, more songs from around the world borrowed reggaeton's
-                catchy beat, including the massive Ed Sheeran hit "Shape of You." This suggests that the world may share more
-                music tastes than we recognize.
-                    <br><br>
-                Take a look at how your country compares to others to see what trends to look out for:</p>
+                    13% and country music's growth of 4%. Following that trend, more songs from around the world borrowed reggaeton's
+                    catchy beat, including the massive Ed Sheeran hit "Shape of You." This suggests that the world may share more
+                    music tastes than we recognize. </p>
+
+                <div class="col-md-12">
+                    <div class="row" id="reggaeton-bar-graph"></div>
+                </div>
+
+                <p class="info">Take a look at how your country compares to others on the next page.</p>
+            </div>
+        </section>
+
+
+        <section class="vertical-scrolling fp-auto-height-responsive" id="8">
+            <!-- Side by side country comparison -->
+            <div class="container">
                 <div class="row">
                     <div class="comparison-top-text">
                         <h4>Choose a country to compare to yours:</h4>
@@ -205,25 +217,13 @@
                     <div class="col-md-10">
                         <div id="comparison-chart"></div>
                     </div>
-                    <!--<div class="col-xl-6">-->
-                        <!--<form class="form-inline">-->
-                            <!--<div class="form-group comparison-dropdown">-->
-                                <!--<select id="countries-list" class="form-control" onChange="updateSelected();" style="margin-left:10px"></select>-->
-                            <!--</div>-->
-                        <!--</form>-->
-                    <!--</div>-->
                 </div>
-                <!--<div class="row">-->
-                    <!--<div class="col-md-12">-->
-                        <!--<div id="comparison-chart"></div>-->
-                    <!--</div>-->
-                <!--</div>-->
             </div>
         </section>
 
 
 
-        <section class="vertical-scrolling fp-auto-height-responsive" id="8">
+        <section class="vertical-scrolling fp-auto-height-responsive" id="9">
             <!-- Bubble chart -->
             <div class="container">
                 <h3>Are your country's top 50 songs also popular around the world?</h3>
@@ -241,7 +241,7 @@
 
 
 
-        <section class="vertical-scrolling fp-auto-height-responsive" id="9">
+        <section class="vertical-scrolling fp-auto-height-responsive" id="10">
             <!-- Personal slider -->
             <div class="container-fluid">
                 <h3>Looking for a new playlist to follow? Find out which country suits you best.</h3>
@@ -286,7 +286,7 @@
             </div>
         </section>
 
-        <section class="vertical-scrolling fp-auto-height-responsive" id="10">
+        <section class="vertical-scrolling fp-auto-height-responsive" id="11">
             <!--Ending message-->
             <div class="container-fluid">
                 <div class="footer">
@@ -326,6 +326,7 @@
     <script src="js/comparison-chart.js"></script>
     <script src="js/choropleth-map.js"></script>
     <script src="js/intro-map.js"></script>
+    <script src="js/reggaeton-chart.js"></script>
     <script src="js/attribute-soundbites.js"></script>
 
 </body>
