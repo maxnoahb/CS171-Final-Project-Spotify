@@ -40,10 +40,8 @@ AttributeSoundbites.prototype.wrangleData = function() {
 
 }
 
-AttributeSoundbites.prototype.initVis = function() {
+AttributeSoundbites.prototype.updateVis = function() {
     var vis = this;
-
-    vis.updateVis();
 
 }
 
