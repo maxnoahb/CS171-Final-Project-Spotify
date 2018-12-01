@@ -12,6 +12,7 @@ var countryAvgAttributes;
 var selectedCountry;
 
 var comparisonChart;
+var attributeSoundbites;
 var sliderVis;
 var choroplethMap;
 var introMap;
@@ -114,6 +115,9 @@ $(document).ready(function() {
 
             // Initialize intro map
             introMap = new IntroMap("intro-map", countryAvgAttributes, data3, data4);
+
+            // Initialize attribute soundbites page
+            attributeSoundbites = new AttributeSoundbites("attribute-soundbites", audioData);
 
             // Initialize comparison chart
             comparisonChart = new ComparisonChart("comparison-chart", audioData);
