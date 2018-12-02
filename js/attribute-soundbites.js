@@ -92,7 +92,14 @@ AttributeSoundbites.prototype.updateVis = function() {
         .attr("xlink:href", "img/up-arrow.png")
         .attr("x", function(d,i) { return vis.xScale(i) - 75; })
         .attr("y", -10)
-        .on("mouseover", function(d) {console.log(vis.topAndBottomTracks[d].highest);});
+        .on("mouseover", function(d) {
+            $("#soundbite-name").html(vis.topAndBottomTracks[d].highest);
+            PlaySound("highest-" + d);
+        })
+        .on("mouseout", function(d) {
+            $("#soundbite-name").html("Hover over the arrows!");
+            StopSound("highest-" + d);
+        });
 
     vis.bottomButtons = vis.svg.selectAll(".bottom-buttons")
         .data(vis.yScale.domain());
@@ -103,7 +110,15 @@ AttributeSoundbites.prototype.updateVis = function() {
         .attr("class", "bottom-buttons")
         .attr("xlink:href", "img/down-arrow.png")
         .attr("x", function(d,i) { return vis.xScale(i) - 75; })
-        .attr("y", 155);
+        .attr("y", 155)
+        .on("mouseover", function(d) {
+            $("#soundbite-name").html(vis.topAndBottomTracks[d].lowest);
+            PlaySound("lowest-" + d);
+        })
+        .on("mouseout", function(d) {
+            $("#soundbite-name").html("Hover over the arrows!");
+            StopSound("lowest-" + d);
+        });
 
     // console.log(vis.topButtons);
 
