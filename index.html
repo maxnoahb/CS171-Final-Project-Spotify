@@ -145,7 +145,7 @@
                         <p class="info" style="margin-right:0px; margin-left:0px; width:100%;">
                             From the danceability of their playlist to the acousticness of their music, we can visually <b>see how popular music differs</b> in audio features across the globe.
                             <br><br>
-                            To compare the the "Top 50" playlists across the world, we <b>averaged the metadata</b> across all 50 songs for each playlist. With each audio feature <b>(danceability, valence, speechiness, loudness, and acousticness)</b>ranging from 0 to 1, we can visually see how each country's "Top 50" playlist differ in audio features.
+                            To compare the "Top 50" playlists across the Spotify's 61 countries, we <b>averaged each country's metadata</b> across all their "Top 50" playlist. With each audio feature <b>(danceability, valence, speechiness, loudness, and acousticness)</b> ranging from 0 to 100, we can visually see how each country's "Top 50" playlist differ in audio features.
                         </p>
                     </div>
                 </div>
@@ -168,10 +168,8 @@
                             <h5><b>What do these audio features mean?</b></h5>
                         </div>
                         <div id="attribute-text" onChange="choroplethMap.updateChoropleth()"></div>
-                        <p>
-                            <br>
-                            For more information on the definitions of these features, check out <a href="https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/">Spotify's API Reference Guide</a>
-                        </p>
+                        <br>
+                        For more information on the definitions of these features, check out <a href="https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/">Spotify's API Reference Guide</a>.
                     </div>
                     <div class="col-md-9" style="margin-right:0px; margin-left:0px;">
                         <div id="choropleth-map"></div>
