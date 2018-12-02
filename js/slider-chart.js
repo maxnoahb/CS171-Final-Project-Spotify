@@ -150,13 +150,19 @@ SliderVis.prototype.updateVis = function() {
         vis.countryOutline
             .enter()
             .append("path")
-            .attr("class", "country");
-
-        vis.countryOutline
+            .attr("class", "country")
+            .transition()
+            .duration(500)
             .attr("d", vis.path)
             .style("fill", "#65d6c9");
 
         vis.countryOutline.exit().remove();
+
+        vis.countryOutline
+            .transition()
+            .duration(500)
+            .attr("d", vis.path)
+            .style("fill", "#65d6c9");
 
     });
 
