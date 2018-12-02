@@ -148,7 +148,8 @@ $(document).ready(function() {
         // autoScrolling: false,
         // scrollBar: true,
         anchors: ['firstSection', 'secondSection', 'thirdSection', 'fourthSection', 'fifthSection',
-            'sixthSection', 'seventhSection', 'eighthSection', 'ninthSection', 'tenthSection'],
+            'sixthSection', 'seventhSection', 'eighthSection', 'ninthSection', 'tenthSection',
+            'eleventhSection', 'twelfthSection'],
         // menu: '#menu',
 
         // afterLoad: function(anchorLink, index) {},
