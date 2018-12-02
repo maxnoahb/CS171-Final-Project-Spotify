@@ -98,7 +98,7 @@ img {
     width: auto;
 }
 
-.sources {
+.sources, .data-summary {
     font-size: 12px;
     text-align: center;
 }
