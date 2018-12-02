@@ -33,6 +33,22 @@ AttributeSoundbites.prototype.initVis = function() {
         "danceability": {
             "highest": "Funky Friday — Dave",
             "lowest": "You are the Reason — Calum Scott"
+        },
+        "valence": {
+            "highest": "Shape of You — Ed Sheeran",
+            "lowest": "Darkside — Alan Walker"
+        },
+        "speechiness": {
+            "highest": "8 out of 10 — Drake",
+            "lowest": "Falling Down — Lil Peep"
+        },
+        "loudness": {
+            "highest": "Justicia — Silvestre Dangond, Natti Natasha",
+            "lowest": "when the party's over — Billie Eilish"
+        },
+        "acousticness": {
+            "highest": "I'll Never Love Again — Lady Gaga",
+            "lowest": "Hero — Imagine Dragons"
         }
     };
 
