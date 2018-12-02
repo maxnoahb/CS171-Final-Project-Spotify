@@ -50,13 +50,9 @@ SliderVis.prototype.initVis = function() {
     vis.path = d3.geoPath().projection(vis.projection);
 
     // initialize Spotify API object
-    vis.spotifyApi = new SpotifyWebApi();
-    vis.spotifyApi.setAccessToken("BQAXjEE9-rbGkAJ-rsMP_MxB_XgWtCWzSZq5jw-h2-sU4WoGFoL5NqNmMhLoGfpzSqPSkil-br4YREO0Sbo");
+    // vis.spotifyApi = new SpotifyWebApi();
 
-    // console.log(vis.offset);
-
-    // console.log(vis.bounds);
-    // console.log(vis.data);
+    // vis.spotifyApi.setAccessToken("BQAXjEE9-rbGkAJ-rsMP_MxB_XgWtCWzSZq5jw-h2-sU4WoGFoL5NqNmMhLoGfpzSqPSkil-br4YREO0Sbo");
 
     vis.wrangleData();
 
@@ -97,18 +93,8 @@ SliderVis.prototype.updateVis = function() {
 
         $('#selectedCountryName').html(vis.similarCountry.replace(" Top 50",""));
 
-        var topThreeTracks = [];
-        // var track;
-        for (var track = 0; track < 3; track++) {
-            // var trackData;
-            topThreeTracks[track] = vis.spotifyApi.getTrack(vis.displayData[track].track_uri, function(err, data) {
-                // console.log(data.external_urls.spotify);
-                if (err) {throw err}
-                else {return data.external_urls.spotify}
-            });
-            // topThreeTracks[track] = trackData;
-        }
-        console.log(topThreeTracks);
+        // access Spotify API to get top three songs for the country and get their URLs
+        // var topThreeTracks = [];
         // vis.displayData.slice(0, 3).forEach(function(track) {
         //     vis.spotifyApi.getTrack(track.track_uri, function(err, data) {
         //         if (err) throw err;
@@ -119,7 +105,7 @@ SliderVis.prototype.updateVis = function() {
 
         $('#top-3-songs').html(
             '<strong>Top 3 Songs:</strong><br>' +
-            '<ol><li><a href="' + topThreeTracks[0] + '">' + vis.displayData[0].track_name + '—' + vis.displayData[0].artist_name + '</a>' +
+            '<ol><li>' + vis.displayData[0].track_name + '—' + vis.displayData[0].artist_name +
             '</li><li>' + vis.displayData[1].track_name + '—' + vis.displayData[1].artist_name +
             '</li><li>' + vis.displayData[2].track_name + '—' + vis.displayData[2].artist_name +
             '</li></ol>'
@@ -165,11 +151,6 @@ SliderVis.prototype.updateVis = function() {
             .style("fill", "#65d6c9");
 
     });
-
-
-
-    // vis.selectedCountryName = vis.svg.append("g")
-    //     .attr("transform", "translate(" + 10 + ", " + 10 + ")");
 
 }
 
