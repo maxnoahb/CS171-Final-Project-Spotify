@@ -24,7 +24,7 @@ var path;
 IntroMap.prototype.initVis = function(){
     var vis = this;
 
-    vis.margin = { top: 0, right: 20, bottom: 200, left: 30 };
+    vis.margin = { top: 0, right: 20, bottom: 0, left: 30 };
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
     vis.height = 400 - vis.margin.top - vis.margin.bottom;
 
@@ -35,8 +35,20 @@ IntroMap.prototype.initVis = function(){
         .append("g")
         .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
+    // Background
+    vis.svg.append("rect")
+        .attr("class", "background")
+        .attr("width", width)
+        .attr("height", height)
+        .style("fill","none")
+        .style("pointer-events", "all")
+        .call(d3.zoom() // Call Zoom
+            .scaleExtent([1 / 2, 4])
+            .on("zoom", zoomed));
+
     // Create a mercator projection and draw path
-    var projection = d3.geoNaturalEarth1().translate([vis.width / 2, vis.height / 2 + 200]);
+    var projection = d3.geoNaturalEarth1().translate([vis.width / 2, vis.height / 2 + 40])
+        .scale(150);
     var path = d3.geoPath().projection(projection);
 
     // Convert the TopoJSON to GeoJSON
@@ -112,6 +124,11 @@ IntroMap.prototype.initVis = function(){
         .on("click", function(d) {
             return vis.showCountry(d.country);
         });
+
+    // Zoomable feature
+    function zoomed() {
+        vis.svg.selectAll("path").attr("transform", d3.event.transform);
+    }
 
 
     vis.wrangleData();

@@ -53,13 +53,13 @@ h3 {
 #top-note {
   width: 80px;
   left: 70%;
-  top: 25%;
+  top: 20%;
 }
 
 #bottom-note {
   width: 100px;
-  left: 32%;
-  top: 60%;
+  left: 30%;
+  top: 61%;
 }
 
 img {
@@ -73,7 +73,7 @@ img {
 
 .info {
     margin: 0 auto;
-    width: 65%;
+    width: 75%;
     padding: 20px;
 }
 
@@ -303,6 +303,10 @@ KATE'S STYLES
 path:hover {
     stroke: #C73866;
     stroke-width: 2px;
+}
+
+#reggaeton-bar-graph {
+    fill: #3f3b69;
 }
 
 /*****
