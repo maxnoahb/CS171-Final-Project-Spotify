@@ -21,7 +21,7 @@ SliderVis.prototype.initVis = function() {
     // Check that data is properly imported
     // console.log(this.data);
 
-    vis.margin = {top: 5, right: 20, bottom: 20, left: 20};
+    vis.margin = {top: 5, right: 20, bottom: 20, left: 100};
 
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
         vis.height = 280 - vis.margin.top - vis.margin.bottom;

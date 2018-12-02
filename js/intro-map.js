@@ -89,6 +89,7 @@ IntroMap.prototype.initVis = function(){
         .attr('class', 'd3-tip')
         .html(function(d){
             if (d.danceability) {
+                console.log(d);
                 return d.country;
             }
             else {

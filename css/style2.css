@@ -115,6 +115,8 @@ MAX'S STYLES
     width: 100%; /* Width of the outside container */
     padding-bottom: 15px;
     display: flex;
+    padding-left: 100px;
+    padding-top: 5px;
 }
 
 .slider-label {
@@ -208,13 +210,14 @@ output {
 }
 
 #match-button {
-  background-color: #C73866;
-  border: none;
-  font-size: 18px;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 10px;
-  outline: 0;
+    background-color: #C73866;
+    border: none;
+    font-size: 18px;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    outline: 0;
+    margin-left: 100px;
 }
 
 #match-button:hover {
