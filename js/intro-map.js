@@ -129,7 +129,6 @@ IntroMap.prototype.initVis = function(){
         vis.svg.selectAll("path").attr("transform", d3.event.transform);
     }
 
-
     vis.wrangleData();
 
 };
