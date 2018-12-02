@@ -33,14 +33,14 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h2>Our Project</h2>
-                        <div class="info"><p>Music is a universal language. It brings us joy, recalls memories, encourages us to
+                        <div class="info"><p><b>Music is a universal language.</b> It brings us joy, recalls memories, encourages us to
                         dance. Our music listening habits reflect our lives: what time of year it is, what mood we're in,
                         what language we speak, how energetic we may be. <br><br>
                         This is why we're interested in exploring music data. To explore what others are listening to is to
-                        explore so much more about how people are feeling right now. Which countries listen to the same
-                        songs and what might that say about the state of those areas? Which artists are popular globally
+                        explore so much more about how people are feeling right now. <b>Which countries listen to the same
+                                songs</b> and what might that say about the state of those areas? <b>Which artists are popular globally</b>
                         and what is it that makes them so universally loved? We hope to dive into these questions and more
-                        as we take you through the top songs in each of the 61 countries that listen to Spotify.</p></div>
+                            as we take you through the <b>top songs</b> in each of the <b>61 countries</b> that listen to Spotify.</p></div>
                     </div>
                 </div>
             </div>
@@ -58,10 +58,10 @@
                             <a href="https://newsroom.spotify.com/companyinfo/">191 million active users</a> across 61 countries
                         featuring over 40 million songs, Spotify is one of the most popular music streaming services in the
                         world. <br><br>
-                            Embedded in each song's metadata is information about the song's energy, valence (happiness), tempo,
-                        key, danceability, and much more. Each of these characteristics has a rating from 0 to 1 and the numbers
-                        help Spotify understand its users. We're focusing on these metrics to explore similarities and differences
-                        in popular music around the world. Our songs are gathered from the Spotify-generated "Top 50" playlists of
+                            Embedded in each song's metadata is information about the song's dancebility, valence (happiness), acousticness, loudness, and speechiness.
+                              Each of these characteristics has a rating from 0 to 100 that describes where each song falls within each scale.
+                              We're focusing on these metrics to explore similarities and differences in popular music around the world.
+                              Our songs are gathered from the Spotify-generated "Top 50" playlists of
                             each of the 61 countries Spotify serves (e.g. Argentina's Top 50, etc.). <br><br>
                         This data is a snapshot of these playlists as of November 2018. As Spotify reaches a broader audience,
                         it can tell us more and more about the world's music tastes. <strong>For now, we can only gather information
@@ -69,8 +69,8 @@
                       </div>
                     </div>
                     <div class="col-md-6">
-                        <img src="img/spotify_logo.png" class="spotify-logo">
-                        <img src="img/spotify-users.png" alt="" id="spotify-users-graph">
+                        <img src="img/spotify_logo.png" style="width:65%;display: block; margin-left:auto; margin-right:auto; padding-top:20px;">
+                        <img src="img/spotify-users.png" style="width:540px;height:562.53px;">
                     </div>
                 </div>
             </div>
@@ -84,7 +84,9 @@
                     <div class="col-md-8 col-centered">
                         <h3>Hear Spotify's metrics in action</h3>
                         <p class="info">
-                            To get a better sense of Spotify's track attributes, hover over the buttons to hear an
+                            We use Spotify's metrics to compare music in different playlists.
+                            <br><br>
+                            To get a better sense of Spotify's track attributes, <b>hover over the buttons</b> to hear an
                             example of a high and low track for each characteristic.
                         </p>
                     </div>
@@ -94,7 +96,7 @@
 
                         <div id="attribute-soundbites"></div>
 
-                        <div><p id="soundbite-name">Hover over the arrows!</p></div>
+                        <div><p id="soundbite-name" style="text-align:center;">Hover over the arrows!</p></div>
 
                         <audio id="highest-danceability" src="audio/highest-danceability.mp3"></audio>
                         <audio id="lowest-danceability" src="audio/lowest-danceability.mp3"></audio>
@@ -118,18 +120,18 @@
             <!-- Intro map -->
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12">
-                        <p>Visit <a href="https://www.spotify.com/us/">Spotify's website</a>
-                            for more information as we take you through a musical adventure across the world. <br><br>
-                        To begin, choose the country you're from to personalize your experience. You can return to this page
-                        and change the country at any time.</p>
+                    <div class="col-md-8 col-centered">
+                        <h3>Choose a country with Spotify</h3>
+                        We want to <b>personalize your experience</b>. You can choose a country you musically identify with,
+                        a country where you are from, or a country you are interested in comparing to the world.
+                        <b>You can return to this page and change your country at any time</b>.
                     </div>
                 </div>
                 <br>
                 <div class="row">
                     <div class="col-md-12">
-                        <h4 id="intro-chosen-country" style="text-align: center"></h4>
                         <div id="intro-map" onclick="comparisonChart.onCountryCompareChange()"></div>
+                        <h4 id="intro-chosen-country" style="text-align: center"></h4>
                     </div>
                 </div>
             </div>
