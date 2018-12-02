@@ -112,7 +112,7 @@ IntroMap.prototype.initVis = function(){
             var dance = d.danceability;
             if (dance) {
                 //If value exists...
-                return "#4FB99F";
+                return "#ED553B";
             }
             else{
                 // If value is undefined...
