@@ -22,7 +22,7 @@ var path;
 IntroMap.prototype.initVis = function(){
     var vis = this;
 
-    vis.margin = { top: 0, right: 20, bottom: 0, left: 30 };
+    vis.margin = { top: 0, right: 200, bottom: 0, left: 200 };
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
     vis.height = 400 - vis.margin.top - vis.margin.bottom;
 

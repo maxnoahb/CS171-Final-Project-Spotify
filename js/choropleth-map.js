@@ -36,9 +36,9 @@ ChoroplethVis.prototype.initVis = function(){
     var music_data = this.music;
 
     // SVG drawing area
-    vis.margin = { top: 20, right: 20, bottom: 200, left: 30 };
-    vis.width = 1000 - vis.margin.left - vis.margin.right;
-    vis.height = 500 - vis.margin.top - vis.margin.bottom;
+    vis.margin = { top: 20, right: 70, bottom: 200, left: 10 };
+    vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
+    vis.height = 400 - vis.margin.top - vis.margin.bottom;
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
@@ -57,7 +57,8 @@ ChoroplethVis.prototype.initVis = function(){
             .on("zoom", zoomed));
 
     // Create a mercator projection and draw path
-    projection = d3.geoMercator().translate([width / 2, height / 2]);
+    projection = d3.geoMercator().translate([width / 2, height / 2 + 35])
+        .scale(130);
     path = d3.geoPath().projection(projection);
 
     // Set color scale

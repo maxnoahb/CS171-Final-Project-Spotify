@@ -54,6 +54,23 @@ SliderVis.prototype.initVis = function() {
 
     // vis.spotifyApi.setAccessToken("BQAXjEE9-rbGkAJ-rsMP_MxB_XgWtCWzSZq5jw-h2-sU4WoGFoL5NqNmMhLoGfpzSqPSkil-br4YREO0Sbo");
 
+    vis.tip = d3.tip()
+        .attr('class', 'd3-tip i-tip')
+        .html("To find your match, we took the sum off all the differences " +
+            "between your five preferences and the average values for each country's five attributes, " +
+            "and then found the country with the minimum total difference.")
+        .direction('se');
+
+    vis.svg.call(vis.tip);
+
+    vis.svg.append("text")
+        .text("i")
+        .attr("x", 0)
+        .attr("y", 10)
+        .attr("fill", "#3f3b69")
+        .on("mouseover", vis.tip.show)
+        .on("mouseout", vis.tip.hide);
+
     vis.wrangleData();
 
 }
