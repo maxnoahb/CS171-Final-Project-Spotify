@@ -6,8 +6,6 @@
  * @param _data             -- map names data
  */
 
-// Green #4caf50
-
 IntroMap = function(_parentElement, _music, _mapjson, _mapnames){
     this.parentElement = _parentElement;
     this.music = _music;

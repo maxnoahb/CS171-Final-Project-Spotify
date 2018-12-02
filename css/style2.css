@@ -73,7 +73,7 @@ img {
 
 .info {
     margin: 0 auto;
-    width: 75%;
+    width: 85%;
     padding: 20px;
 }
 
@@ -123,16 +123,20 @@ MAX'S STYLES
 
 output {
     padding-left: 20px;
+    position: absolute;
+    margin-left: 360px;
 }
 
 .slider {
+    position: absolute;
+    margin-left: 120px;
 	-webkit-appearance: none;
-	width: 100%;
+	width: 250px;
 	height: 15px;
 	border-radius: 5px;
 	background: #d3d3d3;
 	outline: none;
-	opacity: 0.7;
+	opacity: 0.9;
 	-webkit-transition: .2s;
 	transition: opacity .2s;
 }
@@ -161,12 +165,14 @@ output {
 
 #top-3-songs {
     text-align: center;
+    font-size: 16px;
 }
 
 #top-3-songs ol {
     display: table;
     margin: 0 auto;
     text-align: left;
+    font-size: 14px;
 }
 
 .footer {

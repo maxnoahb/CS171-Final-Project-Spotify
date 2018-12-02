@@ -1,8 +1,9 @@
 
 // Create drawing area
-var margin = {top: 5, right: 10, bottom: 5, left: 10},
+var margin = {top: 0, right: 10, bottom: 5, left: 10},
     width = 960 - margin.left - margin.right,
-    height = 700 - margin.top - margin.bottom;
+    height = 390 - margin.top - margin.bottom;
+    // height used to be 700 when not fit to small computer
 
 var svg = d3.select('#bubble-chart').append('svg')
     .attr('width', width + margin.left + margin.right)
@@ -28,7 +29,8 @@ function updateBubbles(country) {
   // Create scale that determines radius of circles
   var radius = d3.scaleLinear()
                  .domain(d3.extent(frequencyData, function(d) { return d.Freq; }))
-                 .range([3, 60]);
+                 .range([2, 25]);
+  // range used to be 3,60 when not fit to small computer
 
   // Keep an array of the selected country's top 50 tracks' names
   var trackNames = [];
