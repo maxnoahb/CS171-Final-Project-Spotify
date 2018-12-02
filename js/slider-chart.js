@@ -59,15 +59,11 @@ SliderVis.prototype.initVis = function() {
         .html("To find your match, we took the sum off all the differences " +
             "between your five preferences and the average values for each country's five attributes, " +
             "and then found the country with the minimum total difference.")
-        .direction('se');
+        .direction('e');
 
     vis.svg.call(vis.tip);
 
-    vis.svg.append("text")
-        .text("i")
-        .attr("x", 0)
-        .attr("y", 10)
-        .attr("fill", "#3f3b69")
+    d3.select(".fa-info-circle")
         .on("mouseover", vis.tip.show)
         .on("mouseout", vis.tip.hide);
 

@@ -123,6 +123,10 @@ MAX'S STYLES
 
 *****/
 
+.fa-info-circle {
+    padding-left: 15px;
+}
+
 .col-centered {
     float: none;
     margin: 0 auto;
@@ -248,38 +252,6 @@ output {
     border-radius: 5%;
     width: 150px;
 }
-
-/*.clearfix:before,
-.clearfix:after {
-    content: "";
-    display: table;
-}
-
-.clearfix:after {
-    clear: both;
-}
-
-.l-left {
-    float: left;
-}
-
-.l-right {
-    float: right;
-}
-
-.end {
-    margin-top: 30px;
-    font-size: 3em;
-    font-weight: bold;
-    opacity: 0;
-    -webkit-transform: translateY(300px);
-    -ms-transform: translateY(300px);
-    transform: translateY(300px);
-    -webkit-transition: opacity, -webkit-transform 1s;
-    transition: opacity, transform 1s;
-    -webkit-transition-delay: 1s;
-    transition-delay: 1s;
-}*/
 
 /*****
 
