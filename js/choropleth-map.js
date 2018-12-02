@@ -81,6 +81,14 @@ ChoroplethVis.prototype.initVis = function(){
             }
         }
 
+        if (country === "Taiwan"){
+            console.log(country_id);
+        }
+
+        if (country === "Switzerland"){
+            console.log(country_id);
+        }
+
         // Grab attributes from Spotify Data and scale
         var dance = music_data[i].value.danceability;
         var valence = music_data[i].value.valence;
@@ -114,6 +122,8 @@ ChoroplethVis.prototype.initVis = function(){
         }
     }
 
+    console.log(world);
+
     var tip = d3.tip()
         .attr('class', 'd3-tip')
         .html(function(d){
@@ -121,7 +131,7 @@ ChoroplethVis.prototype.initVis = function(){
                 return d.country;
             }
             else {
-                return "Does not have Spotify"
+                return "Does not have Spotify";
             }
         })
         .direction('s');
