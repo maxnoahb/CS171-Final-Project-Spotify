@@ -361,7 +361,7 @@ CAITLYN'S STYLES
     display: flex;
     align-items: flex-end;
     padding-bottom: 20px;
-    /*vertical-align: middle;*/
+    vertical-align: middle;
 }
 
 .info {
