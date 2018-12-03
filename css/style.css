@@ -284,8 +284,13 @@ div.tooltip, .d3-tip, #details {
 #details {
   background: #3f3b69;
   color: white;
+    width:auto;
+
 }
 
+#detail-container {
+    margin: 0 auto;
+}
 /*****
 
 KATE'S STYLES
