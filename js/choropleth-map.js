@@ -224,16 +224,16 @@ ChoroplethVis.prototype.updateChoropleth = function(){
     if (vis.attribute==="speechiness"){
         list = speech_list;
         text_box.text("Speechiness detects the presence of spoken words in a track. The more exclusively speech-like " +
-            "the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value.");
+            "the recording (e.g. talk show, audio book, poetry), the closer to 100 the attribute value.");
     }
     if (vis.attribute==="loudness"){
         list = loud_list;
         text_box.text("Loudness is the quality of a sound that is the primary psychological correlate of physical " +
-            "strength (amplitude). Values typical range between -60 and 0 decibels.")
+            "strength (amplitude).");
     }
     if (vis.attribute==="acousticness"){
         list = acoustic_list;
-        text_box.text("Acousticness is a confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0" +
+        text_box.text("Acousticness is a confidence measure from 0 to 100 of whether the track is acoustic. 100 " +
             "represents high confidence the track is acoustic.");
     }
 
