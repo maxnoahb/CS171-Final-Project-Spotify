@@ -140,7 +140,6 @@ $(document).ready(function() {
         controlArrows: true,
         // fixedElements: '.navbar-fixed-top',
         menu: '#myNavbar',
-        paddingTop: '50px',
         // responsiveHeight: 800,
         touchSensitivity: 50,
         // normalScrollElements: "#choropleth-map",
