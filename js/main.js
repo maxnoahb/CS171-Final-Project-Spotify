@@ -142,6 +142,8 @@ $(document).ready(function() {
         navigation: true,
         css3: true,
         controlArrows: true,
+        fixedElements: '.navbar-fixed-top',
+        menu: '#myNavbar',
         // responsiveHeight: 800,
         touchSensitivity: 50,
         normalScrollElements: "#choropleth-map",
@@ -149,8 +151,7 @@ $(document).ready(function() {
         // scrollBar: true,
         anchors: ['title-page', 'project-description', 'data-description', 'attribute-soundbite-page', 'choose-country',
             'choropleth-map-page', 'comparison-intro', 'comparison-chart-page', 'song-popularity-page',
-            'personal-slider-page', 'concluding-page'],
-        // menu: '#menu',
+            'slider-page', 'concluding-page']
 
         // afterLoad: function(anchorLink, index) {},
         // onLeave: function(index, nextIndex) {},
