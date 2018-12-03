@@ -147,9 +147,9 @@ $(document).ready(function() {
         normalScrollElements: "#choropleth-map",
         // autoScrolling: false,
         // scrollBar: true,
-        anchors: ['firstSection', 'secondSection', 'thirdSection', 'fourthSection', 'fifthSection',
-            'sixthSection', 'seventhSection', 'eighthSection', 'ninthSection', 'tenthSection',
-            'eleventhSection', 'twelfthSection'],
+        anchors: ['title-page', 'project-description', 'data-description', 'attribute-soundbite-page', 'choose-country',
+            'choropleth-map-page', 'comparison-intro', 'comparison-chart-page', 'song-popularity-page',
+            'personal-slider-page', 'concluding-page'],
         // menu: '#menu',
 
         // afterLoad: function(anchorLink, index) {},
