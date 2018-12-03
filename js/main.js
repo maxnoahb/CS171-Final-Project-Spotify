@@ -149,24 +149,6 @@ $(document).ready(function() {
         anchors: ['title-page', 'project-description', 'data-description', 'attribute-soundbite-page', 'choose-country',
             'choropleth-map-page', 'comparison-intro', 'comparison-chart-page', 'song-popularity-page',
             'slider-page', 'concluding-page']
-
-        // afterLoad: function(anchorLink, index) {},
-        // onLeave: function(index, nextIndex) {},
-
-        /*afterLoad: function (anchorLink, index) {
-            $header_top.css('background', 'rgba(0, 47, 77, .3)');
-            $nav.css('background', 'rgba(0, 47, 77, .25)');
-            if (index == 5) {
-                $('#fp-nav').hide();
-            }
-        },
-
-        onLeave: function (index, nextIndex, direction) {
-            if (index == 5) {
-                $('#fp-nav').show();
-            }
-        },*/
-
     });
 });
 
