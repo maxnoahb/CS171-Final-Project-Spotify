@@ -1,28 +1,80 @@
 /* custom css rules */
 
+/* Color Schemes
+
+ https://color.adobe.com/Copy-of-Copy-of-Core-color-theme-11564388/edit/?copy=true&base=2&rule=Custom&selected=2&name=Copy%20of%20Copy%20of%20Copy%20of%20Core&mode=rgb&rgbvalues=0.06666666666666667,0.1843137254901961,0.2549019607843137,0.023529411764705882,0.5215686274509804,0.5294117647058824,0.30980392156862746,0.7254901960784313,0.6235294117647059,0.9490196078431372,0.6941176470588235,0.20392156862745098,0.9294117647058824,0.3333333333333333,0.23137254901960785&swatchOrder=0,1,2,3,4
+
+ https://color.adobe.com/paleta-2-color-theme-11596088/edit/?copy=true&base=2&rule=Custom&selected=2&name=Copy%20of%20paleta%202&mode=cmyk&rgbvalues=0.16900000000000004,0.2288,0.26,0.248,0.344,0.4,0.7395,0.8265,0.87,0.94,0.94,0.8742,1,0.56,0&swatchOrder=0,1,2,3,4
+
+ */
+
+
+
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  background-image: linear-gradient(to bottom right, #f6c778, #de4aa3);
+  color: #3f3b69;
+}
+
+h1, h2, h3 {
+    font-weight: bold;
+    color: white;
+    text-align: center;
 }
 
 h1 {
-    text-align: center;
-    color: #4caf50;
-    font-size: 100px;
-    padding-top: 260px;
-    padding-bottom: 260px;
-    background: url("https://cdn12.picryl.com/photo/2016/12/31/guitar-instrument-music-music-34e5d5-1024.jpg") bottom;
-    background-size: cover;
+  font-size: 100px;
+}
+
+h2 {
+  font-size: 75px;
 }
 
 h1 span {
-    padding-left: 15px;
-    padding-right: 15px;
-    background-color: rgba(0,0,0, 0.75);
-    border-radius: 20px;
+    color: #3f3b69;
 }
 
 h3 {
+    font-size: 50px;
     margin: 10px;
+}
+
+/* .section-head {
+  width: 80%;
+  padding: 5px;
+  margin: 0 auto;
+  background: #3F3B69;
+  border: 0px;
+  border-radius: 8px;
+} */
+
+#bubble-info {
+  font-size: 15px;
+  padding: 20px;
+  width: 100%;
+}
+
+#team-name {
+  position: absolute;
+  right: 40px;
+  bottom: 40px;
+  font-size: 30px;
+}
+
+.note {
+  position: absolute;
+}
+
+#top-note {
+  width: 80px;
+  left: 70%;
+  top: 20%;
+}
+
+#bottom-note {
+  width: 100px;
+  left: 30%;
+  top: 61%;
 }
 
 img {
@@ -30,16 +82,54 @@ img {
 }
 
 .container .container-fluid{
-    margin-top: 20px;
+    margin-top: 40px;
     margin-bottom: 40px;
 }
 
 .info {
-    background-color: #d3d3d3;
-    border-radius: 20px;
-    margin-left: 50px;
-    margin-right: 50px;
+    margin: 0 auto;
+    width: 85%;
     padding: 20px;
+}
+
+#our-data {
+  margin: 0 auto;
+  width: 100%;
+  padding: 20px;
+}
+#our-data p {
+  font-size: 16px;
+}
+
+.spotify-logo {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 130px;
+    width: auto;
+}
+
+#spotify-users-graph {
+    height: 510px;
+    width: auto;
+}
+
+.sources, .data-summary {
+    font-size: 12px;
+    text-align: center;
+}
+
+p {
+  text-align: justify;
+  font-size: 20px;
+}
+
+a {
+  color: #C73866;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #9F2D52;
 }
 
 /*****
@@ -48,7 +138,11 @@ MAX'S STYLES
 
 *****/
 
-.col-centered{
+.fa-info-circle {
+    padding-left: 15px;
+}
+
+.col-centered {
     float: none;
     margin: 0 auto;
 }
@@ -57,6 +151,8 @@ MAX'S STYLES
     width: 100%; /* Width of the outside container */
     padding-bottom: 15px;
     display: flex;
+    padding-left: 100px;
+    padding-top: 5px;
 }
 
 .slider-label {
@@ -65,16 +161,20 @@ MAX'S STYLES
 
 output {
     padding-left: 20px;
+    position: absolute;
+    margin-left: 360px;
 }
 
 .slider {
+    position: absolute;
+    margin-left: 120px;
 	-webkit-appearance: none;
-	width: 100%;
+	width: 250px;
 	height: 15px;
 	border-radius: 5px;
 	background: #d3d3d3;
 	outline: none;
-	opacity: 0.7;
+	opacity: 0.9;
 	-webkit-transition: .2s;
 	transition: opacity .2s;
 }
@@ -85,7 +185,7 @@ output {
 	width: 25px;
 	height: 25px;
 	border-radius: 50%;
-	background: #4CAF50;
+	background: #3f3b69;
 	cursor: pointer;
 }
 
@@ -93,7 +193,7 @@ output {
 	width: 25px;
 	height: 25px;
 	border-radius: 50%;
-	background: #4CAF50;
+	background: #3f3b69;
 	cursor: pointer;
 }
 
@@ -103,12 +203,14 @@ output {
 
 #top-3-songs {
     text-align: center;
+    font-size: 16px;
 }
 
 #top-3-songs ol {
     display: table;
     margin: 0 auto;
     text-align: left;
+    font-size: 14px;
 }
 
 .footer {
@@ -126,7 +228,7 @@ output {
 
 #fp-nav ul li a span,
 .fp-slidesNav ul li a span {
-    background: white;
+    background: rgb(255,255,255);
     width: 8px;
     height: 8px;
     margin: -4px 0 0 -4px;
@@ -139,42 +241,34 @@ output {
     width: 16px;
     height: 16px;
     margin: -8px 0 0 -8px;
-    background: transparent;
     box-sizing: border-box;
-    border: 1px solid #4CAF50;
+    background-color: white;
 }
 
-/*.clearfix:before,
-.clearfix:after {
-    content: "";
-    display: table;
+#match-button {
+    background-color: #C73866;
+    border: none;
+    font-size: 18px;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    outline: 0;
+    margin-left: 100px;
 }
 
-.clearfix:after {
-    clear: both;
+#match-button:hover {
+  background-color: #9F2D52;
 }
 
-.l-left {
-    float: left;
+.i-tip {
+    position: absolute;
+    display: inline;
+    font-size: 10px;
+    padding: 8px;
+    background-color: #d3d3d3;
+    border-radius: 5%;
+    width: 150px;
 }
-
-.l-right {
-    float: right;
-}
-
-.end {
-    margin-top: 30px;
-    font-size: 3em;
-    font-weight: bold;
-    opacity: 0;
-    -webkit-transform: translateY(300px);
-    -ms-transform: translateY(300px);
-    transform: translateY(300px);
-    -webkit-transition: opacity, -webkit-transform 1s;
-    transition: opacity, transform 1s;
-    -webkit-transition-delay: 1s;
-    transition-delay: 1s;
-}*/
 
 /*****
 
@@ -182,22 +276,23 @@ JUSTIN'S STYLES
 
 *****/
 
-div.tooltip {
+div.tooltip, .d3-tip, #details {
     position: absolute;
     text-align: center;
     font-family: 'Raleway', sans-serif;
     font-size: 14px;
     padding: 5px;
     margin: 5px;
-    color: #d3d3d3;
-    background: #272A2F;
+    color: #3F3B69;
+    background: white;
     border: 0px;
     border-radius: 8px;
     pointer-events: none;
 }
 
-#bubble-chart-scale {
-  text-align: center;
+#details {
+  background: #3f3b69;
+  color: white;
 }
 
 /*****
@@ -208,13 +303,11 @@ KATE'S STYLES
 .comparison-top-text {
     display: inline-block;
     text-align: center;
-    margin: 30px auto;
+    margin: 50px auto 30px;
 }
 
 .comparison-dropdown {
-    position: relative;
-    margin-top: 200px;
-    /*margin-right: 80px;*/
+    margin-left: 70px;
 }
 
 .comparison-country-labels .country-label-right {
@@ -224,7 +317,6 @@ KATE'S STYLES
 /* this helped: https://stackoverflow.com/questions/5288336/put-text-at-bottom-of-div */
 #comparison-country-label-left {
     position: relative;
-    margin-top: 300px;
 }
 
 #comparison-country-label-left span {
@@ -233,13 +325,16 @@ KATE'S STYLES
     right: 0;
     text-anchor: end;
     margin-right: 70px;
-    padding-top: 300px;
     font-weight: bold;
 }
 
 path:hover {
-    stroke: darkgreen;
+    stroke: #C73866;
     stroke-width: 2px;
+}
+
+#reggaeton-bar-graph {
+    fill: #3f3b69;
 }
 
 /*****
@@ -248,20 +343,29 @@ CAITLYN'S STYLES
 
 *****/
 .choropleth-dropdown {
-    background-color: #d3d3d3;
-    border-radius: 20px;
-    /*margin-left: 50px;*/
-    /*margin-right: 50px;*/
+    background-color: #3f3b69;
+    color: white;
+    border-radius: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
     padding: 20px;
 }
 
 .dropdown-wrapper {
-    /*display: flex;*/
-    /*align-items: flex-end;*/
-    /*padding-bottom: 20px;*/
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 20px;
     vertical-align: middle;
 }
 
 .info {
     font-size: 15px;
+}
+
+#attribute-text {
+    font-size: 14px;
+}
+
+.legend {
+    font-size: 12px;
 }
