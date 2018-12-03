@@ -138,7 +138,7 @@ $(document).ready(function() {
         navigation: true,
         css3: true,
         controlArrows: true,
-        fixedElements: '.navbar-fixed-top',
+        // fixedElements: '.navbar-fixed-top',
         menu: '#myNavbar',
         paddingTop: '50px',
         // responsiveHeight: 800,
