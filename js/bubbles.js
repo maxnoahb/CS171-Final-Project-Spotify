@@ -46,23 +46,6 @@ function updateBubbles(country) {
       .attr("class", "tooltip")
       .style("opacity", 0);
 
-  // var filteredData;
-  //
-  // if (!filter) {
-  //   filteredData = frequencyData;
-  //   chargeStrength = 1;
-  // }
-  // if (filter) {
-  //   filteredData = frequencyData.filter(function (d) {
-  //     if (selectedTop50[d.Var1] != null) {
-  //       return d;
-  //     }
-  //   });
-  //   chargeStrength = 10;
-  // }
-  //
-  // console.log(filteredData);
-
   // Create force simulation
   var force = d3.forceSimulation(frequencyData)
                 .force("charge", d3.forceManyBody().strength(chargeStrength))

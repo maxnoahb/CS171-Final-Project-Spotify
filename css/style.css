@@ -1,14 +1,5 @@
+
 /* custom css rules */
-
-/* Color Schemes
-
- https://color.adobe.com/Copy-of-Copy-of-Core-color-theme-11564388/edit/?copy=true&base=2&rule=Custom&selected=2&name=Copy%20of%20Copy%20of%20Copy%20of%20Core&mode=rgb&rgbvalues=0.06666666666666667,0.1843137254901961,0.2549019607843137,0.023529411764705882,0.5215686274509804,0.5294117647058824,0.30980392156862746,0.7254901960784313,0.6235294117647059,0.9490196078431372,0.6941176470588235,0.20392156862745098,0.9294117647058824,0.3333333333333333,0.23137254901960785&swatchOrder=0,1,2,3,4
-
- https://color.adobe.com/paleta-2-color-theme-11596088/edit/?copy=true&base=2&rule=Custom&selected=2&name=Copy%20of%20paleta%202&mode=cmyk&rgbvalues=0.16900000000000004,0.2288,0.26,0.248,0.344,0.4,0.7395,0.8265,0.87,0.94,0.94,0.8742,1,0.56,0&swatchOrder=0,1,2,3,4
-
- */
-
-
 
 body {
   font-family: 'Montserrat', sans-serif;
@@ -368,4 +359,10 @@ CAITLYN'S STYLES
 
 .legend {
     font-size: 12px;
+}
+
+#countries-list {
+  background-color: #3f3b69;
+  color: white;
+  border: none;
 }
