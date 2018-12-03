@@ -139,7 +139,7 @@ ComparisonChart.prototype.updateVis = function(){
     vis.topStaffs.enter().append("line")
         .attr("class", "top-staff-line")
         .attr("x1", 0)
-        .attr("y1", function(d){console.log(Object.keys(d)[0]); return vis.yScale(Object.keys(d)[0])})
+        .attr("y1", function(d){return vis.yScale(Object.keys(d)[0])})
         .attr("x2", vis.width - 10)
         .attr("y2", function(d){ return vis.yScale(Object.keys(d)[0])})
         .attr("stroke-width", 1)
