@@ -127,6 +127,22 @@ MAX'S STYLES
     color: #9d9d9d;
 }
 
+/*#myNavbar {*/
+    /*position:fixed;*/
+    /*z-index: 99;*/
+    /*top: 20px;*/
+    /*left: 20px;*/
+/*}*/
+
+/*#myNavbar li {*/
+    /*display: inline-block;*/
+    /*padding: 15px;*/
+/*}*/
+
+/*html.fp-enabled body {*/
+    /*margin-top: 50px;*/
+/*}*/
+
 .fa-info-circle {
     padding-left: 15px;
 }
