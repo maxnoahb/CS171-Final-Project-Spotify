@@ -63,7 +63,7 @@ ChoroplethVis.prototype.initVis = function(){
 
     // Set color scale
     colorscale = d3.scaleQuantize()
-        .range(["#F4E1DE", "#EDC2BB", "#E9A094", "#E97C69", "#ED553B"]);
+        .range(["#B7BCD1", "#969AB9", "#7779A0", "#595885", "#3f3b69"]);
 
     // Convert the TopoJSON to GeoJSON
     world = topojson.feature(this.map, this.map.objects.countries).features;
@@ -253,6 +253,18 @@ ChoroplethVis.prototype.updateChoropleth = function(){
         .transition()
         .duration(500)
         .style("stroke", "#FAFAFA")
+        .attr('fill-opacity', function (d) {
+          //Get data value
+          var attribute = d[vis.attribute];
+          if (attribute) {
+              //If value exists...
+              return 1;
+          }
+          else{
+              // If value is undefined...
+              return 0.3;
+          }
+        })
         .style("fill", function(d) {
             //Get data value
             var attribute = d[vis.attribute];

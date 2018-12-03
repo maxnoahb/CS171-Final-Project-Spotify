@@ -157,7 +157,7 @@ SliderVis.prototype.updateVis = function() {
             .transition()
             .duration(500)
             .attr("d", vis.path)
-            .style("fill", "#65d6c9");
+            .style("fill", "#3f3b69");
 
         vis.countryOutline.exit().remove();
 
@@ -165,7 +165,7 @@ SliderVis.prototype.updateVis = function() {
             .transition()
             .duration(500)
             .attr("d", vis.path)
-            .style("fill", "#65d6c9");
+            .style("fill", "#3f3b69");
 
     });
 

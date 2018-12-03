@@ -107,12 +107,24 @@ IntroMap.prototype.initVis = function(){
         .attr("d", path)
         .attr("class", "intro-map-path")
         .style("stroke", "#FAFAFA")
+        .attr('fill-opacity', function (d) {
+          //Get data value
+          var dance = d.danceability;
+          if (dance) {
+              //If value exists...
+              return 1;
+          }
+          else{
+              // If value is undefined...
+              return 0.3;
+          }
+        })
         .style("fill", function(d) {
             //Get data value
             var dance = d.danceability;
             if (dance) {
                 //If value exists...
-                return "#ED553B";
+                return "#3F3B69";
             }
             else{
                 // If value is undefined...

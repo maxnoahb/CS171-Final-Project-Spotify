@@ -42,7 +42,7 @@ ReggaetonChart.prototype.initVis = function(){
         .attr("y", function(d){return vis.yScale(d)})
         .attr("width", function(d){return vis.xScale(d)})
         .attr("height", vis.yScale.bandwidth())
-        .attr("fill", "#4FB99F");
+        .attr("fill", "#3f3b69");
 
     // draw left labels
     vis.leftLabels = vis.svg.selectAll(".reggaeton-left-labels")
@@ -79,4 +79,3 @@ ReggaetonChart.prototype.initVis = function(){
         .attr("text-anchor", "start");
 
 };
-

@@ -39,6 +39,15 @@ h3 {
     margin: 10px;
 }
 
+.section-head {
+  width: 80%;
+  padding: 5px;
+  margin: 0 auto;
+  background: #3F3B69;
+  border: 0px;
+  border-radius: 8px;
+}
+
 #team-name {
   position: absolute;
   right: 40px;
@@ -109,12 +118,12 @@ p {
 }
 
 a {
-  color: #ED553B;
+  color: #C73866;
   font-weight: bold;
 }
 
 a:hover {
-  color: #B9372E;
+  color: #9F2D52;
 }
 
 /*****
@@ -174,7 +183,7 @@ output {
 	width: 25px;
 	height: 25px;
 	border-radius: 50%;
-	background: #65d6c9;
+	background: #3f3b69;
 	cursor: pointer;
 }
 
@@ -182,7 +191,7 @@ output {
 	width: 25px;
 	height: 25px;
 	border-radius: 50%;
-	background: #65d6c9;
+	background: #3f3b69;
 	cursor: pointer;
 }
 
@@ -265,18 +274,23 @@ JUSTIN'S STYLES
 
 *****/
 
-div.tooltip {
+div.tooltip, .d3-tip, #details {
     position: absolute;
     text-align: center;
     font-family: 'Raleway', sans-serif;
     font-size: 14px;
     padding: 5px;
     margin: 5px;
-    color: white;
-    background: #4FB99F;
+    color: #3F3B69;
+    background: white;
     border: 0px;
     border-radius: 8px;
     pointer-events: none;
+}
+
+#details {
+  background: #3f3b69;
+  color: white;
 }
 
 /*****
@@ -327,7 +341,7 @@ CAITLYN'S STYLES
 
 *****/
 .choropleth-dropdown {
-    background-color: #ED553B;
+    background-color: #3f3b69;
     color: white;
     border-radius: 10px;
     margin-left: 50px;
