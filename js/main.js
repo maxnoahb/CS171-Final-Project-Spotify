@@ -147,7 +147,7 @@ $(document).ready(function() {
         // scrollBar: true,
         anchors: ['title-page', 'project-description', 'data-description', 'attribute-soundbite-page', 'choose-country',
             'choropleth-map-page', 'comparison-intro', 'comparison-chart-page', 'song-popularity-page',
-            'slider-page', 'concluding-page']
+            'slider-page', 'concluding-page', 'project-video-page']
     });
 
 

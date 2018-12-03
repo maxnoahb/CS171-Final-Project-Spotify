@@ -129,6 +129,11 @@ MAX'S STYLES
 
 *****/
 
+#project-video {
+    display: block;
+    margin: 0 auto;
+}
+
 .fa-info-circle {
     padding-left: 15px;
 }
