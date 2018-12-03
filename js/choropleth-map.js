@@ -57,8 +57,8 @@ ChoroplethVis.prototype.initVis = function(){
             .on("zoom", zoomed));
 
     // Create a mercator projection and draw path
-    projection = d3.geoMercator().translate([width / 2, height / 2 + 35])
-        .scale(130);
+    projection = d3.geoMercator().translate([width / 2 + 200, height / 2])
+        .scale(110);
     path = d3.geoPath().projection(projection);
 
     // Set color scale

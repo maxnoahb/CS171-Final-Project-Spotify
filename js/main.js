@@ -149,6 +149,8 @@ $(document).ready(function() {
             'choropleth-map-page', 'comparison-intro', 'comparison-chart-page', 'song-popularity-page',
             'slider-page', 'concluding-page']
     });
+
+
 });
 
 function updateSelected() {
