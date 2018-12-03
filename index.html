@@ -11,24 +11,25 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-dark bg-dark navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <!--<a class="navbar-brand" href="#"></a>-->
+                <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">-->
+                    <!--<span class="icon-bar"></span>-->
+                    <!--<span class="icon-bar"></span>-->
+                    <!--<span class="icon-bar"></span>-->
+                    <!--<span class="icon-bar"></span>-->
+                    <!--<span class="icon-bar"></span>-->
+                    <!--<span class="icon-bar"></span>-->
+                    <!--<span class="icon-bar"></span>-->
+                    <!--<span class="icon-bar"></span>-->
+                <!--</button>-->
+                <a class="navbar-brand" href="#">CS171 D<sup>#</sup>ata</a>
             </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
+            <!--<div class="collapse navbar-collapse" id="myNavbar">-->
+            <div id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li data-menuanchor="title-page"><a href="#title-page">Home</a></li>
+                    <li data-menuanchor="title-page" class="active"><a href="#title-page">Home</a></li>
                     <li data-menuanchor="project-description"><a href="#project-description">About</a></li>
                     <li data-menuanchor="attribute-soundbite-page"><a href="#attribute-soundbite-page">Hear the Data</a></li>
                     <li data-menuanchor="choose-country"><a href="#choose-country">Select Your Country</a></li>
@@ -170,9 +171,9 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <p style="text-align: center; font-size:14px;">Drag/Zoom to see different parts of the world better</p>
                         <div id="intro-map" onclick="comparisonChart.onCountryCompareChange()"></div>
                         <h4 id="intro-chosen-country" style="text-align: center"></h4>
+                        <p style="text-align: center; font-size:14px;">Drag/Zoom to see different parts of the world better</p>
                     </div>
                 </div>
             </div>

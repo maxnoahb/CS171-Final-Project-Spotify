@@ -39,7 +39,7 @@ function updateBubbles(country) {
     selectedTop50[d.track_name] = d;
   });
 
-  console.log(selectedTop50);
+  // console.log(selectedTop50);
 
   // Define the div for the tooltip
   var div = d3.select("body").append("div")
