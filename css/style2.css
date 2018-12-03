@@ -39,13 +39,19 @@ h3 {
     margin: 10px;
 }
 
-.section-head {
+/* .section-head {
   width: 80%;
   padding: 5px;
   margin: 0 auto;
   background: #3F3B69;
   border: 0px;
   border-radius: 8px;
+} */
+
+#bubble-info {
+  font-size: 15px;
+  padding: 20px;
+  width: 100%;
 }
 
 #team-name {
