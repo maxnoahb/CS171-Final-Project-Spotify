@@ -138,6 +138,27 @@ MAX'S STYLES
 
 *****/
 
+.nav {
+    list-style: none;
+    text-align: center;
+    color: white;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    font-family: arial, sans-serif;
+    background-color: #404040;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.nav>li {
+    display: inline-block;
+    padding: 10px 50px;
+    color: white;
+}
+
+
 .navbar-inverse .navbar-nav>li>a:focus {
     color: #9d9d9d;
 }
